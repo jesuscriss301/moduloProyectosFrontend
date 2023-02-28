@@ -52,16 +52,6 @@
 				<th scope="row">Responsable:</td>
 				<td> Argeniz Florez </td>
 			  </tr>
-			  <tr>
-				<th scope="row">Diseño:</th>
-				<td><form action="diseño.html">
-					<button type="submit">Diseño</button>
-				  </form></td>
-				<th scope="row">Presupuesto:</td>
-				<td><form action="presupuesto.html">
-					<button type="submit">Presupuesto</button>
-				  </form> </td>
-			  </tr>
 			</tbody>
 	</table>
 
@@ -73,13 +63,11 @@
 						Filtro
 					  </button>
 					  <ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Responsable</a></li>
-						<li><a class="dropdown-item" href="#">Etapa</a></li>
-						<li><a class="dropdown-item" href="#">Completado</a></li>
-						<li><a class="dropdown-item" href="#">Archivado</a></li>
+						<li><a class="dropdown-item" href="#">Presupuesto</a></li>
+						<li><a class="dropdown-item" href="#">Requisicion</a></li>
 					  </ul>
 
-				  <button id="agregarFila" class="btn btn-primary">Agregar Tarea</button>
+				  <button id="agregarFila" class="btn btn-primary">Agregar Presupuesto +</button>
 				</div>
 			  </nav>
 		</div>
@@ -89,10 +77,9 @@
 			  <tr>
 				<th scope="col">Codigo</th>
 				<th scope="col">Nombre</th>
-				<th scope="col">Responsable</th>
-				<th scope="col">Descripcion</th>
-				<th scope="col">Fecha</th>
-				<th scope="col">Completado</th>
+				<th scope="col">Cantidad</th>
+				<th scope="col">Costo</th>
+				<th scope="col">Tiempo</th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -102,7 +89,7 @@
 						<div class="accordion-item">
 						  <h2 class="accordion-header" id="flush-headingOne">
 							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-							  Crear Proyecto
+							  Personal
 							</button>
 						  </h2>
 						  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -110,12 +97,11 @@
 							  <table class="table">
 								<thead>
 								  <tr>
-									<th scope="col">Codigo</th>
-									<th scope="col">Nombre</th>
-									<th scope="col">Responsable</th>
-									<th scope="col">Descripcion</th>
-									<th scope="col">Fecha</th>
-									<th scope="col">Completado</th>
+                                    <td scope="col">Codigo</td>
+                                    <td scope="col">Nombre</td>
+                                    <td scope="col">Cantidad</td>
+                                    <td scope="col">Costo</td>
+                                    <td scope="col">Tiempo</td>
 								  </tr>
 								</thead>
 								<tbody>
@@ -125,7 +111,6 @@
 									<td>Argeniz Florez</td>
 									<td>Reparacion bateria 4</td>
 									<td>28/02/2023</td>
-									<td>ok</td>
 								  </tr>
 								</tbody>
 							  </table>
@@ -142,7 +127,7 @@
 						<div class="accordion-item">
 						  <h2 class="accordion-header" id="flush-headingTwo">
 							<button class="accordion-button collapsed colspan-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-							  Diseño
+							  Maquinaria
 							</button>
 						  </h2>
 						  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -150,12 +135,11 @@
 							  <table class="table">
 								<thead>
 								  <tr>
-									<th scope="col">Codigo</th>
-									<th scope="col">Nombre</th>
-									<th scope="col">Responsable</th>
-									<th scope="col">Descripcion</th>
-									<th scope="col">Fecha</th>
-									<th scope="col">Completado</th>
+                                    <td scope="col">Codigo</td>
+                                    <td scope="col">Nombre</td>
+                                    <td scope="col">Cantidad</td>
+                                    <td scope="col">Costo</td>
+                                    <td scope="col">Tiempo</td>
 								  </tr>
 								</thead>
 								<tbody>
@@ -165,7 +149,6 @@
 									<td>Argeniz Florez</td>
 									<td>Reparacion bateria 4</td>
 									<td>28/02/2023</td>
-									<td>ok</td>
 								  </tr>
 								</tbody>
 							  </table>
@@ -182,7 +165,7 @@
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingThree">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-						   Presupuesto & Requisicion
+						   Material
 						</button>
 					  </h2>
 					  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
@@ -190,12 +173,11 @@
 						  <table class="table">
 							<thead>
 							  <tr>
-								<th scope="col">Codigo</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Responsable</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Completado</th>
+                                <td scope="col">Codigo</td>
+                                <td scope="col">Nombre</td>
+                                <td scope="col">Cantidad</td>
+                                <td scope="col">Costo</td>
+                                <td scope="col">Tiempo</td>
 							  </tr>
 							</thead>
 							<tbody>
@@ -205,7 +187,6 @@
 								<td>Argeniz Florez</td>
 								<td>Reparacion bateria 4</td>
 								<td>28/02/2023</td>
-								<td>ok</td>
 							  </tr>
 							</tbody>
 						  </table>
@@ -221,7 +202,7 @@
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingFour">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-						   Programacion
+						   Herramienta
 						</button>
 					  </h2>
 					  <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
@@ -229,12 +210,11 @@
 						  <table class="table">
 							<thead>
 							  <tr>
-								<th scope="col">Codigo</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Responsable</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Completado</th>
+                                <td scope="col">Codigo</td>
+                                <td scope="col">Nombre</td>
+                                <td scope="col">Cantidad</td>
+                                <td scope="col">Costo</td>
+                                <td scope="col">Tiempo</td>
 							  </tr>
 							</thead>
 							<tbody>
@@ -244,7 +224,6 @@
 								<td>Argeniz Florez</td>
 								<td>Reparacion bateria 4</td>
 								<td>28/02/2023</td>
-								<td>ok</td>
 							  </tr>
 							</tbody>
 						  </table>
@@ -254,64 +233,7 @@
 				  </div>
 				</td>
 			  </tr>
-			  <tr>
-				<td colspan="6">
-				  <div class="accordion accordion-flush" id="accordionFlushExample">
-					<div class="accordion-item">
-					  <h2 class="accordion-header" id="flush-headingFive">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-						  Ejecucion
-						</button>
-					  </h2>
-					  <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-						  <table class="table">
-							<thead>
-							  <tr>
-								<th scope="col">Codigo</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Responsable</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Completado</th>
-							  </tr>
-							</thead>
-							<tbody>
-							  <tr>
-								<td>1</td>
-								<td>Bateria 4</td>
-								<td>Argeniz Florez</td>
-								<td>Reparacion bateria 4</td>
-								<td>28/02/2023</td>
-								<td>ok</td>
-							  </tr>
-							</tbody>
-						  </table>
-						</div>
-					  </div>
-					</div>
-				  </div>
-				</td>
-			  </tr>
-			  <tr>
-				<td colspan="6">
-				  <div class="accordion accordion-flush" id="accordionFlushExample">
-					<div class="accordion-item">
-					  <h2 class="accordion-header" id="flush-headingSix">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-						   Presupuesto & Requisicion
-						</button>
-					  </h2>
-					  <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-						    <div id="table_div" class="m-3"></div>
-  							<script src="aggTabla.js"></script>
-						</div>
-					  </div>
-					</div>
-				  </div>
-				</td>
-			  </tr>
+			 
 			</tbody>
 		  </table>
 		  
