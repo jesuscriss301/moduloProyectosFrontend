@@ -36,8 +36,6 @@
             </div>
         </nav>
           
-    <button onclick="goBack()">Volver</button>
-
       <!--barra de busqueda y menu desplegable (filtro)-->
     <div class="dropdown-center m-3" >
             <nav class="navbar bg-body-tertiary">
@@ -59,10 +57,15 @@
             </div>
           </nav>
     </div>
+    <button class="m-3" onclick="goBack()">Volver</button>
 
     <!--Tabla-->
   <div id="table_div" class="m-3"></div>
-  <script src="aggTabla.js">
+  <script  src="aggTabla.js">  
+  </script>
+  <script>function goBack() {
+    window.history.back();
+    }
   </script>
 
 </body>
