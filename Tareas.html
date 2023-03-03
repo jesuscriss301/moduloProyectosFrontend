@@ -33,8 +33,10 @@
 					</ul>
 					</div>
 					<form action="perfil.html">
-						<button  class="btn btn-danger  d-flex align-items-center m-1" type="submit">Perfil</button>
-					</form> 
+						<button class="btn btn-danger d-flex align-items-center m-1" type="submit">
+						  <i class="bi bi-person-circle me-2 bg-light btn-danger" ></i>Perfil
+						</button>
+					  </form>					  
 				</div>
 			</nav>
 
@@ -67,12 +69,13 @@
 			  </tr>
 			</tbody>
 	</table>
-	<button onclick="goBack()">Volver</button>
+	<div class="m-3">
+	<button onclick="goBack()">Volver</button> </div>
 		      <!--barra de busqueda y menu desplegable (filtro)-->
 			  <div class="dropdown-center m-3" >
 				<nav class="navbar bg-body-tertiary">
 				<div class="container-fluid">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Filtro
 					  </button>
 					  <ul class="dropdown-menu">
@@ -82,7 +85,7 @@
 						<li><a class="dropdown-item" href="#">Archivado</a></li>
 					  </ul>
 
-				  <button id="agregarFila" class="btn btn-primary">Agregar Tarea</button>
+				  <button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
 				</div>
 			  </nav>
 		</div>
