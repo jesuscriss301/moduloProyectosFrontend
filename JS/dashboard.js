@@ -100,8 +100,8 @@ function drawChart() {
   data.addColumn('string', 'Dependencies');
 
   data.addRows([
-    ['2014Spring', 'Spring 2014', 'spring',
-     new Date(2014, 2, 22), new Date(2014, 5, 20), null, 100, null],
+    ['2014Spring', 'Spring 20114', 'spring',
+     new Date(2014, 2, 22), new Date(2014, 5, 20), 10, 100, null],
     ['2014Summer', 'Summer 2014', 'summer',
      new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
     ['2014Autumn', 'Autumn 2014', 'autumn',
@@ -109,7 +109,7 @@ function drawChart() {
     ['2014Winter', 'Winter 2014', 'winter',
      new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
     ['2015Spring', 'Spring 2015', 'spring',
-     new Date(2015, 2, 22), new Date(2015, 5, 20), null, 50, null],
+     new Date(2015, 2, 22), new Date(2015, 5, 20), null, 100, null],
     ['2015Summer', 'Summer 2015', 'summer',
      new Date(2015, 5, 21), new Date(2015, 8, 20), null, 0, null],
     ['2015Autumn', 'Autumn 2015', 'autumn',
