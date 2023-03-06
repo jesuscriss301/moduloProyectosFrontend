@@ -10,44 +10,35 @@
 
     </head>
 
-<section class="d-flex justify-content-center align-middlee m-3">
-        
-    <div class="card" style="width: 35rem; ">
-          <h3 style=" text-align: center;">Bitacora</h3>
-      <div class="card-body">
-      <form>
-    
-      <!-- textArea input -->
-      <div class="form-outline mb-4">
-          <textarea class="form-control" placeholder="Leave a comment here" id="descripcionProyecto"></textarea>
-          <label for="floatingTextarea">Descripción</label>
+    <section class="d-flex justify-content-center align-items-center m-3">
+      <div class="card" style="width: 35rem;">
+        <h3 style="text-align: center;">Bitácora</h3>
+        <div class="card-body">
+          <form action="Tareas.html">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="descripcionProyecto">Descripción</label>
+              <textarea class="form-control" id="descripcionProyecto" placeholder="Ingrese una descripción"></textarea>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="fechaInicio">Fecha Inicio</label>
+              <input type="date" class="form-control" id="fechaInicio">
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="observaciones">Observaciones</label>
+              <textarea class="form-control" id="observaciones" placeholder="Ingrese sus observaciones"></textarea>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="fotoProyecto">Foto</label>
+              <input type="file" class="form-control" id="fotoProyecto" disabled>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-danger d-flex align-items-center m-1" type="button" onclick="window.history.back();">
+                Cancelar
+            </button>
+              <button class="btn btn-success d-flex align-items-center m-1" type="submit">Aceptar</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="form-outline mb-4">
-        <input type="date" class="form-control">
-        <label class="form-label" for="prioridad">Fecha Inicio</label>
-      </div>
-    <div class="form-outline mb-4">
-        <textarea class="form-control" placeholder="Leave a comment here"></textarea>
-        <label for="floatingTextarea">Observaciones</label>
-    </div>    
-    <div class="form-outline mb-4">
-        <input type="url" id="planosProyecto" class="form-control" disabled/>
-        <label class="form-label" for="direcionFotografia">Foto</label>
-    </div>
-    <nav class="d-flex justify-content-between">
-      <form action="Tareas.html">
-        <button class="btn btn-danger d-flex align-content-lg-end m-1" type="submit">
-          Cancelar
-        </button>
-      </form>
-      <form action="Tareas.html">
-        <button class="btn btn-success d-flex align-items-center m-1" type="submit">
-          Aceptar
-        </button>
-      </form>
-    </nav>
-      </form>
-      </div>
-    </div>
-</section>
+    </section>
 </html>
