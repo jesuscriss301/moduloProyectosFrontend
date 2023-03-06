@@ -66,17 +66,20 @@
               <div class="col">
                 <h2 class="text-center align-middle">Bateria 5</h2>
                 <div id="Tabla5" class="m-3">
-                  <script src="hornos.js"></script>
+                  <script src="../js/hornos.js"></script>
                 </div>
               </div>
             </div>
           </div>
           
       <script>
-            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-                return new bootstrap.Popover(popoverTriggerEl)
-            })
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+        title: "Bateria 1",
+        content:  "Este es el primer párrafo."
+    });
+})
             function goBack() {
             window.history.back();
             }
