@@ -37,7 +37,7 @@ function drawTable() {
   table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
 }}
  
- 
+
 function Tabla2() {
   
     google.charts.load('current', {'packages':['table']});
@@ -161,9 +161,6 @@ function drawTable() {
             
               table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
     }}
-                  
-     
-     
     
  
  
