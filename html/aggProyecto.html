@@ -10,12 +10,13 @@
 
     </head>
 
+<body >
 <section class="d-flex justify-content-center align-middlee m-3">
         
     <div class="card" style="width: 35rem; ">
           <h3 style=" text-align: center;">Crear proyecto</h3>
       <div class="card-body">
-      <form>
+      <form action="proyectos.html">
       <!-- Nombre input -->
       <div class="form-outline mb-4">
         <input type="text" id="nombreProyecto" class="form-control" />
@@ -68,19 +69,16 @@
         <label class="form-label" for="direcionFotografia">Planos</label>
       </div>
     <nav class="d-flex justify-content-between">
-      <form action="proyectos.html">
-        <button class="btn btn-danger d-flex align-content-lg-end m-1" type="submit">
-          Cancelar
+      <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="window.history.back();">
+        Cancelar
         </button>
-      </form>
-      <form action="proyectos.html">
         <button class="btn btn-success d-flex align-items-center m-1" type="submit">
           Aceptar
         </button>
-      </form>
     </nav>
       </form>
       </div>
     </div>
 </section>
+</body>
 </html>
