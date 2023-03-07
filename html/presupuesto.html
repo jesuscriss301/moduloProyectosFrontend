@@ -54,7 +54,13 @@
 			  </tr>
 			</tbody>
 	</table>
-	
+	 	<!--nav de boton atras y encabezado-->
+	<div style="display: flex; align-items: center;">
+		<!--Boton ir atras el scritp esta al final-->
+	<button class="m-3" onclick="goBack()">Volver</button>
+		<!--Encabezado pagina-->
+	<h3 style="margin: 0 auto;">Presupuesto</h3>
+</div>
 		      <!--barra de busqueda y menu desplegable (filtro)-->
 			  <div class="dropdown-center m-3" >
 				<nav class="navbar bg-body-tertiary">
@@ -236,7 +242,11 @@
 			 
 			</tbody>
 		  </table>
-		  
+		  <script>
+			function goBack() {
+				window.history.back();
+			}
+		</script>
 
 </body>
 </html>
