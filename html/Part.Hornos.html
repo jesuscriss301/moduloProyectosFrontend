@@ -1,29 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-        <title>Proyectos</title>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Pestañas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
-    </head>
+    <div class="container mt-5">
+        <h1>Bateria #</h1>
+        <hr>
 
-<body onload="hornos()">
-<section class="d-flex justify-content-center align-middlee m-3">
-        
-    <div class="card" style="width: 35rem; ">
-          <h3 style=" text-align: center;">Seleccion de hornos para reparacion</h3>
-      <div class="card-body">
-        <div id="seleccionar-partes">
-            <div id="partes-horno">
-                <!-- JavaScript generará los checkboxes aquí -->
-                <script  src="../js/cantHornos.js"></script>
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">Horno 1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">Pestaña 2</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                <form>
+                    <div id="seleccionar-partes">
+                        <label><input type="checkbox" name="parte-horno-1" value="parte-horno-1" checked> Piso</label><br>
+                        <label><input type="checkbox" name="parte-horno-2" value="parte-horno-2" checked> Aleta Izq</label><br>
+                        <label><input type="checkbox" name="parte-horno-3" value="parte-horno-3" checked> Aleta Derc</label><br>
+                        <label><input type="checkbox" name="parte-horno-4" value="parte-horno-4" checked> Arco</label><br>
+                        <label><input type="checkbox" name="parte-horno-5" value="parte-horno-5" checked> Sobre arco</label><br>
+                        <label><input type="checkbox" name="parte-horno-6" value="parte-horno-6" checked> Boquilla</label><br>
+                        <label><input type="checkbox" name="parte-horno-7" value="parte-horno-7"> Techo</label><br>
+                      </div>
+                    <button class="btn btn-success d-flex align-items-center m-3" type="submit">
+                        Aceptar
+                    </button>
+                </form>
             </div>
-        </div>          
-      </div>
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                <form>
+                    <div id="seleccionar-partes">
+                        <label><input type="checkbox" name="parte-horno-1" value="parte-horno-1" checked> Piso</label><br>
+                        <label><input type="checkbox" name="parte-horno-2" value="parte-horno-2" checked> Aleta Izq</label><br>
+                        <label><input type="checkbox" name="parte-horno-3" value="parte-horno-3" checked> Aleta Derc</label><br>
+                        <label><input type="checkbox" name="parte-horno-4" value="parte-horno-4" checked> Arco</label><br>
+                        <label><input type="checkbox" name="parte-horno-5" value="parte-horno-5" checked> Sobre arco</label><br>
+                        <label><input type="checkbox" name="parte-horno-6" value="parte-horno-6" checked> Boquilla</label><br>
+                        <label><input type="checkbox" name="parte-horno-7" value="parte-horno-7"> Techo</label><br>
+                      </div>
+                    <button class="btn btn-success d-flex align-items-center m-3" type="submit">
+                        Aceptar
+                    </button>
+                </form>
+        </div>
+
     </div>
-</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
