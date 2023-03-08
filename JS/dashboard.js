@@ -7,42 +7,43 @@ function cargaDiagramas() {
 
 //Diagrama Circular//
 function diagramaCircular() {
-    
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(circularfetch);
 
-google.charts.load("current", {packages:["corechart"]});
-google.charts.setOnLoadCallback(drawChart);
+  function drawChart(data) {
+    console.log(data)
+    var data = google.visualization.arrayToDataTable(data);
   
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Obras Civiles',     11],
-    ['Mantenimiento',      2],
-    ['Reparaciòn',      2],
-  ]);
+    var options = {
+      title: 'Tipos de proyectos en ejecuciòn<<',
+      is3D: true,
+    };
+  
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
 
-  var options = {
-    title: 'Tipos de proyectos en ejecuciòn<<',
-    is3D: false,
-  };
+  function circularfetch() {
+    fetch('http://sistemas:8080/proyectos/circular')
+      .then(response => response.json())
+      .then(data => drawChart(data))
+      .catch(error => console.log(error));
+  }
+    
+  
+  
+}
 
-  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-  chart.draw(data, options);
-}}
 
 //Diagrama de barras//
 
 function DiagramaBarras() {
 google.charts.load('current', {'packages':['bar']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(barrasfetch);
   
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses', 'Profit'],
-            ['2014', 1000, 400, null],
-            ['2015', 1170, 460, null],
-            ['2016', 660, 1120, 300],
-            ['2017', 1030, 540, 350]
-          ]);
+    function drawChart(data) {
+      console.log(data)
+      var data = google.visualization.arrayToDataTable(data);
   
         var options = {
             chart: {
@@ -55,31 +56,40 @@ google.charts.setOnLoadCallback(drawChart);
   
           chart.draw(data, google.charts.Bar.convertOptions(options));
         }
-
+        function barrasfetch() {
+          fetch('http://sistemas:8080/proyectos/barras')
+            .then(response => response.json())
+            .then(data => drawChart(data))
+            .catch(error => console.log(error));
+        }
 }
 
 //Tabla de informacion//
 
 function TablaInform() {
 google.charts.load('current', {'packages':['table']});
-google.charts.setOnLoadCallback(drawTable);
+google.charts.setOnLoadCallback(tablafetch);
 
-function drawTable() {
+function drawTable(data) {
+  console.log(data)
   var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Name');
-  data.addColumn('number', 'Salary');
-  data.addColumn('boolean', 'Full Time Employee');
-  data.addRows([
-    ['Mike',  {v: 10000, f: '$10,000'}, true],
-    ['Jim',   {v:8000,   f: '$8,000'},  false],
-    ['Alice', {v: 12500, f: '$12,500'}, true],
-    ['Bob',   {v: 7000,  f: '$7,000'},  true]
-  ]);
+  data.addColumn('string', "Nombre Proyecto");
+  data.addColumn('string', "Responsable" );
+  data.addColumn('string', "Avance");
+  data.addRows(data);
 
   var table = new google.visualization.Table(document.getElementById('table_div'));
 
   table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-}}
+}
+function tablafetch() {
+  fetch('http://sistemas:8080/proyectos/tabla')
+    .then(response => response.json())
+    .then(data => drawTable(data))
+    .catch(error => console.log(error));
+}
+
+}
 
 //Diagrama de Gannt//
 
