@@ -47,6 +47,7 @@ google.charts.setOnLoadCallback(drawChart);
         var options = {
             chart: {
               title: 'Proyectos & avance',
+
             }
         };
   
