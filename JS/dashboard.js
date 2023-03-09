@@ -106,24 +106,32 @@ function drawChart() {
   data.addColumn('number', 'Percent Complete');
   data.addColumn('string', 'Dependencies');
 
-  data.addRows([ ['2014Spring', 'Spring 20114', 'spring',
-     new Date(2014, 2, 22), new Date(2014, 5, 20), 10, 100, null],]);
+  data.addRows([
+    ['2014Spring', 'Spring 20114', 'spring',
+     new Date(2014, 2, 22), new Date(2014, 5, 20), 10, 100, null],
+    ['2014Summer', 'Summer 2014', 'summer',
+     new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
+    ['2014Autumn', 'Autumn 2014', 'autumn',
+     new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
+    ['2014Winter', 'Winter 2014', 'winter',
+     new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
+    ['2015Spring', 'Spring 2015', 'spring',
+     new Date(2015, 2, 22), new Date(2015, 5, 20), null, 100, null],
+    ['2015Summer', 'Summer 2015', 'summer',
+     new Date(2015, 5, 21), new Date(2015, 8, 20), null, 0, null],
+    ['2015Autumn', 'Autumn 2015', 'autumn',
+     new Date(2015, 8, 21), new Date(2015, 11, 20), null, 0, null],
+    ['2015Winter', 'Winter 2015', 'winter',
+     new Date(2015, 11, 21), new Date(2016, 2, 21), null, 0, null],
+  ]);
 
   var options = {
     height: 400,
     gantt: {
-      title: 'Proyectos',
       trackHeight: 30
-      }
+    }
   };
  var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
 
   chart.draw(data, options);
-}
-function tablafetch() {
-  fetch('http://sistemas:8080/tareas/proyecto/1')
-    .then(response => response.json())
-    .then(data => drawTable(data))
-    .catch(error => console.log(error));
-}
-}
+}}
