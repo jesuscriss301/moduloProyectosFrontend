@@ -29,9 +29,6 @@ function diagramaCircular() {
       .then(data => drawChart(data))
       .catch(error => console.log(error));
   }
-    
-  
-  
 }
 
 
@@ -92,10 +89,17 @@ function tablafetch() {
 function DiagramaGannt() {
     
 google.charts.load('current', {'packages':['gantt']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(ganntfetch);
 
-function drawChart() {
+function ganntfetch() {
+  fetch('http://sistemas:8080/tareas/proyecto/1')
+    .then(response => response.json())
+    .then(data => drawChart(data))
+    .catch(error => console.log(error));
+}
 
+function drawChart(info) {
+  console.log(info);
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Task ID');
   data.addColumn('string', 'Task Name');
@@ -106,24 +110,43 @@ function drawChart() {
   data.addColumn('number', 'Percent Complete');
   data.addColumn('string', 'Dependencies');
 
-  data.addRows([
-    ['2014Spring', 'Spring 20114', 'spring',
-     new Date(2014, 2, 22), new Date(2014, 5, 20), 10, 100, null],
-    ['2014Summer', 'Summer 2014', 'summer',
-     new Date(2014, 5, 21), new Date(2014, 8, 20), null, 100, null],
-    ['2014Autumn', 'Autumn 2014', 'autumn',
-     new Date(2014, 8, 21), new Date(2014, 11, 20), null, 100, null],
-    ['2014Winter', 'Winter 2014', 'winter',
-     new Date(2014, 11, 21), new Date(2015, 2, 21), null, 100, null],
-    ['2015Spring', 'Spring 2015', 'spring',
-     new Date(2015, 2, 22), new Date(2015, 5, 20), null, 100, null],
-    ['2015Summer', 'Summer 2015', 'summer',
-     new Date(2015, 5, 21), new Date(2015, 8, 20), null, 0, null],
-    ['2015Autumn', 'Autumn 2015', 'autumn',
-     new Date(2015, 8, 21), new Date(2015, 11, 20), null, 0, null],
-    ['2015Winter', 'Winter 2015', 'winter',
-     new Date(2015, 11, 21), new Date(2016, 2, 21), null, 0, null],
-  ]);
+  var nuevo = Array(info.length);
+
+  for (let i = 0; i < info.length; i++) {
+    const element = info[i];
+    console.log(element.fechaInicio);
+    console.log(element.fechaFinal);
+    //element.fechaInicio
+    //element.fechaFinal
+    nuevo[0]="#"+element.id;
+    nuevo[1]=element.nombreTarea;
+    nuevo[2]=element.idEtapaProyecto.idEtapa.nombreEtapa;
+    var fechaFinal = new Date(element.fechaFinal);
+    var fechainicial = new Date(element.fechaFinal);
+    if (element.fechaInicioReal ==null) {
+      fechainicial=new Date(element.fechaInicio);
+      fechaFinal= new Date(element.fechaFinal);
+      nuevo[6]=0;
+    } else {if (element.fechaFinalReal != null) {
+      fechainicial=new Date(element.fechaInicioReal);
+        fechaFinal=new Date(element.fechaFinal);
+        //nuevo[5]= ((fechaFinal - nuevo[3].getTime())/(1000*60*60*24))+1;
+        nuevo[6]=100;
+      }else{
+        fechainicial=new Date(element.fechaInicioReal);
+        fechaFinal=new Date(element.fechaFinal);
+        //nuevo[5]= ((fechaFinal - nuevo[3].getTime())/(1000*60*60*24))+1
+        nuevo[6]=50;
+      }
+    }
+    nuevo[3]=new Date(fechainicial.getTime()-(1000*60*60*14));
+    nuevo[4]=new Date(fechaFinal.getTime()+(1000*60*60*4));
+    nuevo[5]= null;
+    nuevo[7]=null;
+    console.log(nuevo[4]+"   "+nuevo[3]);
+    data.addRow(nuevo);
+  }
+  //console.log(data);
 
   var options = {
     height: 400,
@@ -131,7 +154,9 @@ function drawChart() {
       trackHeight: 30
     }
   };
- var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+  var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
 
   chart.draw(data, options);
-}}
+}
+}
