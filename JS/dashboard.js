@@ -3,7 +3,7 @@ function cargaDiagramas() {
     DiagramaBarras();
     TablaInform();
     DiagramaGannt();
-    desplegable();
+    
 }
 
 //Diagrama Circular//
@@ -115,18 +115,27 @@ function drawChart(info) {
       fechainicial=new Date(element.fechaInicio);
       fechaFinal= new Date(element.fechaFinal);
       nuevo[6]=0;
-    } else {if (element.fechaFinalReal != null) {
+    } else {if (element.fechaFinalReal == null) {
       fechainicial=new Date(element.fechaInicioReal);
         fechaFinal=new Date(element.fechaFinal);
         nuevo[6]=100;
       }else{
         fechainicial=new Date(element.fechaInicioReal);
-        fechaFinal=new Date(element.fechaFinal);
+        fechaFinal=new Date(element.fechaFinalReal);
         nuevo[6]=50;
       }
     }
-    nuevo[3]=new Date(fechainicial.getTime()-(1000*60*60*14));
-    nuevo[4]=new Date(fechaFinal.getTime()+(1000*60*60*4));
+    if (fechainicial.getTime()+(1000*60*60*10) < fechaFinal.getTime()+(1000*60*60*26)) {
+      nuevo[3]=new Date(fechainicial.getTime()+(1000*60*60*10));
+      nuevo[4]=new Date(fechaFinal.getTime()+(1000*60*60*26));
+    }else{
+      nuevo[3]=new Date(fechainicial.getTime()+(1000*60*60*10));
+      nuevo[4]=new Date(fechainicial.getTime()+(1000*60*60*26));
+    }
+    
+    console.log(nuevo[1]+": \n"+nuevo[3]+"-----"+nuevo[4]+"\n" +fechainicial+"-----"+fechaFinal+"\n"
+                           +element.fechaInicio+"-----"+element.fechaFinal+"\n"
+                          +element.fechaInicioReal+"-----"+element.fechaFinalReal);
     nuevo[5]= null;
     nuevo[7]=null;
     data.addRow(nuevo);
@@ -145,25 +154,51 @@ function drawChart(info) {
 }
 }
 
-function etapa() {
-  const proyectoDropdown = document.getElementById("SeleccionarProyecto");
+function etapa(number) {
 
+  const proyectoDropdown = document.getElementById("SeleccionarProyecto");
+  const etapaDropdown = document.getElementById("etapa");
+  let etapa="";
+  
+  switch (number) {
+    case 1:etapa="Crear proyecto";
+      break;
+    case 2:etapa="Diseño";
+      break;
+    case 3:etapa="Reparación y presupuesto";
+      break;
+    case 4:etapa="Programación";
+      break;
+    case 5:etapa="Ejeución";
+      break;
+    case 6:etapa="Completado";
+      break;
+    case 7:etapa="Archivado";
+      break; 
+    case 8:etapa="Descartado";
+     break;
+    default:etapa= "Etapa"
+}
+
+etapaDropdown.innerText=etapa;
   proyectoDropdown.disabled = false;
+  desplegable(number);
 
 }
 
-function desplegable() {
+function desplegable(number) {
   
-  fetch('http://sistemas:8080/proyectos/etapa/5')
+  fetch('http://sistemas:8080/proyectos/etapa/'+number)
             .then(response => response.json())
             .then(data => proyectos(data))
             .catch(error => console.log(error));
 // Create a new li element
-function proyectos(data) {
+  function proyectos(data) {
   
   for (let i = 0; i < data.length; i++) {
     
   const proyectoDropdown = document.getElementById("proyecto");
+
   const newListItem = document.createElement("li");
     const element = data[i];
     // Create a new a element

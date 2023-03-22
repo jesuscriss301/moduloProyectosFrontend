@@ -62,18 +62,18 @@
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <div class="dropdown">
-          <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
             Etapa
           </button>
           <ul class="dropdown-menu">
-            <li><button class="dropdown-item" onclick="etapa()">Crear proyectos</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Diseño</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Requisicion y presupuesto</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Programación</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Ejecución</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Completado</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Archivo</button></li>
-            <li><button class="dropdown-item" onclick="etapa()">Descartado</button></li>
+            <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
+            <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
+            <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
+            <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
+            <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
+            <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
+            <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
+            <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
           </ul>
         </div>
         <div class="dropdown">
@@ -90,7 +90,7 @@
       </div>
     </nav>
   </div>
-  <div id="chart_div" class="m-3"></div>
+  <div  id="chart_div" class="m-3 scroll"></div>
 
   <script src="js/dashboard.js"></script>
 
