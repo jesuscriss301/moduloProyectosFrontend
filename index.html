@@ -58,6 +58,38 @@
     </div>
   </div>
   <!--Diagrama de Gannt-->
+  <div class="dropdown-center m-3" >
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="dropdown">
+          <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Etapa
+          </button>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" onclick="etapa()">Crear proyectos</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Diseño</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Requisicion y presupuesto</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Programación</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Ejecución</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Completado</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Archivo</button></li>
+            <li><button class="dropdown-item" onclick="etapa()">Descartado</button></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+            Seleccionar proyecto
+          </button>
+          <ul class="dropdown-menu"  id="proyecto">
+            <li><a class="dropdown-item" onclick="">proyecto</a></li>
+          </ul>
+        </div>
+        <form action="html/aggTarea.html">
+          <button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
+        </form>
+      </div>
+    </nav>
+  </div>
   <div id="chart_div" class="m-3"></div>
 
   <script src="js/dashboard.js"></script>
