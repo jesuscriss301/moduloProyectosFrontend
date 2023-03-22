@@ -2,7 +2,7 @@ function cargaDiagramas() {
     diagramaCircular();
     DiagramaBarras();
     TablaInform();
-    DiagramaGannt();
+    //DiagramaGannt();
     
 }
 
@@ -15,7 +15,7 @@ function diagramaCircular() {
     var data = google.visualization.arrayToDataTable(data);
   
     var options = {
-      title: 'Tipos de proyectos en ejecuciòn<<',
+      title: 'Tipos de proyectos en ejecuciòn',
       is3D: true,
     };
   
@@ -80,12 +80,13 @@ function tablafetch() {
 }
 
 //Diagrama de Gannt//
-function DiagramaGannt() {    
+function DiagramaGannt(number) {    
 google.charts.load('current', {'packages':['gantt']});
-google.charts.setOnLoadCallback(ganntfetch);
+google.charts.setOnLoadCallback(ganntfetch(number));
 
-function ganntfetch() {
-  fetch('http://sistemas:8080/tareas/proyecto/1')
+function ganntfetch(number) {
+  console.log(number);
+  fetch('http://sistemas:8080/tareas/proyecto/'+number)
     .then(response => response.json())
     .then(data => drawChart(data))
     .catch(error => console.log(error));
@@ -103,7 +104,9 @@ function drawChart(info) {
   data.addColumn('string', 'Dependencies');
 
   var nuevo = Array(info.length);
-
+  
+  const proyectoNombre = document.getElementById("nombreProyecto");
+  proyectoNombre.textContent = info[0].idEtapaProyecto.idProyecto.nombreProyecto;
   for (let i = 0; i < info.length; i++) {
     const element = info[i];
     nuevo[0]="#"+element.id;
@@ -132,10 +135,12 @@ function drawChart(info) {
       nuevo[3]=new Date(fechainicial.getTime()+(1000*60*60*10));
       nuevo[4]=new Date(fechainicial.getTime()+(1000*60*60*26));
     }
-    
+    /*
     console.log(nuevo[1]+": \n"+nuevo[3]+"-----"+nuevo[4]+"\n" +fechainicial+"-----"+fechaFinal+"\n"
                            +element.fechaInicio+"-----"+element.fechaFinal+"\n"
                           +element.fechaInicioReal+"-----"+element.fechaFinalReal);
+    
+    */
     nuevo[5]= null;
     nuevo[7]=null;
     data.addRow(nuevo);
@@ -197,15 +202,18 @@ function desplegable(number) {
   
   for (let i = 0; i < data.length; i++) {
     
-  const proyectoDropdown = document.getElementById("proyecto");
+    const proyectoDropdown = document.getElementById("proyecto");
 
-  const newListItem = document.createElement("li");
+    const newListItem = document.createElement("li");
     const element = data[i];
     // Create a new a element
-    const newLink = document.createElement("a");
+    const newLink = document.createElement("button");
     newLink.setAttribute("class", "dropdown-item");
-    newLink.setAttribute("href", "#");
+    console.log(element.id);
+    newLink.setAttribute("onclick", "DiagramaGannt("+ element.id +")");
+    //newLink.setAttribute("href", "#");
     newLink.textContent = element.nombreProyecto;
+    
     // Append the newLink to the newListItem
     newListItem.appendChild(newLink); 
     proyectoDropdown.appendChild(newListItem);
