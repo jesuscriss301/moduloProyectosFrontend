@@ -11,161 +11,158 @@
     </head>
 <body onload="cargarTabla()">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
-            <!-- barra de navegaciòn-->
-            
-            <div class="section">
-				<nav class="navbar navbar-expand-lg bg-body-secondary" >
-				  <a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
-				  <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
-					  <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
-					  <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
-					  <span class="navbar-toggler-icon"></span>
-					  </button>
-					  <div class="collapse navbar-collapse" id="navbarText" >
-					  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						  <li class="nav-item">
-						  <a class="nav-link active" aria-current="page" href="../index.html"><h3>Dashboard</h3></a>
-						  </li>
-						  <li class="nav-item">
-						  <a class="nav-link" href="proyectos.html"><h3>Proyectos</h3></a>
-						  </li>
-						  <li class="nav-item">
-						  <a class="nav-link" href="Tareas.html"><h3>Tareas</h3></a>
-						  </li>
-						  <li class="nav-item">
+    <!-- barra de navegaciòn-->        
+    <div class="section">
+		<nav class="navbar navbar-expand-lg bg-body-secondary" >
+			<a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
+			<div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
+				<!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
+				<button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText" >
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="../index.html"><h3>Dashboard</h3></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="proyectos.html"><h3>Proyectos</h3></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="Tareas.html"><h3>Tareas</h3></a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="hornos.html"><h3>Reparaciones</h3></a>
-							</li>
-					  </ul>
-					  </div>
-				  </div>
-				  <a href="perfil.html" class="btn btn-danger m-2">
-					<i class="bi bi-person"></i> Ver Perfil
-				  </a>			  
-					</div>
-				</nav>
+						</li>
+					</ul>
+				</div>
 			</div>
+			<a href="perfil.html" class="btn btn-danger m-2">
+				<i class="bi bi-person"></i> Ver Perfil
+			</a>			  
+		</nav>
+	</div>
 		
-
-<!--Tabla informacion sobre el proyecto de la tarea-->
+	<!--Tabla informacion sobre el proyecto de la tarea-->
 	<table class="table table-bordered border-light-subtle m-3" >
 		<thead>
-			<tr>
+		  <tr>
 			<th scope="col">Codigo Proyecto:</th>
 			<td scope="col">B4H22</th>
 			<th scope="col">Nombre Proyecto:</th>
 			<td scope="col"> Reparacion Bateria 4 </th>
-			</tr>
+		  </tr>
 		</thead>
-			<tbody>
-			  <tr>
-				<th scope="row">Tipo Proyecto:</th>
-				<td> Reparacion </td>
-				<th scope="row">Responsable:</td>
-				<td> Argeniz Florez </td>
-			  </tr>
-			  <tr>
-				<th scope="row">Diseño:</th>
-				<td><form action="diseño.html">
+		<tbody>
+		  <tr>
+			<th scope="row">Tipo Proyecto:</th>
+			<td> Reparacion </td>
+			<th scope="row">Responsable:</td>
+			<td> Argeniz Florez </td>
+		  </tr>
+		  <tr>
+			<th scope="row">Diseño:</th>
+			<td><form action="diseño.html">
 					<button type="submit">Diseño</button>
-				  </form></td>
-				<th scope="row">Presupuesto:</td>
-				<td><form action="presupuesto.html">
+			  	</form></td>
+			<th scope="row">Presupuesto:</td>
+			<td><form action="presupuesto.html">
 					<button type="submit">Presupuesto</button>
-				  </form> </td>
-			  </tr>
-			</tbody>
+				</form>
+			</td>
+		  </tr>
+		</tbody>
 	</table>
 	<!--nav de boton atras y encabezado-->
 	<div style="display: flex; align-items: center;">
 		<!--Boton ir atras el scritp esta al final-->
 		<!--Encabezado pagina-->
-	<h3 style="margin: 0 auto;">Tareas</h3>
-</div>
+		<h3 style="margin: 0 auto;">Tareas</h3>
+	</div>
 		      <!--barra de busqueda y menu desplegable (filtro)-->
-			  <div class="dropdown-center m-3" >
-				<nav class="navbar bg-body-tertiary">
-				<div class="container-fluid">
-					<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Filtro
-					  </button>
-					  <ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Responsable</a></li>
-						<li><a class="dropdown-item" href="#">Etapa</a></li>
-						<li><a class="dropdown-item" href="#">Completado</a></li>
-						<li><a class="dropdown-item" href="#">Archivado</a></li>
-					  </ul>
-					<form action="aggTarea.html">
-				  <button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
+	<div class="dropdown-center m-3" >
+		<nav class="navbar bg-body-tertiary">
+			<div class="container-fluid">
+				<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Filtro
+				</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#">Responsable</a></li>
+					<li><a class="dropdown-item" href="#">Etapa</a></li>
+					<li><a class="dropdown-item" href="#">Completado</a></li>
+					<li><a class="dropdown-item" href="#">Archivado</a></li>
+				</ul>
+				<form action="aggTarea.html">
+					<button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
 				</form>
-				</div>
-			  </nav>
-		</div>
+			</div>
+	    </nav>
+	</div>
 		<!-- Encabezado de la tabla por tarea-->
-		<table class="table">
-			<thead>
-			  <tr>
-				<th scope="col">Codigo</th>
-				<th scope="col">Nombre</th>
-				<th scope="col">Responsable</th>
-				<th scope="col">Descripcion</th>
-				<th scope="col">Fecha</th>
-				<th scope="col">Completado</th>
-			  </tr>
-			</thead>
-			<!-- Cuerpo de la tabla por tarea-->
-			<tbody>
-				<tr>
-					<td colspan="6">
-					  <div class="accordion accordion-flush" id="accordionFlushExample">
-						<div class="accordion-item">
-						  <h2 class="accordion-header" id="flush-headingOne">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-							  Crear Proyecto
-							</button>
-						  </h2>
-						  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-							<div class="accordion-body">
-							  <table class="table">
-								<thead>
-								  <tr>
-									<th scope="col">Codigo</th>
-									<th scope="col">Nombre</th>
-									<th scope="col">Responsable</th>
-									<th scope="col">Descripcion</th>
-									<th scope="col">Fecha</th>
-									<th scope="col">Completado</th>
-								  </tr>
-								</thead>
-								<tbody>
-								  <tr>
-									<td>1</td>
-									<td><form action="bitacora.html">
-										<button type="submit">Bateria 4</button>
-									  </form></td>
-									<td>Argeniz Florez</td>
-									<td>Reparacion bateria 4</td>
-									<td>28/02/2023</td>
-									<td>ok</td>
-								  </tr>
-								</tbody>
-							  </table>
-							</div>
-						  </div>
+	<table class="table">
+		<thead>
+		  <tr>
+			<th scope="col">Codigo</th>
+			<th scope="col">Nombre</th>
+			<th scope="col">Responsable</th>
+			<th scope="col">Descripcion</th>
+			<th scope="col">Fecha</th>
+			<th scope="col">Completado</th>
+		  </tr>
+		</thead>
+		<!-- Cuerpo de la tabla por tarea-->
+		<tbody>
+		  <tr>
+			<td colspan="6">
+				<div class="accordion accordion-flush" id="accordionFlushExample">
+					<div class="accordion-item">
+					  <h2 class="accordion-header" id="flush-headingOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+						  Crear Proyecto
+						</button>
+					  </h2>
+					  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+						<div class="accordion-body">
+						  <table class="table">
+							<thead>
+							  <tr>
+								<th scope="col">Codigo</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Responsable</th>
+								<th scope="col">Descripcion</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Completado</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<td>1</td>
+								<td><form action="bitacora.html">
+									<button type="submit">Bateria 4</button>
+								  </form></td>
+								<td>Argeniz Florez</td>
+								<td>Reparacion bateria 4</td>
+								<td>28/02/2023</td>
+								<td>ok</td>
+							  </tr>
+							</tbody>
+						  </table>
 						</div>
 					  </div>
-					</td>
-				  </tr>
-				  
-				  <tr class="accordion-row">
-					<td colspan="6">
-					  <div class="accordion accordion-flush" id="accordionFlushExample">
-						<div class="accordion-item">
-						  <h2 class="accordion-header" id="flush-headingTwo">
+					</div>
+				</div>
+			</td>
+		  </tr>	  
+		  <tr class="accordion-row">
+			<td colspan="6">
+				<div class="accordion accordion-flush" id="accordionFlushExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="flush-headingTwo">
 							<button class="accordion-button collapsed colspan-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-							  Diseño
+						 	 Diseño
 							</button>
-						  </h2>
-						  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+						</h2>
+						<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
 							<div class="accordion-body">
 							  <table class="table">
 								<thead>
@@ -190,15 +187,14 @@
 								</tbody>
 							  </table>
 							</div>
-						  </div>
 						</div>
-					  </div>
-					</td>
-				  </tr>
-				  
-			  <tr>
-				<td colspan="6">
-				  <div class="accordion accordion-flush" id="accordionFlushExample">
+					</div>
+				</div>
+			</td>
+		  </tr>
+		  <tr>
+			<td colspan="6">
+				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingThree">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
@@ -232,12 +228,12 @@
 						</div>
 					  </div>
 					</div>
-				  </div>
-				</td>
-			  </tr>
-			  <tr>
-				<td colspan="6">
-				  <div class="accordion accordion-flush" id="accordionFlushExample">
+				</div>
+			</td>
+		  </tr>
+		  <tr>
+			<td colspan="6">
+				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingFour">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
@@ -271,51 +267,51 @@
 						</div>
 					  </div>
 					</div>
-				  </div>
-				</td>
-			  </tr>
-			  <tr>
-				<td colspan="6">
-				  <div class="accordion accordion-flush" id="accordionFlushExample">
-					<div class="accordion-item">
-					  <h2 class="accordion-header" id="flush-headingFive">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-						  Ejecucion
-						</button>
-					  </h2>
-					  <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-						  <table class="table">
-							<thead>
-							  <tr>
-								<th scope="col">Codigo</th>
-								<th scope="col">Nombre</th>
-								<th scope="col">Responsable</th>
-								<th scope="col">Descripcion</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Completado</th>
-							  </tr>
-							</thead>
-							<tbody>
-							  <tr>
-								<td>1</td>
-								<td>Bateria 4</td>
-								<td>Argeniz Florez</td>
-								<td>Reparacion bateria 4</td>
-								<td>28/02/2023</td>
-								<td>ok</td>
-							  </tr>
-							</tbody>
-						  </table>
-						</div>
-					  </div>
+				</div>
+			</td>
+		  </tr>
+		  <tr>
+			<td colspan="6">
+			  <div class="accordion accordion-flush" id="accordionFlushExample">
+				<div class="accordion-item">
+				  <h2 class="accordion-header" id="flush-headingFive">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+					  Ejecucion
+					</button>
+				  </h2>
+				  <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+					<div class="accordion-body">
+					  <table class="table">
+						<thead>
+						  <tr>
+							<th scope="col">Codigo</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Responsable</th>
+							<th scope="col">Descripcion</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Completado</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td>1</td>
+							<td>Bateria 4</td>
+							<td>Argeniz Florez</td>
+							<td>Reparacion bateria 4</td>
+							<td>28/02/2023</td>
+							<td>ok</td>
+						  </tr>
+						</tbody>
+					  </table>
 					</div>
 				  </div>
-				</td>
-			  </tr>
-			  <tr>
-				<td colspan="6">
-				  <div class="accordion accordion-flush" id="accordionFlushExample">
+				</div>
+			  </div>
+			</td>
+		  </tr>
+		  <tr>
+			<td colspan="6">
+				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingSix">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
@@ -329,12 +325,10 @@
 						</div>
 					  </div>
 					</div>
-				  </div>
-				</td>
-			  </tr>
-			</tbody>
-		  
+				</div>
+			</td>
+		  </tr>
+		</tbody>
 	</table>
-
 </body>
 </html>
