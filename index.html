@@ -17,29 +17,29 @@
       <a href="#" class="logo"><img src="LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
       <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
           <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
-          <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
+        <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
           <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText" >
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText" >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="index.html"><h3>Dashboard</h3></a>
-              </li>
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="html/proyectos.html"><h3>Proyectos</h3></a>
-              </li>
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="html/Tareas.html"><h3>Tareas</h3></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="html/hornos.html"><h3>Reparaciones</h3></a>
-                </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="html/hornos.html"><h3>Reparaciones</h3></a>
+            </li>
           </ul>
-          </div>
+        </div>
       </div>
       <a href="html/perfil.html" class="btn btn-danger m-2">
         <i class="bi bi-person"></i> Ver Perfil
-        </a>	
+      </a>	
     </nav>
   </div>
 
@@ -58,7 +58,39 @@
     </div>
   </div>
   <!--Diagrama de Gannt-->
-  <div id="chart_div" class="m-3"></div>
+  <div class="dropdown-center m-3" >
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="dropdown">
+          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
+            Etapa
+          </button>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
+            <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
+            <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
+            <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
+            <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
+            <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
+            <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
+            <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+            Seleccionar proyecto
+          </button>
+          <ul class="dropdown-menu"  id="proyecto">
+            <li><a class="dropdown-item" onclick="">proyecto</a></li>
+          </ul>
+        </div>
+        <form action="html/aggTarea.html">
+          <button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <div  id="chart_div" class="m-3 scroll"></div>
 
   <script src="js/dashboard.js"></script>
 

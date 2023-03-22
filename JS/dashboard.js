@@ -3,6 +3,7 @@ function cargaDiagramas() {
     DiagramaBarras();
     TablaInform();
     DiagramaGannt();
+    
 }
 
 //Diagrama Circular//
@@ -11,7 +12,6 @@ function diagramaCircular() {
   google.charts.setOnLoadCallback(circularfetch);
 
   function drawChart(data) {
-    console.log(data)
     var data = google.visualization.arrayToDataTable(data);
   
     var options = {
@@ -31,15 +31,12 @@ function diagramaCircular() {
   }
 }
 
-
 //Diagrama de barras//
-
 function DiagramaBarras() {
 google.charts.load('current', {'packages':['bar']});
 google.charts.setOnLoadCallback(barrasfetch);
   
     function drawChart(data) {
-      console.log(data)
       var data = google.visualization.arrayToDataTable(data);
   
         var options = {
@@ -62,13 +59,11 @@ google.charts.setOnLoadCallback(barrasfetch);
 }
 
 //Tabla de informacion//
-
 function TablaInform() {
 google.charts.load('current', {'packages':['table']});
 google.charts.setOnLoadCallback(tablafetch);
 
 function drawTable(datas) {
-  console.log(datas)
   var data = google.visualization.arrayToDataTable(datas);
 
   var table = new google.visualization.Table(document.getElementById('table_div'));
@@ -85,9 +80,7 @@ function tablafetch() {
 }
 
 //Diagrama de Gannt//
-
-function DiagramaGannt() {
-    
+function DiagramaGannt() {    
 google.charts.load('current', {'packages':['gantt']});
 google.charts.setOnLoadCallback(ganntfetch);
 
@@ -99,7 +92,6 @@ function ganntfetch() {
 }
 
 function drawChart(info) {
-  console.log(info);
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Task ID');
   data.addColumn('string', 'Task Name');
@@ -114,10 +106,6 @@ function drawChart(info) {
 
   for (let i = 0; i < info.length; i++) {
     const element = info[i];
-    console.log(element.fechaInicio);
-    console.log(element.fechaFinal);
-    //element.fechaInicio
-    //element.fechaFinal
     nuevo[0]="#"+element.id;
     nuevo[1]=element.nombreTarea;
     nuevo[2]=element.idEtapaProyecto.idEtapa.nombreEtapa;
@@ -127,26 +115,31 @@ function drawChart(info) {
       fechainicial=new Date(element.fechaInicio);
       fechaFinal= new Date(element.fechaFinal);
       nuevo[6]=0;
-    } else {if (element.fechaFinalReal != null) {
+    } else {if (element.fechaFinalReal == null) {
       fechainicial=new Date(element.fechaInicioReal);
         fechaFinal=new Date(element.fechaFinal);
-        //nuevo[5]= ((fechaFinal - nuevo[3].getTime())/(1000*60*60*24))+1;
         nuevo[6]=100;
       }else{
         fechainicial=new Date(element.fechaInicioReal);
-        fechaFinal=new Date(element.fechaFinal);
-        //nuevo[5]= ((fechaFinal - nuevo[3].getTime())/(1000*60*60*24))+1
+        fechaFinal=new Date(element.fechaFinalReal);
         nuevo[6]=50;
       }
     }
-    nuevo[3]=new Date(fechainicial.getTime()-(1000*60*60*14));
-    nuevo[4]=new Date(fechaFinal.getTime()+(1000*60*60*4));
+    if (fechainicial.getTime()+(1000*60*60*10) < fechaFinal.getTime()+(1000*60*60*26)) {
+      nuevo[3]=new Date(fechainicial.getTime()+(1000*60*60*10));
+      nuevo[4]=new Date(fechaFinal.getTime()+(1000*60*60*26));
+    }else{
+      nuevo[3]=new Date(fechainicial.getTime()+(1000*60*60*10));
+      nuevo[4]=new Date(fechainicial.getTime()+(1000*60*60*26));
+    }
+    
+    console.log(nuevo[1]+": \n"+nuevo[3]+"-----"+nuevo[4]+"\n" +fechainicial+"-----"+fechaFinal+"\n"
+                           +element.fechaInicio+"-----"+element.fechaFinal+"\n"
+                          +element.fechaInicioReal+"-----"+element.fechaFinalReal);
     nuevo[5]= null;
     nuevo[7]=null;
-    console.log(nuevo[4]+"   "+nuevo[3]);
     data.addRow(nuevo);
   }
-  //console.log(data);
 
   var options = {
     height: 400,
@@ -159,4 +152,67 @@ function drawChart(info) {
 
   chart.draw(data, options);
 }
+}
+
+function etapa(number) {
+
+  const proyectoDropdown = document.getElementById("SeleccionarProyecto");
+  const etapaDropdown = document.getElementById("etapa");
+  let etapa="";
+  
+  switch (number) {
+    case 1:etapa="Crear proyecto";
+      break;
+    case 2:etapa="Diseño";
+      break;
+    case 3:etapa="Reparación y presupuesto";
+      break;
+    case 4:etapa="Programación";
+      break;
+    case 5:etapa="Ejeución";
+      break;
+    case 6:etapa="Completado";
+      break;
+    case 7:etapa="Archivado";
+      break; 
+    case 8:etapa="Descartado";
+     break;
+    default:etapa= "Etapa"
+}
+
+etapaDropdown.innerText=etapa;
+  proyectoDropdown.disabled = false;
+  desplegable(number);
+
+}
+
+function desplegable(number) {
+  
+  fetch('http://sistemas:8080/proyectos/etapa/'+number)
+            .then(response => response.json())
+            .then(data => proyectos(data))
+            .catch(error => console.log(error));
+// Create a new li element
+  function proyectos(data) {
+  
+  for (let i = 0; i < data.length; i++) {
+    
+  const proyectoDropdown = document.getElementById("proyecto");
+
+  const newListItem = document.createElement("li");
+    const element = data[i];
+    // Create a new a element
+    const newLink = document.createElement("a");
+    newLink.setAttribute("class", "dropdown-item");
+    newLink.setAttribute("href", "#");
+    newLink.textContent = element.nombreProyecto;
+    // Append the newLink to the newListItem
+    newListItem.appendChild(newLink); 
+    proyectoDropdown.appendChild(newListItem);
+  }
+  
+  // Append the newListItem to the proyectoDropdown
+  
+}
+
 }
