@@ -47,7 +47,19 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <!--Diagrama de barras-->
-        <div id="columnchart_material"></div>
+        <div class="container-fluid m-3">
+         <div class="row">
+          <div class="col">
+           <div class="card" style="height: 250px;">
+             <div class="card-body" style="overflow-y: auto;">
+               <!-- Contenido del rectángulo aquí -->
+                <div id="columnchart_material"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <!--Diagrama de tabla-->
         <div id="table_div"></div>
       </div>
@@ -58,40 +70,52 @@
     </div>
   </div>
   <!--Diagrama de Gannt-->
-  <div class="dropdown-center m-3" >
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <div class="dropdown">
-          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
-            Etapa
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
-            <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
-            <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
-            <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
-            <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
-            <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
-            <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
-            <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
-          </ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card" style="height: 300px;">
+          <div class="card-body" style="overflow-y: auto;">
+            <!-- Contenido del rectángulo aquí -->
+            <div class="dropdown-center m-3" >
+              <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                  <div class="dropdown">
+                    <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
+                      Etapa
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
+                      <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
+                    </ul>
+                  </div>
+                  <div class="dropdown">
+                    <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+                      Seleccionar proyecto
+                    </button>
+                    <ul class="dropdown-menu"  id="proyecto">
+                      <li><button class="dropdown-item">proyecto</button></li>
+                    </ul>
+                  </div>
+                  <form action="html/aggTarea.html">
+                    <button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
+                  </form>
+                </div>
+              </nav>
+            </div>
+            <h2 id="nombreProyecto" class="text-center text-danger"></h2>
+            <div  id="chart_div" class="m-3 scroll"></div>
+          </div>
         </div>
-        <div class="dropdown">
-          <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
-            Seleccionar proyecto
-          </button>
-          <ul class="dropdown-menu"  id="proyecto">
-            <li><button class="dropdown-item">proyecto</button></li>
-          </ul>
-        </div>
-        <form action="html/aggTarea.html">
-          <button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
-        </form>
       </div>
-    </nav>
+    </div>
   </div>
-  <h2 id="nombreProyecto" class="text-center text-danger"></h2>
-  <div  id="chart_div" class="m-3 scroll"></div>
+
 
   <script src="js/dashboard.js"></script>
 
