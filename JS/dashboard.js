@@ -118,7 +118,7 @@ function drawChart(info) {
       fechainicial=new Date(element.fechaInicio);
       fechaFinal= new Date(element.fechaFinal);
       nuevo[6]=0;
-    } else {if (element.fechaFinalReal != null) {
+    } else {if (element.fechaFinalReal == null) {
       fechainicial=new Date(element.fechaInicioReal);
         fechaFinal=new Date(element.fechaFinal);
         nuevo[6]=100;
