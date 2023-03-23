@@ -50,15 +50,21 @@
     <div class="dropdown-center m-3" >
             <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filtro
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Responsable</a></li>
-                    <li><a class="dropdown-item" href="#">Etapa</a></li>
-                    <li><a class="dropdown-item" href="#">Completado</a></li>
-                    <li><a class="dropdown-item" href="#">Archivado</a></li>
-                  </ul>
+              <div class="dropdown">
+                <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
+                  Etapa
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
+                </ul>
+              </div>
               <form class="d-flex text-center" role="search">
                 <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
@@ -69,11 +75,26 @@
             </div>
           </nav>
     </div>
+    <footer class="bg-Secondary py-3 position-absolute bottom-0 start-50 translate-middle">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="mb-0">© 2023 Carboexco. Todos los derechos reservados.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">Desarrollado por <a href="https://github.com/Carboexco2/moduloProyectosFrontend">Equipo Dinamita</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
 
     <!--Tabla proyectos-->
-  <div id="table_div" class="m-3"></div>
-  <script  src="../js/aggTabla.js">  
+    <div class="container-fluid row justify-content-md-center">
+      <div id="table_div" class=" col-11"></div>
+    </div>
+
+  <script  src="../js/proyectos.js">  
   </script>
 
 
