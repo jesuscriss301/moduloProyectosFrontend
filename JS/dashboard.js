@@ -154,8 +154,14 @@ function drawChart(info) {
 }
 
 function etapa(number) {
-
   const proyectoDropdown = document.getElementById("SeleccionarProyecto");
+  desplegarEtapa(number);
+  proyectoDropdown.disabled = false;
+  desplegable(number);
+
+}
+function desplegarEtapa(number) {
+  
   const etapaDropdown = document.getElementById("etapa");
   let etapa="";
   
@@ -168,7 +174,7 @@ function etapa(number) {
       break;
     case 4:etapa="Programación";
       break;
-    case 5:etapa="Ejeución";
+    case 5:etapa="Ejecución";
       break;
     case 6:etapa="Completado";
       break;
@@ -177,12 +183,8 @@ function etapa(number) {
     case 8:etapa="Descartado";
      break;
     default:etapa= "Etapa"
-}
-
-etapaDropdown.innerText=etapa;
-  proyectoDropdown.disabled = false;
-  desplegable(number);
-
+  }
+  etapaDropdown.innerText=etapa;
 }
 
 function desplegable(number) {
@@ -199,7 +201,6 @@ function desplegable(number) {
   
   for (let i = 0; i < data.length; i++) {
     
-    
     const newListItem = document.createElement("li");
     const element = data[i];
     // Create a new a element
@@ -207,7 +208,6 @@ function desplegable(number) {
     newLink.setAttribute("class", "dropdown-item");
     console.log(element.id);
     newLink.setAttribute("onclick", "DiagramaGannt("+ element.id +")");
-    //newLink.setAttribute("href", "#");
     newLink.textContent = element.nombreProyecto;
     
     // Append the newLink to the newListItem
