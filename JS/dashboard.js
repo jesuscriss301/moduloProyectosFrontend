@@ -141,7 +141,7 @@ function drawChart(info) {
   }
 
   var options = {
-    height: 400,
+    height: "100%",
     gantt: {
       trackHeight: 30
     }
