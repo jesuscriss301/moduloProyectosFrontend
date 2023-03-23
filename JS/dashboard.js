@@ -187,6 +187,9 @@ etapaDropdown.innerText=etapa;
 
 function desplegable(number) {
   
+  const proyectoDropdown = document.getElementById("proyecto");
+  proyectoDropdown.innerHTML="";
+  
   fetch('http://sistemas:8080/proyectos/etapa/'+number)
             .then(response => response.json())
             .then(data => proyectos(data))
@@ -196,8 +199,7 @@ function desplegable(number) {
   
   for (let i = 0; i < data.length; i++) {
     
-    const proyectoDropdown = document.getElementById("proyecto");
-
+    
     const newListItem = document.createElement("li");
     const element = data[i];
     // Create a new a element
