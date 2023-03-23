@@ -118,7 +118,7 @@ function drawChart(info) {
       fechainicial=new Date(element.fechaInicio);
       fechaFinal= new Date(element.fechaFinal);
       nuevo[6]=0;
-    } else {if (element.fechaFinalReal == null) {
+    } else {if (element.fechaFinalReal != null) {
       fechainicial=new Date(element.fechaInicioReal);
         fechaFinal=new Date(element.fechaFinal);
         nuevo[6]=100;
@@ -135,12 +135,6 @@ function drawChart(info) {
       nuevo[3]=new Date(fechainicial.getTime()+(1000*60*60*10));
       nuevo[4]=new Date(fechainicial.getTime()+(1000*60*60*26));
     }
-    /*
-    console.log(nuevo[1]+": \n"+nuevo[3]+"-----"+nuevo[4]+"\n" +fechainicial+"-----"+fechaFinal+"\n"
-                           +element.fechaInicio+"-----"+element.fechaFinal+"\n"
-                          +element.fechaInicioReal+"-----"+element.fechaFinalReal);
-    
-    */
     nuevo[5]= null;
     nuevo[7]=null;
     data.addRow(nuevo);
