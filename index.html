@@ -43,7 +43,7 @@
     </nav>
   </div>
 
-  <div class="container text-center ">
+  <div class="container text-center">
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <!--Diagrama de barras-->
@@ -61,9 +61,21 @@
       </div>
 
         <!--Diagrama de tabla-->
-        <div id="table_div"></div>
+        <div class="container-fluid m-3">
+          <div class="row">
+            <div class="col">
+              <div class="card" style="height: 150px;">
+                <div class="card-body" style="overflow-y: auto;">
+                  <!-- Contenido del diagrama aquí -->
+                  <div id="table_div"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="piechart_3d" class="col-sm-12 col-md-6  col-lg-6 align-self-center">
+
+      <div id="piechart_3d" class="col-sm-12 col-md-6">
         <!--Diagrama circular-->
         <div style="width:auto; min-height: 400px;"> </div>
       </div>
@@ -105,11 +117,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <div class="card" style="height: 250px;">
-          <div class="card-body" style="overflow-y: auto;">
+        <div class="card" style="height: 200;  overflow-y: scroll; ">
+          <div class="card-body" style="overflow-y: auto; overflow: auto;">
             <!-- Contenido del diagrama aquí -->
             <h2 id="nombreProyecto" class="text-center text-danger"></h2>
-            <div  id="chart_div" class="m-3 scroll"></div>
+            <div  id="chart_div"></div>
           </div>
         </div>
       </div>
@@ -118,14 +130,14 @@
 
   <script src="js/dashboard.js"></script>
 
-  <footer class="bg-light py-3">
+  <footer class="bg-Secondary py-3">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <p class="mb-0">© 2023 Carboexco. Todos los derechos reservados.</p>
         </div>
         <div class="col-md-6 text-md-end">
-          <p class="mb-0">Desarrollado por <a href="#">Equipo Dinamita</a></p>
+          <p class="mb-0">Desarrollado por <a href="https://github.com/Carboexco2/moduloProyectosFrontend">Equipo Dinamita</a></p>
         </div>
       </div>
     </div>
