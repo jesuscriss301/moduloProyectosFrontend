@@ -11,7 +11,7 @@
 <body>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
               
-  <!-- barra de navegaciòn-->
+   <!-- barra de navegaciòn-->
             
     <nav class="navbar navbar-expand-lg bg-body-secondary" >
         <div class="container-fluid"  style="width: auto; margin-left: auto; margin-right: auto;">
@@ -39,7 +39,7 @@
     <button class="m-3" onclick="goBack()">Volver</button>
 
     <div class="dropdown text-center">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           Baterias
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -50,42 +50,42 @@
       </div>
     </nav>
 
-    <div class="container-fluid bg-light m-3 py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-               <h2>Bateria 1 </h2><h3> 1-11</h3>
-               <table class="table table-bordered border-light-subtle m-3" >
-                <thead>
-                    <tr>
-                    <th scope="col">Codigo Proyecto:</th>
-                    <td scope="col">B4H22</th>
-                    <th scope="col">Nombre Proyecto:</th>
-                    <td scope="col"> Reparacion Bateria 4 </th>
-                    </tr>
-                </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Codigo Tarea:</th>
-                        <td> #123 </td>
-                        <th scope="row">Fecha Tarea:</td>
-                        <td> 28-02-2023 </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Responsable:</th>
-                        <td>Argeniz Florez</td>
-                        <th scope="row">Fecha inicio:</td>
-                        <td>  </td>
-                      </tr>
-                    </tbody>
-            </table>
-            </div>
+    <div class="container-fluid bg-light">
+      <div class="row justify-content-center m-3">
+        <div class="col-md-6 text-center" >
+          <h2>Bateria 1</h2>
+          <h3>1-11</h3>
+          <table class="table table-bordered border-light-subtle m-3">
+            <thead>
+              <tr>
+                <th scope="col">Codigo Proyecto:</th>
+                <td scope="col">B4H22</td>
+                <th scope="col">Nombre Proyecto:</th>
+                <td scope="col">Reparacion Bateria 4</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Codigo Tarea:</th>
+                <td>#123</td>
+                <th scope="row">Fecha Tarea:</th>
+                <td>28-02-2023</td>
+              </tr>
+              <tr>
+                <th scope="row">Responsable:</th>
+                <td>Argeniz Florez</td>
+                <th scope="row">Fecha inicio:</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
 
     <script>function goBack() {
-        window.history.back();
-        }
-      </script>
+      window.history.back();
+      }
+    </script>
 
 </body>
 </html>
