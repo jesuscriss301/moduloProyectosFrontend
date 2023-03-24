@@ -40,6 +40,17 @@ function alerta() {
     alertPlaceholder.setAttribute("class", "visually-hidden");
   }, 2500);
 }
+
+function despliegue(number) {
+
+  
+  // construir la URL con el parámetro de consulta
+  const url = `file:///C:/Users/SISTEMAS/Documents/aplicacion%20planta/moduloProyectosFrontend/moduloProyectosFrontend/html/proyectos.html?nombreProyecto=${number}`;
+  // redirigir a la página con la URL construida
+  window.location.href = url;
+    desplegarEtapa(number);
+  
+}
 /*
 const alertTrigger = document.getElementById('liveAlertBtn')
 if (alertTrigger) {
