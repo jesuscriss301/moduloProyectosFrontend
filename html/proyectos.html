@@ -96,15 +96,21 @@
               <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
             </ul>
           </div>
-          <form class="d-flex text-center" role="search" action="">
-            <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          <form class="d-flex text-center" role="search" action="proyectos.html">
+            <input class="form-control me-2 text-center" type="search" name="nombreProyecto" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
           <form action="aggProyecto.html">
             <button   class="btn btn-danger">Agregar Proyecto</button>
           </form>
         </div>
       </nav>
+    </div>
+
+    <div class="visually-hidden" id="liveAlertPlaceholder">
+      <div class="alert alert-danger" role="alert">
+        No se encontraron proyectos con esas indicaciones
+      </div>
     </div>
     
     <!--Tabla proyectos-->
