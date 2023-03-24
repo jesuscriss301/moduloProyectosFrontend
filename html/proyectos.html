@@ -11,43 +11,42 @@
     </head>
 
 <body onload="cargarTabla()">
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
-            <!-- barra de navegaciòn-->
-            
-            <div class="section">
-              <nav class="navbar navbar-expand-lg bg-body-secondary" >
-                <a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
-                <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
-                  <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
-                  <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
-                  <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarText" >
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../index.html"><h3>Dashboard</h3></a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="proyectos.html"><h3>Proyectos</h3></a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="Tareas.html"><h3>Tareas</h3></a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="hornos.html"><h3>Reparaciones</h3></a>
-                    </li>
-                  </ul>
-                  </div>
-                </div>
-                <a href="perfil.html" class="btn btn-danger m-2">
-                <i class="bi bi-person"></i> Ver Perfil
-                </a>			  
-                </div>
-              </nav>
-            </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
+    <!-- barra de navegaciòn-->
+    <div class="section">
+      <nav class="navbar navbar-expand-lg bg-body-secondary" >
+        <a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
+        <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
+          <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
+          <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText" >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../index.html"><h3>Dashboard</h3></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="proyectos.html"><h3>Proyectos</h3></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Tareas.html"><h3>Tareas</h3></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="hornos.html"><h3>Reparaciones</h3></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a href="perfil.html" class="btn btn-danger m-2">
+          <i class="bi bi-person"></i> Ver Perfil
+        </a>			  
+      </nav>
+    </div>
           
       <!--barra de busqueda y menu desplegable (filtro)-->
     <div class="dropdown-center m-3" >
+<<<<<<< HEAD
             <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
               <div class="dropdown">
@@ -79,6 +78,56 @@
 
     <!--Tabla proyectos-->
     <div id="table_div" class="vstack gap-2 col-11 mx-auto m-3"></div>
+=======
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <div class="dropdown">
+            <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
+              Etapa
+            </button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
+              <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
+              <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
+              <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
+              <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
+              <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
+              <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
+              <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
+            </ul>
+          </div>
+          <form class="d-flex text-center" role="search" action="">
+            <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <form action="aggProyecto.html">
+            <button   class="btn btn-danger">Agregar Proyecto</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    
+    <!--Tabla proyectos-->
+    <div class="container-fluid row justify-content-md-center">
+      <div id="table_div" class=" col-11"></div>
+    </div>
+
+      <footer class="bg-Secondary py-3 position-absolute bottom-0 start-50 translate-middle">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-0">© 2023 Carboexco. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <p class="mb-0">Desarrollado por <a href="https://github.com/Carboexco2/moduloProyectosFrontend">Equipo Dinamita</a></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+  <script  src="../js/proyectos.js">  
+  </script>
+
+>>>>>>> 5a9ac2771f9726e88f7d8835376d30ee82bb7f93
 
     <footer class="bg-light py-3 position-absolute top-100 start-50 translate-middle">
       <div class="container">
