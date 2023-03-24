@@ -7,7 +7,7 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title>Proyectos</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+      
     </head>
 
 <body onload="cargarTabla()">
@@ -46,6 +46,39 @@
           
       <!--barra de busqueda y menu desplegable (filtro)-->
     <div class="dropdown-center m-3" >
+<<<<<<< HEAD
+            <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <div class="dropdown">
+                <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
+                  Etapa
+                </button>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
+                  <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
+                </ul>
+              </div>
+              <form class="d-flex text-center" role="search">
+                <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              <form action="aggProyecto.html">
+              <button   class="btn btn-danger">Agregar Proyecto</button>
+            </form>
+            </div>
+          </nav>
+    </div>
+
+
+    <!--Tabla proyectos-->
+    <div id="table_div" class="vstack gap-2 col-11 mx-auto m-3"></div>
+=======
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
           <div class="dropdown">
@@ -100,7 +133,22 @@
   <script  src="../js/proyectos.js">  
   </script>
 
+>>>>>>> 5a9ac2771f9726e88f7d8835376d30ee82bb7f93
 
+    <footer class="bg-light py-3 position-absolute top-100 start-50 translate-middle">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="mb-0">© 2023 Carboexco. Todos los derechos reservados.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">Desarrollado por <a href="#">Equipo Dinamita</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  <script  src="../js/dashboard.js"></script>
+  <script src="../JS/proyectos.js"></script>
 </body>
 
 
