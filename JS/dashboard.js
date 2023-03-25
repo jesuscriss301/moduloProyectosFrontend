@@ -9,7 +9,11 @@ function cargaDiagramas() {
 //Diagrama Circular//
 function diagramaCircular() {
   google.charts.load("current", {packages:["corechart"]});
-  google.charts.setOnLoadCallback(circularfetch);
+  google.charts.setOnLoadCallback(() => {
+    circularfetch().then(data => {
+      drawChart(data);
+    });
+  });
 
   function drawChart(data) {
     var data = google.visualization.arrayToDataTable(data);
@@ -23,7 +27,7 @@ function diagramaCircular() {
     chart.draw(data, options);
   }
 
-  function circularfetch() {
+  async function circularfetch() {
     fetch('http://sistemas:8080/proyectos/circular')
       .then(response => response.json())
       .then(data => drawChart(data))
@@ -34,28 +38,30 @@ function diagramaCircular() {
 //Diagrama de barras//
 function DiagramaBarras() {
 google.charts.load('current', {'packages':['bar']});
-google.charts.setOnLoadCallback(barrasfetch);
-  
-    function drawChart(data) {
-      var data = google.visualization.arrayToDataTable(data);
-  
-        var options = {
-            chart: {
-              title: 'Proyectos & avance',
+google.charts.setOnLoadCallback(() => {
+  barrasfetch().then(data => {
+    drawChart(data);
+  });
+});
 
-            }
-        };
+  function drawChart(data) {
+    var data = google.visualization.arrayToDataTable(data);
   
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-  
-          chart.draw(data, google.charts.Bar.convertOptions(options));
+    var options = {
+        chart: {
+        title: 'Proyectos & avance',
         }
-        function barrasfetch() {
-          fetch('http://sistemas:8080/proyectos/barras')
-            .then(response => response.json())
-            .then(data => drawChart(data))
-            .catch(error => console.log(error));
-        }
+    };
+    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+
+  }
+  async  function barrasfetch() {
+    fetch('http://sistemas:8080/proyectos/barras')
+        .then(response => response.json())
+        .then(data => drawChart(data))
+        .catch(error => console.log(error));
+  }
 }
 
 //Tabla de informacion//
@@ -82,10 +88,15 @@ function tablafetch() {
 //Diagrama de Gannt//
 function DiagramaGannt(number) {    
 google.charts.load('current', {'packages':['gantt']});
-google.charts.setOnLoadCallback(ganntfetch(number));
+google.charts.setOnLoadCallback(() => {
+  ganntfetch(number).then(data => {
+    drawChart(data);
+  });
+});
 
-function ganntfetch(number) {
-  console.log(number);
+
+async function ganntfetch(number) {
+  //console.log(number);
   fetch('http://sistemas:8080/tareas/proyecto/'+number)
     .then(response => response.json())
     .then(data => drawChart(data))
@@ -160,6 +171,7 @@ function etapa(number) {
   desplegable(number);
 
 }
+
 function desplegarEtapa(number) {
   
   const etapaDropdown = document.getElementById("etapa");
@@ -206,7 +218,7 @@ function desplegable(number) {
     // Create a new a element
     const newLink = document.createElement("button");
     newLink.setAttribute("class", "dropdown-item");
-    console.log(element.id);
+    //console.log(element.id);
     newLink.setAttribute("onclick", "DiagramaGannt("+ element.id +")");
     newLink.textContent = element.nombreProyecto;
     
