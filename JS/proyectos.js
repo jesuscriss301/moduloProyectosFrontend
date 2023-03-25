@@ -17,9 +17,13 @@ function consultaNombreProyecto() {
 
 function Tabla(busqueda) {
   google.charts.load('current', {'packages':['table']});
-  google.charts.setOnLoadCallback(proyectos(busqueda));
+  google.charts.setOnLoadCallback(() => {
+    proyectos(busqueda).then(data => {
+      drawTable(data);
+    });
+  });
 }
-function proyectos(busqueda) {
+async function proyectos(busqueda) {
   fetch('http://sistemas:8080/proyectos/tablaProyectos/'+busqueda+"/")
     .then(response => response.json())
     .then(data => drawTable(data))
