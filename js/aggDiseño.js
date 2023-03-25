@@ -6,4 +6,4 @@ console.log(datos);
 const datosCompletos = Object.fromEntries(datos.entries());
 
 console.log(datosCompletos);
-}
+}    
