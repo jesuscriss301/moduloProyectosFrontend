@@ -7,10 +7,10 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title>Proyectos</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+      
     </head>
 
-<body onload="cargarTabla()">
+<body onload="cargarTablaProyectos()">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
     <!-- barra de navegaciòn-->
     <div class="section">
@@ -53,25 +53,31 @@
               Etapa
             </button>
             <ul class="dropdown-menu">
-              <li><button class="dropdown-item" onclick="etapa(1)">Crear proyectos</button></li>
-              <li><button class="dropdown-item" onclick="etapa(2)">Diseño</button></li>
-              <li><button class="dropdown-item" onclick="etapa(3)">Requisicion y presupuesto</button></li>
-              <li><button class="dropdown-item" onclick="etapa(4)">Programación</button></li>
-              <li><button class="dropdown-item" onclick="etapa(5)">Ejecución</button></li>
-              <li><button class="dropdown-item" onclick="etapa(6)">Completado</button></li>
-              <li><button class="dropdown-item" onclick="etapa(7)">Archivo</button></li>
-              <li><button class="dropdown-item" onclick="etapa(8)">Descartado</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(1)">Crear proyectos</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(2)">Diseño</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(3)">Requisicion y presupuesto</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(4)">Programación</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(5)">Ejecución</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(6)">Completado</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(7)">Archivo</button></li>
+              <li><button class="dropdown-item" onclick=" despliegue(8)">Descartado</button></li>
             </ul>
           </div>
-          <form class="d-flex text-center" role="search" action="">
-            <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          <form class="d-flex text-center" role="search" action="proyectos.html">
+            <input class="form-control me-2 text-center" type="search" name="nombreProyecto" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
           <form action="aggProyecto.html">
             <button   class="btn btn-danger">Agregar Proyecto</button>
           </form>
         </div>
       </nav>
+    </div>
+
+    <div class="visually-hidden" id="liveAlertPlaceholder">
+      <div class="alert alert-danger" role="alert">
+        No se encontraron proyectos con esas indicaciones
+      </div>
     </div>
     
     <!--Tabla proyectos-->
@@ -93,8 +99,8 @@
     </footer>
   <script  src="../js/proyectos.js">  
   </script>
-
-
+  <script  src="../js/dashboard.js"></script>
+  <script src="../JS/proyectos.js"></script>
 </body>
 
 
