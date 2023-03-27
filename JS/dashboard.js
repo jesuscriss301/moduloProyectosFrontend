@@ -194,7 +194,7 @@ function desplegarEtapa(number) {
       break; 
     case 8:etapa="Descartado";
      break;
-    default:etapa= "Etapa"
+    default:etapa= "Etapa";
   }
   etapaDropdown.innerText=etapa;
 }
@@ -229,6 +229,5 @@ function desplegable(number) {
   
   // Append the newListItem to the proyectoDropdown
   
-}
-
+  }
 }

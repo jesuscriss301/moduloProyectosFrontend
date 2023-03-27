@@ -23,6 +23,7 @@ function Tabla(busqueda) {
     });
   });
 }
+
 async function proyectos(busqueda) {
   fetch('http://sistemas:8080/proyectos/tablaProyectos/'+busqueda+"/")
     .then(response => response.json())
