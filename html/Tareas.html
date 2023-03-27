@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 		
     </head>
-<body onload="cargarTabla()">
+<body onload="cargar()">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
     <!-- barra de navegaciòn-->        
     <div class="section">
@@ -43,23 +43,22 @@
 			</a>			  
 		</nav>
 	</div>
-		
 	<!--Tabla informacion sobre el proyecto de la tarea-->
 	<table class="table table-bordered border-light-subtle m-3 sangria">
 		<thead>
 		  <tr>
 			<th scope="col">Codigo Proyecto:</th>
-			<td scope="col">B4H22</th>
+			<td id="CodigoProyecto" scope="col"></th>
 			<th scope="col">Nombre Proyecto:</th>
-			<td scope="col"> Reparacion Bateria 4 </th>
+			<td id="mombreProyecto" scope="col"></th>
 		  </tr>
 		</thead>
 		<tbody>
 		  <tr>
 			<th scope="row">Tipo Proyecto:</th>
-			<td> Reparacion </td>
+			<td id="tipoProyecto"></td>
 			<th scope="row">Responsable:</td>
-			<td> Argeniz Florez </td>
+			<td id="responsable"></td>
 		  </tr>
 		  <tr>
 			<th scope="row">Diseño:</th>
@@ -80,18 +79,15 @@
 		<!--Encabezado pagina-->
 		<h2 style="margin: 0 auto;">Tareas</h2>
 	</div>
-		      <!--barra de busqueda y menu desplegable (filtro)-->
+	<!--barra de busqueda y menu desplegable (filtro)-->
 	<div class="dropdown-center m-3" >
 		<nav class="navbar bg-body-tertiary">
 			<div class="container-fluid">
 				<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-					Filtro
+					Proyectos
 				</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Responsable</a></li>
-					<li><a class="dropdown-item" href="#">Etapa</a></li>
-					<li><a class="dropdown-item" href="#">Completado</a></li>
-					<li><a class="dropdown-item" href="#">Archivado</a></li>
+				<ul id="proyectoEjecucion" class="dropdown-menu">
+					<li><button class="dropdown-item" onclick="">Responsable</button></li>
 				</ul>
 				<form action="aggTarea.html">
 					<button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
@@ -322,7 +318,6 @@
 					  <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
 						<div class="accordion-body">
 						    <div id="table_div" class="m-3"></div>
-  							<script src="../js/aggTabla.js"></script>
 						</div>
 					  </div>
 					</div>
@@ -343,5 +338,6 @@
 		  </div>
 		</div>
 	  </footer>
+	<script src="../JS/tareas.js"></script>
 </body>
 </html>
