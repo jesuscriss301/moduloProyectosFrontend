@@ -47,7 +47,6 @@ function alerta() {
 }
 
 function despliegue(number) {
-
   
   // construir la URL con el parámetro de consulta
   const url = `file:///C:/Users/SISTEMAS/Documents/aplicacion%20planta/moduloProyectosFrontend/moduloProyectosFrontend/html/proyectos.html?nombreProyecto=${number}`;
