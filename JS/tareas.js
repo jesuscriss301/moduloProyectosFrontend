@@ -1,8 +1,9 @@
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);
-    queryParam = urlParams.get('nombreProyecto');
+    let queryParam = urlParams.get('nombreProyecto');
     cargarProyecto(queryParam);
     cargarProyectos();
+    tareasEtapa(queryParam);
 }
 
 async function cargarProyecto(id) {
@@ -21,7 +22,9 @@ async function responsable(proyecto) {
     fetch(`http://localhost:8080/proyectoPersonas/proyecto/${proyecto}/5`)
     .then(response => response.json())
     .then(data => {
-        responsable.textContent=data[0].id.persona;
+        const idPersonas = data.map(item => item.id.persona);
+        const rta = idPersonas.join(", ");
+        responsable.textContent = rta;
     })
     .catch(error => console.log(error));
 }
@@ -85,5 +88,61 @@ async function cargarProyectos() {
     fetch('http://sistemas:8080/proyectos/etapa/5')
     .then(response => response.json())
     .then(data => cargarfiltro(data))
+    .catch(error => console.log(error));
+}
+
+function tareasEtapa(idProyecto) {
+
+    for(let i =1; i<=5;i++){
+        
+        etapas(idProyecto,i);
+    }
+}
+
+async function etapas(ididProyecto,idEtapa) {
+
+    const tabla = document.getElementById(`tabla${idEtapa}`);
+    console.log(tabla +"-->"+idEtapa );
+    fetch(`http://sistemas:8080/tareas/${ididProyecto}/${idEtapa}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        for(var i in data){
+        const row1 = document.createElement("tr");
+        const cell1 = document.createElement("td");
+        const cell2 = document.createElement("td");
+        const cell3 = document.createElement("td");
+        const cell4 = document.createElement("td");
+        const cell5 = document.createElement("td");
+        const cell6 = document.createElement("td");
+
+        cell1.textContent = data[i].id;
+        cell2.textContent = data[i].nombreTarea;
+        cell3.textContent = "responsable";
+        cell4.textContent = data[i].descripcionTarea;
+        if(data[i].fechaInicioReal==null){
+            cell5.textContent = `${data[i].fechaInicio} / ${data[i].fechaFinal}`;
+            cell6.textContent = "en espera";
+        }else{
+            if(data[i].fechaFinalReal==null){
+                cell5.textContent = `${data[i].fechaInicioReal} / ${data[i].fechaFinalReal}`;
+                cell6.textContent = "culminado";
+            }else{
+                cell5.textContent = `${data[i].fechaInicioReal} / ${data[i].fechaFinal}`;
+                cell6.textContent = "en ejecución";
+            }
+
+        }
+
+        row1.appendChild(cell1);
+        row1.appendChild(cell2);
+        row1.appendChild(cell3);
+        row1.appendChild(cell4);
+        row1.appendChild(cell5);
+        row1.appendChild(cell6);
+
+        tabla.appendChild(row1)
+        }
+    })
     .catch(error => console.log(error));
 }
