@@ -1,6 +1,6 @@
 function cargarTablaProyectos() {
   //Tabla();
-  consultaNombreProyecto()
+  consultaNombreProyecto();
 }
 
 function consultaNombreProyecto() {
@@ -10,9 +10,7 @@ function consultaNombreProyecto() {
     Tabla(queryParam)
   }else{
     Tabla("*");
-    console.log("*");
-  }
-  console.log(queryParam); // "JavaScript"  
+  } // "JavaScript"  
 }
 
 function Tabla(busqueda) {
@@ -23,6 +21,7 @@ function Tabla(busqueda) {
     });
   });
 }
+
 async function proyectos(busqueda) {
   fetch('http://sistemas:8080/proyectos/tablaProyectos/'+busqueda+"/")
     .then(response => response.json())
@@ -35,6 +34,8 @@ function drawTable(info) {
   var data = new google.visualization.arrayToDataTable(info);
   var table = new google.visualization.Table(document.getElementById('table_div'));
   table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+
+  tablaestilo();
 }
 
 function alerta() {
@@ -46,7 +47,6 @@ function alerta() {
 }
 
 function despliegue(number) {
-
   
   // construir la URL con el parámetro de consulta
   const url = `file:///C:/Users/SISTEMAS/Documents/aplicacion%20planta/moduloProyectosFrontend/moduloProyectosFrontend/html/proyectos.html?nombreProyecto=${number}`;
@@ -54,6 +54,22 @@ function despliegue(number) {
   window.location.href = url;
     desplegarEtapa(number);
   
+}
+
+function tablaestilo() {
+  let tabla= document.querySelector("table");
+  tabla.setAttribute("class","table table-striped table-hover");
+  let tbody = tabla.querySelector("tbody");
+  let row = tbody.querySelectorAll("tr");
+
+  for (let i in row) {
+    let cell = row[i].querySelectorAll("td");
+    row[i].setAttribute("data-id",cell[0].textContent);    
+    row[i].addEventListener("dblclick",  () => {
+      const idproyecto = row[i].getAttribute("data-id");
+      window.location.href = `tareas.html?nombreProyecto=${idproyecto}`;
+    });
+  };
 }
 /*
 const alertTrigger = document.getElementById('liveAlertBtn')

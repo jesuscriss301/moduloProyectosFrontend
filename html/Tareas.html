@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 		
     </head>
-<body onload="cargarTabla()">
+<body onload="cargar()">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
     <!-- barra de navegaciòn-->        
     <div class="section">
@@ -43,23 +43,22 @@
 			</a>			  
 		</nav>
 	</div>
-		
 	<!--Tabla informacion sobre el proyecto de la tarea-->
 	<table class="table table-bordered border-light-subtle m-3 sangria">
 		<thead>
 		  <tr>
 			<th scope="col">Codigo Proyecto:</th>
-			<td scope="col">B4H22</th>
+			<td id="codigoProyecto" scope="col"></th>
 			<th scope="col">Nombre Proyecto:</th>
-			<td scope="col"> Reparacion Bateria 4 </th>
+			<td id="nombreProyecto" scope="col"></th>
 		  </tr>
 		</thead>
 		<tbody>
 		  <tr>
 			<th scope="row">Tipo Proyecto:</th>
-			<td> Reparacion </td>
+			<td id="tipoProyecto"></td>
 			<th scope="row">Responsable:</td>
-			<td> Argeniz Florez </td>
+			<td id="responsable"></td>
 		  </tr>
 		  <tr>
 			<th scope="row">Diseño:</th>
@@ -80,18 +79,15 @@
 		<!--Encabezado pagina-->
 		<h2 style="margin: 0 auto;">Tareas</h2>
 	</div>
-		      <!--barra de busqueda y menu desplegable (filtro)-->
+	<!--barra de busqueda y menu desplegable (filtro)-->
 	<div class="dropdown-center m-3" >
 		<nav class="navbar bg-body-tertiary">
 			<div class="container-fluid">
-				<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-					Filtro
+				<button id="proyectosButton" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" style="width: max-content; max-width: 30ch;" aria-expanded="false">
+					Proyectos
 				</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Responsable</a></li>
-					<li><a class="dropdown-item" href="#">Etapa</a></li>
-					<li><a class="dropdown-item" href="#">Completado</a></li>
-					<li><a class="dropdown-item" href="#">Archivado</a></li>
+				<ul id="proyectoEjecucion" class="dropdown-menu">
+					<li><button class="dropdown-item" onclick="">Responsable</button></li>
 				</ul>
 				<form action="aggTarea.html">
 					<button id="agregarFila" class="btn btn-danger">Agregar Tarea</button>
@@ -118,13 +114,13 @@
 				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingOne">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+						<button id="button1"  disabled class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 						  Crear Proyecto
 						</button>
 					  </h2>
 					  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
 						<div class="accordion-body">
-						  <table class="table">
+						  <table class="table table-striped table-hover">
 							<thead>
 							  <tr>
 								<th scope="col">Codigo</th>
@@ -135,18 +131,7 @@
 								<th scope="col">Completado</th>
 							  </tr>
 							</thead>
-							<tbody>
-							  <tr>
-								<td>1</td>
-								<td><form action="bitacora.html">
-									<button type="submit">Bateria 4</button>
-								  </form></td>
-								<td>Argeniz Florez</td>
-								<td>Reparacion bateria 4</td>
-								<td>28/02/2023</td>
-								<td>ok</td>
-							  </tr>
-							</tbody>
+							<tbody id="tabla1"></tbody>
 						  </table>
 						</div>
 					  </div>
@@ -159,13 +144,13 @@
 				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="flush-headingTwo">
-							<button class="accordion-button collapsed colspan-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+							<button id="button2"  disabled class="accordion-button collapsed colspan-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
 						 	 Diseño
 							</button>
 						</h2>
 						<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
 							<div class="accordion-body">
-							  <table class="table">
+							  <table  class="table table-striped table-hover">
 								<thead>
 								  <tr>
 									<th scope="col">Codigo</th>
@@ -176,16 +161,7 @@
 									<th scope="col">Completado</th>
 								  </tr>
 								</thead>
-								<tbody>
-								  <tr>
-									<td>1</td>
-									<td>Bateria 4</td>
-									<td>Argeniz Florez</td>
-									<td>Reparacion bateria 4</td>
-									<td>28/02/2023</td>
-									<td>ok</td>
-								  </tr>
-								</tbody>
+								<tbody id="tabla2"></tbody>
 							  </table>
 							</div>
 						</div>
@@ -198,13 +174,13 @@
 				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingThree">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-						   Presupuesto & Requisicion
+						<button id="button3"  disabled class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+						   Presupuesto & Requisición
 						</button>
 					  </h2>
 					  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
 						<div class="accordion-body">
-						  <table class="table">
+						  <table class="table table-striped table-hover" >
 							<thead>
 							  <tr>
 								<th scope="col">Codigo</th>
@@ -215,16 +191,7 @@
 								<th scope="col">Completado</th>
 							  </tr>
 							</thead>
-							<tbody>
-							  <tr>
-								<td>1</td>
-								<td>Bateria 4</td>
-								<td>Argeniz Florez</td>
-								<td>Reparacion bateria 4</td>
-								<td>28/02/2023</td>
-								<td>ok</td>
-							  </tr>
-							</tbody>
+							<tbody id="tabla3"></tbody>
 						  </table>
 						</div>
 					  </div>
@@ -237,13 +204,13 @@
 				<div class="accordion accordion-flush" id="accordionFlushExample">
 					<div class="accordion-item">
 					  <h2 class="accordion-header" id="flush-headingFour">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-						   Programacion
+						<button id="button4" disabled class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+						   Programación
 						</button>
 					  </h2>
 					  <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
 						<div class="accordion-body">
-						  <table class="table">
+						  <table class="table table-striped table-hover" >
 							<thead>
 							  <tr>
 								<th scope="col">Codigo</th>
@@ -254,16 +221,7 @@
 								<th scope="col">Completado</th>
 							  </tr>
 							</thead>
-							<tbody>
-							  <tr>
-								<td>1</td>
-								<td>Bateria 4</td>
-								<td>Argeniz Florez</td>
-								<td>Reparacion bateria 4</td>
-								<td>28/02/2023</td>
-								<td>ok</td>
-							  </tr>
-							</tbody>
+							<tbody id="tabla4"></tbody>
 						  </table>
 						</div>
 					  </div>
@@ -273,16 +231,16 @@
 		  </tr>
 		  <tr>
 			<td colspan="6">
-			  <div class="accordion accordion-flush" id="accordionFlushExample">
-				<div class="accordion-item">
+			    <div class="accordion accordion-flush" id="accordionFlushExample">
+					<div class="accordion-item">
 				  <h2 class="accordion-header" id="flush-headingFive">
-					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+					<button id="button5" disabled class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
 					  Ejecucion
 					</button>
 				  </h2>
 				  <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
 					<div class="accordion-body">
-					  <table class="table">
+					  <table class="table table-striped table-hover">
 						<thead>
 						  <tr>
 							<th scope="col">Codigo</th>
@@ -293,42 +251,14 @@
 							<th scope="col">Completado</th>
 						  </tr>
 						</thead>
-						<tbody>
-						  <tr>
-							<td>1</td>
-							<td>Bateria 4</td>
-							<td>Argeniz Florez</td>
-							<td>Reparacion bateria 4</td>
-							<td>28/02/2023</td>
-							<td>ok</td>
-						  </tr>
-						</tbody>
+						<tbody id="tabla5"></tbody>
 					  </table>
 					</div>
 				  </div>
-				</div>
-			  </div>
-			</td>
-		  </tr>
-		  <tr>
-			<td colspan="6">
-				<div class="accordion accordion-flush" id="accordionFlushExample">
-					<div class="accordion-item">
-					  <h2 class="accordion-header" id="flush-headingSix">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-						   Tabla prueba
-						</button>
-					  </h2>
-					  <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
-						<div class="accordion-body">
-						    <div id="table_div" class="m-3"></div>
-  							<script src="../js/aggTabla.js"></script>
-						</div>
-					  </div>
 					</div>
-				</div>
+			    </div>
 			</td>
-		  </tr>
+		  </tr>		  
 		</tbody>
 	</table>
     <footer class="bg-body-secondary py-3  bottom-0 start-50 " style="padding: 0; margin: 0;">
@@ -342,6 +272,7 @@
 			</div>
 		  </div>
 		</div>
-	  </footer>
+	</footer>
+	<script src="../JS/tareas.js"></script>
 </body>
 </html>
