@@ -1,9 +1,11 @@
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);
     let queryParam = urlParams.get('nombreProyecto');
-    cargarProyecto(queryParam);
     cargarProyectos();
+    if (queryParam!=null) {
+    cargarProyecto(queryParam);
     tareasEtapa(queryParam);
+    }
 }
 
 async function cargarProyecto(id) {
@@ -93,6 +95,7 @@ async function cargarProyectos() {
 
 function tareasEtapa(idProyecto) {
 
+    //console.log(idProyecto);
     for(let i =1; i<=5;i++){
         
         etapas(idProyecto,i);
@@ -102,11 +105,15 @@ function tareasEtapa(idProyecto) {
 async function etapas(ididProyecto,idEtapa) {
 
     const tabla = document.getElementById(`tabla${idEtapa}`);
-    console.log(tabla +"-->"+idEtapa );
     fetch(`http://sistemas:8080/tareas/${ididProyecto}/${idEtapa}`)
     .then(response => response.json())
-    .then(data => {
-        console.log(data);
+    .then(async data => {
+        let boton = document.getElementById(`button${idEtapa}`);
+        if(data.length==0){
+            boton.setAttribute("class","accordion-button collapsed btn btn-outline-secondary" );
+        }else{
+            boton.disabled=false;
+
         for(var i in data){
         const row1 = document.createElement("tr");
         const cell1 = document.createElement("td");
@@ -118,20 +125,37 @@ async function etapas(ididProyecto,idEtapa) {
 
         cell1.textContent = data[i].id;
         cell2.textContent = data[i].nombreTarea;
-        cell3.textContent = "responsable";
+        responsabletarea(data[i].id);
         cell4.textContent = data[i].descripcionTarea;
-        if(data[i].fechaInicioReal==null){
-            cell5.textContent = `${data[i].fechaInicio} / ${data[i].fechaFinal}`;
-            cell6.textContent = "en espera";
+        var fechaFinal = data[i].fechaFinal;
+        var fechainicial = data[i].fechaFinal;
+        if (data[i].fechaInicioReal == null) {
+          fechainicial= data[i].fechaInicio;
+          fechaFinal= data[i].fechaFinal;
+          cell6.textContent = "en espera";
+        } else {if (data[i].fechaFinalReal == null) {
+            fechainicial = data[i].fechaInicioReal;
+            fechaFinal = data[i].fechaFinal;
+            cell6.textContent = "culminado";
+          }else{
+            fechainicial = data[i].fechaInicioReal;
+            fechaFinal = data[i].fechaFinalReal;
+            cell6.textContent = "en ejecución";
+          }
+        }
+        if (fechainicial < fechaFinal) {
+          cell5.textContent = fechainicial +" / "+ fechaFinal ;
         }else{
-            if(data[i].fechaFinalReal==null){
-                cell5.textContent = `${data[i].fechaInicioReal} / ${data[i].fechaFinalReal}`;
-                cell6.textContent = "culminado";
-            }else{
-                cell5.textContent = `${data[i].fechaInicioReal} / ${data[i].fechaFinal}`;
-                cell6.textContent = "en ejecución";
-            }
-
+         cell5.textContent = fechainicial +" / "+ fechaFinal ;
+        }
+    async function responsabletarea(idTarea) {
+    
+        fetch('http://localhost:8080/tareaPersonas/tareas/'+idTarea)
+            .then(response => response.json())
+            .then(rta => {
+                cell3.textContent = rta.map(item => item.id.idPersona).join(" ,");
+            })
+            .catch(error => console.log(error));
         }
 
         row1.appendChild(cell1);
@@ -143,6 +167,8 @@ async function etapas(ididProyecto,idEtapa) {
 
         tabla.appendChild(row1)
         }
+    }
     })
     .catch(error => console.log(error));
 }
+

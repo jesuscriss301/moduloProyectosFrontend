@@ -96,7 +96,6 @@ google.charts.setOnLoadCallback(() => {
 
 
 async function ganntfetch(number) {
-  //console.log(number);
   fetch('http://sistemas:8080/tareas/proyecto/'+number)
     .then(response => response.json())
     .then(data => drawChart(data))
@@ -218,7 +217,6 @@ function desplegable(number) {
     // Create a new a element
     const newLink = document.createElement("button");
     newLink.setAttribute("class", "dropdown-item");
-    //console.log(element.id);
     newLink.setAttribute("onclick", "DiagramaGannt("+ element.id +")");
     newLink.textContent = element.nombreProyecto;
     
