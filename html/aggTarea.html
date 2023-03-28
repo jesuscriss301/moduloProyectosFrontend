@@ -15,7 +15,7 @@
     <div class="card" style="width: 35rem; ">
           <h3 style=" text-align: center;">Crear Tarea</h3>
       <div class="card-body">
-      <form action="Tareas.html">
+      <formi id="formTarea">
       <!-- Nombre input -->
       <div class="form-outline mb-4">
         <input type="text" class="form-control" />
@@ -43,7 +43,7 @@
       <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="window.history.back();">
         Cancelar
         </button>
-        <button class="btn btn-success d-flex align-items-center m-1" type="submit">
+        <button class="btn btn-success d-flex align-items-center m-1" type="button" onclick="addTarea(1)">
           Aceptar
         </button>
         
@@ -52,4 +52,5 @@
       </div>
     </div>
 </section>
+<script src="../js/addTarea.js"></script>
 </html>

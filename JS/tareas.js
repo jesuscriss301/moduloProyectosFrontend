@@ -21,7 +21,7 @@ async function responsable(proyecto) {
         
     const responsable = document.getElementById("responsable");
 
-    fetch(`http://localhost:8080/proyectoPersonas/proyecto/${proyecto}/5`)
+    fetch(`http://sistemas:8080/proyectoPersonas/proyecto/${proyecto}/5`)
     .then(response => response.json())
     .then(data => {
         const idPersonas = data.map(item => item.id.persona);
@@ -150,7 +150,7 @@ async function etapas(idProyecto, idEtapa) {
   }
   
   async function getResponsablesTarea(idTarea) {
-    const response = await fetch(`http://localhost:8080/tareaPersonas/tareas/${idTarea}`);
+    const response = await fetch(`http://sistemas:8080/tareaPersonas/tareas/${idTarea}`);
     const data = await response.json();
     return data.map(item => item.id.idPersona).join(", ");
   }
