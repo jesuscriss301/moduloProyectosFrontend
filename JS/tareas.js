@@ -102,73 +102,72 @@ function tareasEtapa(idProyecto) {
     }
 }
 
-async function etapas(ididProyecto,idEtapa) {
-
+async function etapas(idProyecto, idEtapa) {
     const tabla = document.getElementById(`tabla${idEtapa}`);
-    fetch(`http://sistemas:8080/tareas/${ididProyecto}/${idEtapa}`)
-    .then(response => response.json())
-    .then(async data => {
-        let boton = document.getElementById(`button${idEtapa}`);
-        if(data.length==0){
-            boton.setAttribute("class","accordion-button collapsed btn btn-outline-secondary" );
-        }else{
-            boton.disabled=false;
-
-        for(var i in data){
-        const row1 = document.createElement("tr");
-        const cell1 = document.createElement("td");
-        const cell2 = document.createElement("td");
-        const cell3 = document.createElement("td");
-        const cell4 = document.createElement("td");
-        const cell5 = document.createElement("td");
-        const cell6 = document.createElement("td");
-
-        cell1.textContent = data[i].id;
-        cell2.textContent = data[i].nombreTarea;
-        responsabletarea(data[i].id);
-        cell4.textContent = data[i].descripcionTarea;
-        var fechaFinal = data[i].fechaFinal;
-        var fechainicial = data[i].fechaFinal;
-        if (data[i].fechaInicioReal == null) {
-          fechainicial= data[i].fechaInicio;
-          fechaFinal= data[i].fechaFinal;
-          cell6.textContent = "en espera";
-        } else {if (data[i].fechaFinalReal == null) {
-            fechainicial = data[i].fechaInicioReal;
-            fechaFinal = data[i].fechaFinal;
-            cell6.textContent = "culminado";
-          }else{
-            fechainicial = data[i].fechaInicioReal;
-            fechaFinal = data[i].fechaFinalReal;
-            cell6.textContent = "en ejecución";
-          }
-        }
-        if (fechainicial < fechaFinal) {
-          cell5.textContent = fechainicial +" / "+ fechaFinal ;
-        }else{
-         cell5.textContent = fechainicial +" / "+ fechaFinal ;
-        }
-    async function responsabletarea(idTarea) {
+    const response = await fetch(`http://sistemas:8080/tareas/${idProyecto}/${idEtapa}`);
+    const data = await response.json();
     
-        fetch('http://localhost:8080/tareaPersonas/tareas/'+idTarea)
-            .then(response => response.json())
-            .then(rta => {
-                cell3.textContent = rta.map(item => item.id.idPersona).join(" ,");
-            })
-            .catch(error => console.log(error));
-        }
+    const boton = document.getElementById(`button${idEtapa}`);
+    boton.disabled = (data.length === 0);
+    boton.setAttribute("class", `accordion-button ${boton.disabled ? "collapsed" : ""} btn btn-outline-secondary`);
+    
+    for (const tarea of data) {
+      const row = document.createElement("tr");
+      
+      row.setAttribute("data-id", tarea.id)
+      row.addEventListener("dblclick", () => {
+        const idTarea = row.getAttribute("data-id");
+        window.location.href = `bitacora.html?idTarea=${idTarea}`;
+      });
 
-        row1.appendChild(cell1);
-        row1.appendChild(cell2);
-        row1.appendChild(cell3);
-        row1.appendChild(cell4);
-        row1.appendChild(cell5);
-        row1.appendChild(cell6);
-
-        tabla.appendChild(row1)
-        }
+      const cell1 = document.createElement("td");
+      cell1.textContent = tarea.id;
+      
+      const cell2 = document.createElement("td");
+      cell2.textContent = tarea.nombreTarea;
+      
+      const cell3 = document.createElement("td");
+      cell3.textContent = await getResponsablesTarea(tarea.id);
+      
+      const cell4 = document.createElement("td");
+      cell4.textContent = tarea.descripcionTarea;
+      
+      const cell5 = document.createElement("td");
+      cell5.textContent = getFechasTarea(tarea);
+      
+      const cell6 = document.createElement("td");
+      cell6.textContent = getEstadoTarea(tarea);
+      
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      row.appendChild(cell3);
+      row.appendChild(cell4);
+      row.appendChild(cell5);
+      row.appendChild(cell6);
+      
+      tabla.appendChild(row);
     }
-    })
-    .catch(error => console.log(error));
-}
+  }
+  
+  async function getResponsablesTarea(idTarea) {
+    const response = await fetch(`http://localhost:8080/tareaPersonas/tareas/${idTarea}`);
+    const data = await response.json();
+    return data.map(item => item.id.idPersona).join(", ");
+  }
+  
+  function getFechasTarea(tarea) {
+    const fechaInicio = tarea.fechaInicioReal || tarea.fechaInicio;
+    const fechaFinal = tarea.fechaFinalReal || tarea.fechaFinal;
+    return `${fechaInicio} / ${fechaFinal}`;
+  }
+  
+  function getEstadoTarea(tarea) {
+    if (tarea.fechaInicioReal === null) {
+      return "en espera";
+    } else if (tarea.fechaFinalReal === null) {
+      return "en ejecución";
+    } else {
+      return "culminado";
+    }
+  }
 
