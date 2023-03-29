@@ -1,46 +1,72 @@
-function addTarea(idEtapaProyecto){
-    let form= document.querySelector("#formTarea");
-    console.log(form[0].value);
-    var nuevo={
-    "idEtapaProyecto":{
-        "id":idEtapaProyecto,
-        "idProyecto":{"id":1
-        ,"idTipoProyecto":{"id":1
-        ,"nombre":"Obras civiles"}
-        ,"nombreProyecto":"Cuneta de prueba ",
-        "descripcionProyecto":"este proyecto es de prueba para la base de datos.",
-        "idPrioridad":{"id":3,"nombrePrioridad":"Baja"},
-        "justificacion":null,
-        "objetivoGeneral":"validad pruebas de garantía de la base de datos",
-        "objetivoEspecifico":null,"ubicacion":"oficina de carboexco"},
-        "idEtapa":{"id":1,"nombreEtapa":"Crear Proyecto"},
-        "fechaInicio":"2023-02-22",
-        "fechaFinal":"2023-03-01",
-        "idEstado":{"id":1,
-        "nombreEstado":"Aprovado"}},
-    "nombreTarea":form[0].value,
-    "descripcionTarea":form[1].value,
-    "fechaInicio":form[2].value,
-    "fechaFinal":form[3].value,
-    "fechaInicioReal":null,
-    "fechaFinalReal":null}
+const URL_BASE = "http://sistemas:8080";
 
-    console.log(nuevo);
-  
-    var url="http://sistemas:8080/tareas" ;
-        const response =  fetch(url, {
-          method: 'POST', // *GET, POST, PUT, DELETE, etc.
-          mode: 'cors', // no-cors, *cors, same-origin
-          cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-          credentials: 'same-origin', // include, *same-origin, omit
-          headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          redirect: 'follow', // manual, *follow, error
-          referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-          body: JSON.stringify(nuevo) // body data type must match "Content-Type" header
-          });
-    window.location='tarea.html';
-    
-  }
+// Función para enviar una petición POST a la API y crear una nueva tarea
+const crearTarea = async (idEtapaProyecto, form) => {
+  const nuevaTarea = {
+    idEtapaProyecto: { id: idEtapaProyecto },
+    nombreTarea: form[0].value,
+    descripcionTarea: form[1].value,
+    fechaInicio: form[2].value,
+    fechaFinal: form[3].value,
+    fechaInicioReal: null,
+    fechaFinalReal: null,
+  };
+
+  const response = await fetch(`${URL_BASE}/tareas`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(nuevaTarea),
+  });
+  const data = await response.json();
+  return data;
+};
+
+// Función para obtener los datos de una etapa de proyecto por su ID
+const obtenerEtapaProyecto = async (idEtapaProyecto) => {
+  const response = await fetch(`${URL_BASE}/etapa_proyectos/${idEtapaProyecto}`);
+  const data = await response.json();
+  return data;
+};
+
+// Función para asignar una persona responsable a una tarea
+const asignarResponsable = async (nuevaTarea, form) => {
+  const responsable = {
+    id: {
+      idTarea: nuevaTarea.id,
+      idPersona: parseInt(form[4].value, 10),
+    },
+    fecha: nuevaTarea.fechaInicio,
+  };
+  console.log(responsable);
+
+  const response = await fetch(`${URL_BASE}/tareaPersonas`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(responsable),
+  });
+  const data = await response.json();
+  return data;
+};
+
+// Función principal que se encarga de crear una nueva tarea, asignar un responsable, y hacer alguna acción adicional
+const addTarea = async (idEtapaProyecto) => {
+  const form = document.querySelector("#formTarea");
+  //console.log(form[0].value);
+
+  const nuevaTarea = await crearTarea(idEtapaProyecto, form);
+  console.log(nuevaTarea);
+
+  const etapaProyecto = await obtenerEtapaProyecto(idEtapaProyecto);
+  console.log(etapaProyecto);
+
+  const responsable = await asignarResponsable(nuevaTarea, form);
+  console.log(responsable);
+
+  location.href ="tareas.html?nombreProyecto="+etapaProyecto.idProyecto.id;
+
+  // Hacer alguna acción adicional (por ejemplo, redireccionar a otra página)
+};
