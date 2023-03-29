@@ -10,9 +10,9 @@
 
     </head>
 
-<section class="d-flex justify-content-center align-middlee m-3">
+<section class="d-flex justify-content-center align-middle p-3" style="background-color: lightgrey;">
         
-    <div class="card" style="width: 35rem; ">
+    <div class="card py-5 px-3" style="width: 35rem; ">
           <h3 style=" text-align: center;">Crear Tarea</h3>
       <div class="card-body">
       <form id="formTarea">
@@ -20,6 +20,18 @@
       <div class="form-outline mb-4">
         <input type="text" class="form-control" />
         <label class="form-label">Nombre de Tarea</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <select id="Etapa" class="form-control">
+          <option value="1">Crear proyecto</option>
+          <option value="2">Diseño</option>
+          <option value="3">Presupuesto & Requisicion</option>
+          <option value="4">Programación</option>
+          <option value="5">Ejecucion</option>
+          <option value="6">Archivado</option>
+        </select>
+        <label class="form-label" for="Etapa">Etapa</label>
       </div>
     
       <!-- textArea input -->
@@ -53,4 +65,5 @@
     </div>
 </section>
 <script src="../js/addTarea.js"></script>
+<script src="../js/dashboard.js"></script>
 </html>

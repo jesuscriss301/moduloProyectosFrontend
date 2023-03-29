@@ -5,9 +5,9 @@ const crearTarea = async (idEtapaProyecto, form) => {
   const nuevaTarea = {
     idEtapaProyecto: { id: idEtapaProyecto },
     nombreTarea: form[0].value,
-    descripcionTarea: form[1].value,
-    fechaInicio: form[2].value,
-    fechaFinal: form[3].value,
+    descripcionTarea: form[2].value,
+    fechaInicio: form[3].value,
+    fechaFinal: form[4].value,
     fechaInicioReal: null,
     fechaFinalReal: null,
   };
@@ -24,7 +24,12 @@ const crearTarea = async (idEtapaProyecto, form) => {
 };
 
 // Función para obtener los datos de una etapa de proyecto por su ID
-const obtenerEtapaProyecto = async (idEtapaProyecto) => {
+const obtenerEtapaProyecto = async () => {
+
+  const urlParams = new URLSearchParams(window.location.search);
+    let queryParam = urlParams.get('nombreProyecto'); 
+  //buscar link para buscar etapa proyecto por la etapa ya el proyecto
+
   const response = await fetch(`${URL_BASE}/etapa_proyectos/${idEtapaProyecto}`);
   const data = await response.json();
   return data;
@@ -35,7 +40,7 @@ const asignarResponsable = async (nuevaTarea, form) => {
   const responsable = {
     id: {
       idTarea: nuevaTarea.id,
-      idPersona: parseInt(form[4].value, 10),
+      idPersona: parseInt(form[5].value, 10),
     },
     fecha: nuevaTarea.fechaInicio,
   };
@@ -52,16 +57,21 @@ const asignarResponsable = async (nuevaTarea, form) => {
   return data;
 };
 
+const despliegue = async (number)=>{
+  desplegarEtapa(number);
+
+}
+
 // Función principal que se encarga de crear una nueva tarea, asignar un responsable, y hacer alguna acción adicional
-const addTarea = async (idEtapaProyecto) => {
+const addTarea = async () => {
   const form = document.querySelector("#formTarea");
   //console.log(form[0].value);
 
-  const nuevaTarea = await crearTarea(idEtapaProyecto, form);
-  console.log(nuevaTarea);
-
-  const etapaProyecto = await obtenerEtapaProyecto(idEtapaProyecto);
+  const etapaProyecto = await obtenerEtapaProyecto();
   console.log(etapaProyecto);
+
+  const nuevaTarea = await crearTarea(etapaProyecto, form);
+  console.log(nuevaTarea);
 
   const responsable = await asignarResponsable(nuevaTarea, form);
   console.log(responsable);

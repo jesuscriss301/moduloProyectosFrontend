@@ -85,6 +85,14 @@ function desplegable(id, nombre) {
     
   }
 
+function agregartarea() {
+  const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get('nombreProyecto');
+  
+  location.href ="aggTarea.html?nombreProyecto="+queryParam;
+
+}
+
 async function cargarProyectos() {
     
     fetch('http://sistemas:8080/proyectos/etapa/5')
