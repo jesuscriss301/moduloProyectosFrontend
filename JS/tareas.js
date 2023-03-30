@@ -86,32 +86,6 @@ function desplegable(id, nombre) {
     
   }
 
-function direccion(direccion) {
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const queryParam = urlParams.get('nombreProyecto');
-    let a= parseInt(queryParam);
-    if (isNaN(a)) {
-    alerta("Seleccione un proyecto para continuar") 
-    }else{
-      location.href =direccion+"?nombreProyecto="+queryParam;
-    }
-  } catch (error) {
-    alerta("Seleccione un proyecto para continuar")
-  }
-  
-  
-  function alerta(text) {
-    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-    const mensaje = document.getElementById('alerta');
-    alertPlaceholder.setAttribute("class", "m-3");
-    mensaje.innerText=text;
-    setTimeout(function() {
-      alertPlaceholder.setAttribute("class", "visually-hidden");
-    }, 2500);
-  }
-}
-
 async function cargarProyectos() {
     
     fetch('http://sistemas:8080/proyectos/etapa/5')
@@ -121,10 +95,8 @@ async function cargarProyectos() {
 }
 
 function tareasEtapa(idProyecto) {
-
     //console.log(idProyecto);
     for(let i =1; i<=5;i++){
-        
         etapas(idProyecto,i);
     }
 }

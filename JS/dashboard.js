@@ -171,33 +171,6 @@ function etapa(number) {
 
 }
 
-function desplegarEtapa(number) {
-  
-  const etapaDropdown = document.getElementById("etapa");
-  let etapa="";
-  
-  switch (number) {
-    case 1:etapa="Crear proyecto";
-      break;
-    case 2:etapa="Diseño";
-      break;
-    case 3:etapa="Reparación y presupuesto";
-      break;
-    case 4:etapa="Programación";
-      break;
-    case 5:etapa="Ejecución";
-      break;
-    case 6:etapa="Completado";
-      break;
-    case 7:etapa="Archivado";
-      break; 
-    case 8:etapa="Descartado";
-     break;
-    default:etapa= "Etapa";
-  }
-  etapaDropdown.innerText=etapa;
-}
-
 function desplegable(number) {
   
   const proyectoDropdown = document.getElementById("proyecto");
