@@ -1,7 +1,9 @@
+const URL_BASE = "http://sistemas:8080"; 
+
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);
     let queryParam = urlParams.get('nombreProyecto');
-    console.log(queryParam);
+    //console.log(queryParam);
     cargarProyectos();
     if (queryParam!=null && queryParam!="") {
     cargarProyecto(queryParam);
@@ -10,7 +12,7 @@ function cargar() {
 }
 
 async function cargarProyecto(id) {
-    fetch(`http://sistemas:8080/proyectos/${id}`)
+    fetch(`${URL_BASE}/proyectos/${id}`)
     .then(response => response.json())
     .then(data => {
         tablaInfo(data);
@@ -18,11 +20,12 @@ async function cargarProyecto(id) {
     })
     .catch(error => console.log(error));
 }
+
 async function responsable(proyecto) {
         
     const responsable = document.getElementById("responsable");
 
-    fetch(`http://sistemas:8080/proyectoPersonas/proyecto/${proyecto}/5`)
+    fetch(`${URL_BASE}/proyectoPersonas/proyecto/${proyecto}/5`)
     .then(response => response.json())
     .then(data => {
         const idPersonas = data.map(item => item.id.persona);
@@ -38,32 +41,31 @@ function tablaInfo(data) {
     const nombre = document.getElementById("nombreProyecto");
     const tipo= document.getElementById("tipoProyecto");
     
-
     codigo.textContent=data.id;
     nombre.textContent=data.nombreProyecto;
     tipo.textContent=data.idTipoProyecto.nombre;
 
 }
 
-
 function cargarfiltro(data) {
     const proyectoDropdown = document.getElementById("proyectoEjecucion");
     proyectoDropdown.innerHTML="";
     
-    for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     
-        const newListItem = document.createElement("li");
-        const element = data[i];
+    const newListItem = document.createElement("li");
+    const element = data[i];
         // Create a new a element
-        const newLink = document.createElement("button");
-        newLink.setAttribute("class", "dropdown-item");
-        newLink.setAttribute("onclick", "desplegable("+ element.id+",'"+ element.nombreProyecto +"')");
-        newLink.textContent = element.id+"- " +element.nombreProyecto;
+    const newLink = document.createElement("button");
+    newLink.setAttribute("class", "dropdown-item");
+    newLink.setAttribute("onclick", "desplegable("+ element.id+",'"+ element.nombreProyecto +"')");
+    newLink.textContent = element.id+"- " +element.nombreProyecto;
  
         // Append the newLink to the newListItem
-        newListItem.appendChild(newLink); 
-        proyectoDropdown.appendChild(newListItem);
-    }
+    newListItem.appendChild(newLink); 
+    proyectoDropdown.appendChild(newListItem);
+    
+  }
       
 }
 
@@ -80,15 +82,12 @@ function desplegable(id, nombre) {
     const url = `${currentPathname}?nombreProyecto=${id}`;
     // redirigir a la página con la URL construida
     window.location.href = url;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const queryParam = urlParams.get('nombreProyecto');
     
-  }
+}
 
 async function cargarProyectos() {
     
-    fetch('http://sistemas:8080/proyectos/etapa/5')
+    fetch(`${URL_BASE}/proyectos/etapa/5`)
     .then(response => response.json())
     .then(data => cargarfiltro(data))
     .catch(error => console.log(error));
@@ -103,7 +102,7 @@ function tareasEtapa(idProyecto) {
 
 async function etapas(idProyecto, idEtapa) {
     const tabla = document.getElementById(`tabla${idEtapa}`);
-    const response = await fetch(`http://sistemas:8080/tareas/${idProyecto}/${idEtapa}`);
+    const response = await fetch(`${URL_BASE}/tareas/${idProyecto}/${idEtapa}`);
     const data = await response.json();
     
     const boton = document.getElementById(`button${idEtapa}`);
@@ -116,7 +115,7 @@ async function etapas(idProyecto, idEtapa) {
       row.setAttribute("data-id", tarea.id)
       row.addEventListener("dblclick", () => {
         const idTarea = row.getAttribute("data-id");
-        window.location.href = `bitacora.html?idTarea=${idTarea}`;
+        window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
       });
 
       const cell1 = document.createElement("td");
@@ -146,21 +145,21 @@ async function etapas(idProyecto, idEtapa) {
       
       tabla.appendChild(row);
     }
-  }
+}
   
-  async function getResponsablesTarea(idTarea) {
-    const response = await fetch(`http://sistemas:8080/tareaPersonas/tareas/${idTarea}`);
+async function getResponsablesTarea(idTarea) {
+    const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
     const data = await response.json();
     return data.map(item => item.id.idPersona).join(", ");
-  }
+}
   
-  function getFechasTarea(tarea) {
+function getFechasTarea(tarea) {
     const fechaInicio = tarea.fechaInicioReal || tarea.fechaInicio;
     const fechaFinal = tarea.fechaFinalReal || tarea.fechaFinal;
     return `${fechaInicio} / ${fechaFinal}`;
-  }
+}
   
-  function getEstadoTarea(tarea) {
+function getEstadoTarea(tarea) {
     if (tarea.fechaInicioReal === null) {
       return "en espera";
     } else if (tarea.fechaFinalReal === null) {
@@ -168,5 +167,4 @@ async function etapas(idProyecto, idEtapa) {
     } else {
       return "culminado";
     }
-  }
-
+}

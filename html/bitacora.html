@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/master.css">
 
   </head>
-<body>
+<body onload="carga()">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
   <!-- barra de navegaciòn-->
   <div class="section">
@@ -43,28 +43,33 @@
       </a>			  
     </nav>
   </div>
+  
 	<table class="table table-bordered border-light-subtle m-3 sangria" >
 		<thead>
 			<tr>
-			<th scope="col">Codigo Proyecto:</th>
-			<td scope="col">B4H22</th>
-			<th scope="col">Nombre Proyecto:</th>
-			<td scope="col"> Reparacion Bateria 4 </th>
-			</tr>
+        <th scope="col">Codigo Proyecto:</th>
+        <td id="codigoProyecto" scope="col"></th>
+        <th scope="col">Nombre Proyecto:</th>
+        <td id="nombreProyecto" scope="col"></th>
+      </tr>
 		</thead>
 		<tbody>
 			<tr>
-			  <th scope="row">Codigo Tarea:</th>
-			  <td> #123 </td>
-			  <th scope="row">Fecha Tarea:</td>
-			  <td> 28-02-2023 </td>
+			  <th scope="col">Codigo Tarea:</th>
+        <td id="codigoTarea" scope="col"></th>
+        <th scope="col">Nombre Tarea:</th>
+        <td id="nombreTarea" scope="col"></th>
       </tr>
 			<tr>
-			  <th scope="row">Responsable:</th>
-			  <td>Argeniz Florez</td>
+			  <th rowspan="2" scope="row">Responsable:</th>
+			  <td rowspan="2" id="responsable"></td>
 			  <th scope="row">Fecha inicio:</td>
-        <td>  </td>
-			</tr>
+        <td id="fechaInicio"></td>
+      </tr>
+      <tr>
+        <th>Fecha final:</th>
+        <td id="fechaFinal"></td>
+      </tr>
 		</tbody>
 	</table>
   	<!--nav de boton atras y encabezado-->
@@ -75,28 +80,16 @@
 		  <!--Encabezado pagina-->
 	  <h3 class="m-auto">Bitacora</h3>
   </div>
-		      <!--barra de busqueda y menu desplegable (filtro)-->
+	<!--barra de busqueda y menu desplegable (filtro)-->
 	<div class="dropdown m-3" >
 		<nav class="navbar bg-body-tertiary">
 		  <div class="container-fluid">
-			  <div class="dropdown">
-          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
-            Etapa
-          </button>
-          <ul class="dropdown-menu">
-            <li><button class="dropdown-item" onclick=" despliegue(1)">Crear proyectos</button></li>
-            <li><button class="dropdown-item" onclick=" despliegue(2)">Diseño</button></li>
-            <li><button class="dropdown-item" onclick=" despliegue(3)">Requisicion y presupuesto</button></li>
-            <li><button class="dropdown-item" onclick=" despliegue(4)">Programación</button></li>
-            <li><button class="dropdown-item" onclick=" despliegue(5)">Ejecución</button></li>
-            <li><button class="dropdown-item" onclick=" despliegue(6)">Completado</button></li>
-          </ul>
-        </div>
+			
         <div class="dropdown">
-          <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+          <button id="SeleccionarTarea" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Seleccionar tarea
           </button>
-          <ul class="dropdown-menu"  id="proyecto">
+          <ul class="dropdown-menu"  id="tarea">
             <li><button class="dropdown-item">proyecto</button></li>
           </ul>
         </div>
@@ -137,5 +130,6 @@
     } 
   </script>
   <script src="../JS/bitacora.js"></script>
+  <script src="../JS/carboexco.js"></script>
 </body>
 </html>
