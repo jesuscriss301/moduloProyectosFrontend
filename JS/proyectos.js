@@ -38,18 +38,11 @@ function drawTable(info) {
   tablaestilo();
 }
 
-function alerta() {
-  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-  alertPlaceholder.setAttribute("class", "m-3");
-  setTimeout(function() {
-    alertPlaceholder.setAttribute("class", "visually-hidden");
-  }, 2500);
-}
-
 function despliegue(number) {
   
+  var currentPathname = window.location.pathname;
   // construir la URL con el parámetro de consulta
-  const url = `file:///C:/Users/SISTEMAS/Documents/aplicacion%20planta/moduloProyectosFrontend/moduloProyectosFrontend/html/proyectos.html?nombreProyecto=${number}`;
+  const url = `${currentPathname}?nombreProyecto=${number}`;
   // redirigir a la página con la URL construida
   window.location.href = url;
     desplegarEtapa(number);
@@ -71,11 +64,3 @@ function tablaestilo() {
     });
   };
 }
-/*
-const alertTrigger = document.getElementById('liveAlertBtn')
-if (alertTrigger) {
-  alertTrigger.addEventListener('click', () => {
-    alert('Nice, you triggered this alert message!', 'success')
-  })
-}
-*/

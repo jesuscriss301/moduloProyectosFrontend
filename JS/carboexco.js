@@ -11,18 +11,17 @@ function direccion(direccion) {
     } catch (error) {
       alerta("Seleccione un proyecto para continuar")
     }
-    
-    
-    function alerta(text) {
-      const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-      const mensaje = document.getElementById('alerta');
-      alertPlaceholder.setAttribute("class", "m-3");
-      mensaje.innerText=text;
-      setTimeout(function() {
-        alertPlaceholder.setAttribute("class", "visually-hidden");
-      }, 2500);
-    }
-  }
+}  
+function alerta(text) {
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    const mensaje = document.getElementById('alerta');
+    alertPlaceholder.setAttribute("class", "m-3");
+    mensaje.innerText=text;
+    setTimeout(function() {
+      alertPlaceholder.setAttribute("class", "visually-hidden");
+    }, 2500);
+}
+  
 
   function desplegarEtapa(number) {
   
