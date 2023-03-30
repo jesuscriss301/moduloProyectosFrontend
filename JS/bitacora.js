@@ -27,8 +27,18 @@ function tablaInfo(data) {
     const nombreProyecto =document.getElementById("nombreProyecto");
     const codigoTarea =document.getElementById("codigoTarea");
     const nombreTarea =document.getElementById("nombreTarea");
-    
-    
+    const responsable =document.getElementById("responsable");
+    const fechaInicio =document.getElementById("fechaInicio");
+    const fechaFinal =document.getElementById("fechaFinal");
+
+    codigoProyecto.textContent = data.idEtapaProyecto.idProyecto.id;
+    nombreProyecto.textContent = data.idEtapaProyecto.idProyecto.nombreProyecto;
+    codigoTarea.textContent = data.id;
+    nombreTarea.textContent = data.nombreTarea;
+    responsable.textContent ="responsable";
+    fechaInicio.textContent = data.fechaInicio;
+    fechaFinal.textContent = data.fechaFinal;
+
 }
 
 function cargartareas(proyecto) {
