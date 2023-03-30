@@ -86,14 +86,20 @@ function desplegable(id, nombre) {
     
   }
 
-function agregartarea() {
-  const urlParams = new URLSearchParams(window.location.search);
+function direccion(direccion) {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
     const queryParam = urlParams.get('nombreProyecto');
-  if(queryParam==null||queryParam==""){
-   alerta("Seleccione un proyecto para continuar")
-  }else{
-  location.href ="aggTarea.html?nombreProyecto="+queryParam;
+    let a= parseInt(queryParam);
+    if (isNaN(a)) {
+    alerta("Seleccione un proyecto para continuar") 
+    }else{
+      location.href =direccion+"?nombreProyecto="+queryParam;
+    }
+  } catch (error) {
+    alerta("Seleccione un proyecto para continuar")
   }
+  
   
   function alerta(text) {
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -104,11 +110,7 @@ function agregartarea() {
       alertPlaceholder.setAttribute("class", "visually-hidden");
     }, 2500);
   }
-  
 }
-
-
-
 
 async function cargarProyectos() {
     

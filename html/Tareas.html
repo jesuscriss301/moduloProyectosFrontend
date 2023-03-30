@@ -62,13 +62,12 @@
 		  </tr>
 		  <tr>
 			<th scope="row">Diseño:</th>
-			<td><form action="diseño.html">
-					<button type="submit">Diseño</button>
-			  	</form></td>
+			<td>
+				<button id="agregarFila" class="btn btn-outline-secondary" onclick="direccion('diseño.html')">Diseño</button>
+			</td>
 			<th scope="row">Presupuesto:</td>
-			<td><form action="presupuesto.html">
-					<button type="submit">Presupuesto</button>
-				</form>
+			<td>
+				<button id="agregarFila" class="btn btn-outline-secondary" onclick="direccion('presupuesto.html')">Presupuesto</button>
 			</td>
 		  </tr>
 		</tbody>
@@ -90,7 +89,7 @@
 					<li><button class="dropdown-item" onclick="">Responsable</button></li>
 				</ul>
 				
-				<button id="agregarFila" class="btn btn-danger" onclick="agregartarea()">Agregar Tarea</button>
+				<button id="agregarFila" class="btn btn-danger" onclick="direccion('aggTarea.html')">Agregar Tarea</button>
 				
 			</div>
 	    </nav>
