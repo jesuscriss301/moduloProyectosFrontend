@@ -24,12 +24,11 @@ const crearTarea = async (idEtapaProyecto, form) => {
 };
 
 // Función para obtener los datos de una etapa de proyecto por su ID
-const obtenerEtapaProyecto = async (form) => {
+const obtenerEtapaProyecto = async (form, proyecto) => {
 
-  const urlParams = new URLSearchParams(window.location.search);
-    let queryParam = urlParams.get('nombreProyecto'); 
+  
   //buscar link para buscar etapa proyecto por la etapa ya el proyecto
-  const response = await fetch(`${URL_BASE}/etapa_proyectos/${queryParam}/${form[1].value}`);
+  const response = await fetch(`${URL_BASE}/etapa_proyectos/${proyecto}/${form[1].value}`);
   const data = await response.json();
   return data;
 };
@@ -60,8 +59,10 @@ const asignarResponsable = async (nuevaTarea, form) => {
 const addTarea = async () => {
   const form = document.querySelector("#formTarea");
   //console.log(form[0].value);
-
-  const etapaProyecto = await obtenerEtapaProyecto(form);
+  const urlParams = new URLSearchParams(window.location.search);
+  let proyecto = urlParams.get('nombreProyecto'); 
+  
+  const etapaProyecto = await obtenerEtapaProyecto(form,proyecto);
   console.log(etapaProyecto);
 
   const nuevaTarea = await crearTarea(etapaProyecto, form);
@@ -70,7 +71,7 @@ const addTarea = async () => {
   const responsable = await asignarResponsable(nuevaTarea, form);
   console.log(responsable);
 
-  location.href ="tareas.html?nombreProyecto="+etapaProyecto.idProyecto.id;
-
+  location.href ="tareas.html?nombreProyecto="+proyecto;
+  
   // Hacer alguna acción adicional (por ejemplo, redireccionar a otra página)
 };

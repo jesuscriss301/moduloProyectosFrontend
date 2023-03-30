@@ -1,8 +1,9 @@
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);
     let queryParam = urlParams.get('nombreProyecto');
+    console.log(queryParam);
     cargarProyectos();
-    if (queryParam!=null) {
+    if (queryParam!=null && queryParam!="") {
     cargarProyecto(queryParam);
     tareasEtapa(queryParam);
     }
@@ -88,10 +89,26 @@ function desplegable(id, nombre) {
 function agregartarea() {
   const urlParams = new URLSearchParams(window.location.search);
     const queryParam = urlParams.get('nombreProyecto');
-  
+  if(queryParam==null||queryParam==""){
+   alerta("Seleccione un proyecto para continuar")
+  }else{
   location.href ="aggTarea.html?nombreProyecto="+queryParam;
-
+  }
+  
+  function alerta(text) {
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+    const mensaje = document.getElementById('alerta');
+    alertPlaceholder.setAttribute("class", "m-3");
+    mensaje.innerText=text;
+    setTimeout(function() {
+      alertPlaceholder.setAttribute("class", "visually-hidden");
+    }, 2500);
+  }
+  
 }
+
+
+
 
 async function cargarProyectos() {
     
