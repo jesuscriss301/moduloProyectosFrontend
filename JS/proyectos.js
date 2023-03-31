@@ -13,12 +13,10 @@ function consultaNombreProyecto() {
   } // "JavaScript"  
 }
 
-function Tabla(busqueda) {
+async function Tabla(busqueda) {
   google.charts.load('current', {'packages':['table']});
-  google.charts.setOnLoadCallback(() => {
-    proyectos(busqueda).then(data => {
-      drawTable(data);
-    });
+  await google.charts.setOnLoadCallback(() => {
+    proyectos(busqueda)
   });
 }
 
@@ -30,12 +28,15 @@ async function proyectos(busqueda) {
 }
 
 function drawTable(info) {
+  try {
+    var data = new google.visualization.arrayToDataTable(info);
+    var table = new google.visualization.Table(document.getElementById('table_div'));
+    table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+    tablaestilo();
+  } catch (error) {
+    console.log(info);
+  }
   
-  var data = new google.visualization.arrayToDataTable(info);
-  var table = new google.visualization.Table(document.getElementById('table_div'));
-  table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
-
-  tablaestilo();
 }
 
 function despliegue(number) {
@@ -55,12 +56,25 @@ function tablaestilo() {
   let tbody = tabla.querySelector("tbody");
   let row = tbody.querySelectorAll("tr");
 
-  for (let i in row) {
-    let cell = row[i].querySelectorAll("td");
-    row[i].setAttribute("data-id",cell[0].textContent);    
-    row[i].addEventListener("dblclick",  () => {
-      const idproyecto = row[i].getAttribute("data-id");
+  for (let i of row) {
+    let cell = i.querySelectorAll("td");
+    i.setAttribute("data-id",cell[0].textContent);    
+    i.addEventListener("dblclick",  () => {
+      const idproyecto = i.getAttribute("data-id");
       window.location.href = `tareas.html?nombreProyecto=${idproyecto}`;
     });
+    let lastTouchTime = 0;
+    const touchThreshold = 300; 
+    i.addEventListener("touchstart",function() {
+        const currentTime = new Date().getTime();
+        const timeSinceLastTouch = currentTime - lastTouchTime;
+      
+        if (timeSinceLastTouch < touchThreshold) {
+            const idproyecto = i.getAttribute("data-id");
+            window.location.href = `tareas.html?nombreProyecto=${idproyecto}`;
+          }
+      
+        lastTouchTime = currentTime;
+      });
   };
 }
