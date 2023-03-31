@@ -117,6 +117,19 @@ async function etapas(idProyecto, idEtapa) {
         const idTarea = row.getAttribute("data-id");
         window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
       });
+      let lastTouchTime = 0;
+      const touchThreshold = 300; 
+      row.addEventListener("touchstart",function() {
+        const currentTime = new Date().getTime();
+        const timeSinceLastTouch = currentTime - lastTouchTime;
+      
+        if (timeSinceLastTouch < touchThreshold) {
+            const idTarea = row.getAttribute("data-id");
+            window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
+          }
+      
+        lastTouchTime = currentTime;
+      });
 
       const cell1 = document.createElement("td");
       cell1.textContent = tarea.id;
