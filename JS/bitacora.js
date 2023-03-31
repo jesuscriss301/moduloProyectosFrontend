@@ -1,4 +1,5 @@
 const URL_BASE = "http://sistemas:8080";
+const URL_IMG = "http://localhost:8081"
 
 function carga() {
     const urltarea = new URLSearchParams(window.location.search);
@@ -92,45 +93,63 @@ function desplegable(id, nombre) {
 }
 
 async function tablasBitacoras(idTarea) {
-    
     const tbody= document.getElementById("tablaBitacora");
-
-    const response = await fetch(`${URL_BASE}/bitacoras/tarea/${idTarea}`);
-    const data = await response.json();
-    
+    const data = await getBitacoras(idTarea);
+  
     for (const bitacora of data) {
-      const row = document.createElement("tr");
-      
-      row.setAttribute("data-id", bitacora.id)
-      
-      /*
-      row.addEventListener("dblclick", () => {
-        const idTarea = row.getAttribute("data-id");
-        window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
-      });
-      */
-
-      const cell1 = document.createElement("td");
-      cell1.textContent = bitacora.id;
-      
-      const cell2 = document.createElement("td");
-      cell2.textContent = bitacora.fechaHora;
-      
-      const cell3 = document.createElement("td");
-      cell3.textContent = bitacora.descripcionBitacora;
-      
-      const cell4 = document.createElement("td");
-      cell4.textContent = bitacora.observacionBitacora;
-      
-      const cell5 = document.createElement("td");
-      cell5.textContent = bitacora.fileFoto;
-
-      row.appendChild(cell1);
-      row.appendChild(cell2);
-      row.appendChild(cell3);
-      row.appendChild(cell4);
-      row.appendChild(cell5);
-      
+      const row = createBitacoraRow(bitacora);
       tbody.appendChild(row);
     }
-}
+  }
+  
+  async function getBitacoras(idTarea) {
+    const response = await fetch(`${URL_BASE}/bitacoras/tarea/${idTarea}`);
+    return response.json();
+  }
+  
+  function createBitacoraRow(bitacora) {
+    const row = document.createElement("tr");
+    row.setAttribute("data-id", bitacora.id);
+  
+    //const cell1 = document.createElement("td");
+    //cell1.textContent = bitacora.id;
+  
+    const cell2 = document.createElement("td");
+    const fecha = new Date(bitacora.fechaHora);
+    cell2.textContent = formatDate(fecha);
+  
+    const cell3 = document.createElement("td");
+    cell3.textContent = bitacora.descripcionBitacora;
+  
+    const cell4 = document.createElement("td");
+    cell4.textContent = bitacora.observacionBitacora;
+  
+    const cell5 = createBitacoraImageCell(bitacora.fileFoto);
+  
+    //row.appendChild(cell1);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    row.appendChild(cell4);
+    row.appendChild(cell5);
+  
+    return row;
+  }
+  
+  function formatDate(date) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours() + 5;
+    const minutes = date.getMinutes();
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+  
+  function createBitacoraImageCell(imageFile) {
+    const cell = document.createElement("td");
+    const img = document.createElement("img");
+    img.setAttribute("src", `${URL_IMG}/files/view/${imageFile}`);
+    img.setAttribute("class", "imagenBitacora");
+    cell.setAttribute("class", "d-flex justify-content-center");
+    cell.appendChild(img);
+    return cell;
+  }
