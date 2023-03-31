@@ -11,6 +11,7 @@ function carga() {
     if (!isNaN(a) && !isNaN(b)) {
         cargartareas(proyecto);
         info(a);
+        tablasBitacoras(a);
     }
 }
 
@@ -88,4 +89,48 @@ function desplegable(id, nombre) {
     // redirigir a la página con la URL construida
     window.location.href = url;
 
+}
+
+async function tablasBitacoras(idTarea) {
+    
+    const tbody= document.getElementById("tablaBitacora");
+
+    const response = await fetch(`${URL_BASE}/bitacoras/tarea/${idTarea}`);
+    const data = await response.json();
+    
+    for (const bitacora of data) {
+      const row = document.createElement("tr");
+      
+      row.setAttribute("data-id", bitacora.id)
+      
+      /*
+      row.addEventListener("dblclick", () => {
+        const idTarea = row.getAttribute("data-id");
+        window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
+      });
+      */
+
+      const cell1 = document.createElement("td");
+      cell1.textContent = bitacora.id;
+      
+      const cell2 = document.createElement("td");
+      cell2.textContent = bitacora.fechaHora;
+      
+      const cell3 = document.createElement("td");
+      cell3.textContent = bitacora.descripcionBitacora;
+      
+      const cell4 = document.createElement("td");
+      cell4.textContent = bitacora.observacionBitacora;
+      
+      const cell5 = document.createElement("td");
+      cell5.textContent = bitacora.fileFoto;
+
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      row.appendChild(cell3);
+      row.appendChild(cell4);
+      row.appendChild(cell5);
+      
+      tbody.appendChild(row);
+    }
 }
