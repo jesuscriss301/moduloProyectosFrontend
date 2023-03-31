@@ -110,6 +110,7 @@ async function etapas(idProyecto, idEtapa) {
     boton.setAttribute("class", `accordion-button ${boton.disabled ? "collapsed" : ""} btn btn-outline-secondary`);
     
     for (const tarea of data) {
+
       const row = document.createElement("tr");
       
       row.setAttribute("data-id", tarea.id)
@@ -130,6 +131,7 @@ async function etapas(idProyecto, idEtapa) {
       
         lastTouchTime = currentTime;
       });
+
 
       const cell1 = document.createElement("td");
       cell1.textContent = tarea.id;
