@@ -110,29 +110,29 @@ async function etapas(idProyecto, idEtapa) {
     boton.setAttribute("class", `accordion-button ${boton.disabled ? "collapsed" : ""} btn btn-outline-secondary`);
     
     for (const tarea of data) {
-        const row = document.createElement("tr");
-    
-        row.setAttribute("data-id", tarea.id);
-        row.addEventListener("touchstart", (e) => {
-          // Obtener la posición inicial del toque
-          const touchStart = e.changedTouches[0];
-          // Esperar hasta que se complete el toque para obtener la posición final del toque
-          row.addEventListener("touchend", (e) => {
-            const touchEnd = e.changedTouches[0];
-            // Calcular la distancia entre la posición inicial y la posición final del toque
-            const touchDistance = Math.sqrt(Math.pow(touchEnd.pageX - touchStart.pageX, 2) + Math.pow(touchEnd.pageY - touchStart.pageY, 2));
-            // Si la distancia es menor que 10 píxeles, asumir que el usuario hizo clic en la tarea
-            if (touchDistance < 10) {
-              const idTarea = row.getAttribute("data-id");
-              window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
-            }
-          });
-        });
-        
-        row.addEventListener("click", () => {
-          const idTarea = row.getAttribute("data-id");
-          window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
-        });
+
+      const row = document.createElement("tr");
+      
+      row.setAttribute("data-id", tarea.id)
+      row.addEventListener("dblclick", () => {
+        const idTarea = row.getAttribute("data-id");
+        window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
+      });
+      let lastTouchTime = 0;
+      const touchThreshold = 300; 
+      row.addEventListener("touchstart",function() {
+        const currentTime = new Date().getTime();
+        const timeSinceLastTouch = currentTime - lastTouchTime;
+      
+        if (timeSinceLastTouch < touchThreshold) {
+            const idTarea = row.getAttribute("data-id");
+            window.location.href = `bitacora.html?nombreProyecto=${idProyecto}&idTarea=${idTarea}`;
+          }
+      
+        lastTouchTime = currentTime;
+      });
+
+
       const cell1 = document.createElement("td");
       cell1.textContent = tarea.id;
       

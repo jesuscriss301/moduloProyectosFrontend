@@ -1,4 +1,5 @@
 const URL_BASE = "http://sistemas:8080";
+const URL_IMG = "http://localhost:8081"
 
 function carga() {
     const urltarea = new URLSearchParams(window.location.search);
@@ -10,25 +11,41 @@ function carga() {
     b= parseInt(proyecto);
     if (!isNaN(a) && !isNaN(b)) {
         cargartareas(proyecto);
-        cargartareas(a);
+        info(a);
+        tablasBitacoras(a);
     }
 }
 
-async function cargartareas(id) {
+async function info(id) {
     fetch(`${URL_BASE}/tareas/${id}`)
     .then(response => response.json())
     .then(data => tablaInfo(data))
     .catch(error => console.log(error));
 }
 
-function tablaInfo(data) {
-    
+async function tablaInfo(data) {
+   
     const codigoProyecto =document.getElementById("codigoProyecto");
     const nombreProyecto =document.getElementById("nombreProyecto");
     const codigoTarea =document.getElementById("codigoTarea");
     const nombreTarea =document.getElementById("nombreTarea");
-    
-    
+    const responsable =document.getElementById("responsable");
+    const fechaInicio =document.getElementById("fechaInicio");
+    const fechaFinal =document.getElementById("fechaFinal");
+
+    codigoProyecto.textContent = data.idEtapaProyecto.idProyecto.id;
+    nombreProyecto.textContent = data.idEtapaProyecto.idProyecto.nombreProyecto;
+    codigoTarea.textContent = data.id;
+    nombreTarea.textContent = data.nombreTarea;
+    responsable.textContent = await getResponsablesTarea(data.id);
+    fechaInicio.textContent = data.fechaInicioReal || data.fechaInicio;
+    fechaFinal.textContent = data.fechaFinalReal || data.fechaFinal;
+}
+
+async function getResponsablesTarea(idTarea) {
+    const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
+    const data = await response.json();
+    return data.map(item => item.id.idPersona).join(", ");
 }
 
 function cargartareas(proyecto) {
@@ -42,7 +59,6 @@ function cargarfiltro(data) {
 
     let tareaDropdown = document.querySelector("#tarea");
     tareaDropdown.innerHTML="";
-    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
     
@@ -75,3 +91,65 @@ function desplegable(id, nombre) {
     window.location.href = url;
 
 }
+
+async function tablasBitacoras(idTarea) {
+    const tbody= document.getElementById("tablaBitacora");
+    const data = await getBitacoras(idTarea);
+  
+    for (const bitacora of data) {
+      const row = createBitacoraRow(bitacora);
+      tbody.appendChild(row);
+    }
+  }
+  
+  async function getBitacoras(idTarea) {
+    const response = await fetch(`${URL_BASE}/bitacoras/tarea/${idTarea}`);
+    return response.json();
+  }
+  
+  function createBitacoraRow(bitacora) {
+    const row = document.createElement("tr");
+    row.setAttribute("data-id", bitacora.id);
+  
+    //const cell1 = document.createElement("td");
+    //cell1.textContent = bitacora.id;
+  
+    const cell2 = document.createElement("td");
+    const fecha = new Date(bitacora.fechaHora);
+    cell2.textContent = formatDate(fecha);
+  
+    const cell3 = document.createElement("td");
+    cell3.textContent = bitacora.descripcionBitacora;
+  
+    const cell4 = document.createElement("td");
+    cell4.textContent = bitacora.observacionBitacora;
+  
+    const cell5 = createBitacoraImageCell(bitacora.fileFoto);
+  
+    //row.appendChild(cell1);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    row.appendChild(cell4);
+    row.appendChild(cell5);
+  
+    return row;
+  }
+  
+  function formatDate(date) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours() + 5;
+    const minutes = date.getMinutes();
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+  
+  function createBitacoraImageCell(imageFile) {
+    const cell = document.createElement("td");
+    const img = document.createElement("img");
+    img.setAttribute("src", `${URL_IMG}/files/view/${imageFile}`);
+    img.setAttribute("class", "imagenBitacora");
+    cell.setAttribute("class", "d-flex justify-content-center");
+    cell.appendChild(img);
+    return cell;
+  }
