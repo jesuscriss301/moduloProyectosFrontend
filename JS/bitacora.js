@@ -10,19 +10,19 @@ function carga() {
     b= parseInt(proyecto);
     if (!isNaN(a) && !isNaN(b)) {
         cargartareas(proyecto);
-        cargartareas(a);
+        info(a);
     }
 }
 
-async function cargartareas(id) {
+async function info(id) {
     fetch(`${URL_BASE}/tareas/${id}`)
     .then(response => response.json())
     .then(data => tablaInfo(data))
     .catch(error => console.log(error));
 }
 
-function tablaInfo(data) {
-    
+async function tablaInfo(data) {
+   
     const codigoProyecto =document.getElementById("codigoProyecto");
     const nombreProyecto =document.getElementById("nombreProyecto");
     const codigoTarea =document.getElementById("codigoTarea");
@@ -35,10 +35,15 @@ function tablaInfo(data) {
     nombreProyecto.textContent = data.idEtapaProyecto.idProyecto.nombreProyecto;
     codigoTarea.textContent = data.id;
     nombreTarea.textContent = data.nombreTarea;
-    responsable.textContent ="responsable";
-    fechaInicio.textContent = data.fechaInicio;
-    fechaFinal.textContent = data.fechaFinal;
+    responsable.textContent = await getResponsablesTarea(data.id);
+    fechaInicio.textContent = data.fechaInicioReal || data.fechaInicio;
+    fechaFinal.textContent = data.fechaFinalReal || data.fechaFinal;
+}
 
+async function getResponsablesTarea(idTarea) {
+    const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
+    const data = await response.json();
+    return data.map(item => item.id.idPersona).join(", ");
 }
 
 function cargartareas(proyecto) {
@@ -52,7 +57,6 @@ function cargarfiltro(data) {
 
     let tareaDropdown = document.querySelector("#tarea");
     tareaDropdown.innerHTML="";
-    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
     
