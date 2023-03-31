@@ -7,9 +7,15 @@
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title>Diseño</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+		<style>
+			body {
+			  width: 100%;
+			  overflow-x: hidden;
+			}
+		  </style>
+		
     </head>
-<body>
+<body  onload="cargar()">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
             <!-- barra de navegaciòn-->
             
@@ -45,26 +51,26 @@
 				</nav>
 			</div>
 
-	<div class="container m-3 align-content-center">
-	<table class="table table-bordered border-light-subtle">
+	<!--Tabla informacion sobre el diseño de la tarea-->
+	<table class="table table-bordered border-light-subtle m-3 sangria">
 		<thead>
-			<tr>
+		  <tr>
 			<th scope="col">Codigo Proyecto:</th>
-			<td scope="col">B4H22</th>
+			<td id="codigoProyecto" scope="col"></th>
 			<th scope="col">Nombre Proyecto:</th>
-			<td scope="col"> Reparacion Bateria 4 </th>
-			</tr>
+			<td id="nombreProyecto" scope="col"></th>
+		  </tr>
 		</thead>
-			<tbody>
-			  <tr>
-				<th scope="row">Tipo Proyecto:</th>
-				<td> Reparacion </td>
-				<th scope="row">Responsable:</td>
-				<td> Argeniz Florez </td>
-			  </tr>
-			</tbody>
+		<tbody>
+		  <tr>
+			<th scope="row">Tipo Proyecto:</th>
+			<td id="tipoProyecto"></td>
+			<th scope="row">Responsable:</td>
+			<td id="responsable"></td>
+		  </tr>
+		</tbody>
 	</table>
-</div>
+
 	<!--nav de boton atras y encabezado-->
 	<div style="display: flex; align-items: center;">
 			<!--Boton ir atras el scritp esta al final-->
@@ -108,6 +114,6 @@
 		</div>
 	  </footer>
 
-
+	  <script src="../JS/tareas.js"></script>
 </body>
 </html>
