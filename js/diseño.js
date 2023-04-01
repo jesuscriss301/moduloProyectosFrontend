@@ -5,7 +5,7 @@ function cargar() {
     let queryParam = urlParams.get('nombreProyecto');
     //console.log(queryParam);
     if (queryParam!=null && queryParam!="") {
-    cargarProyecto(queryParam);
+        cargarProyecto(queryParam);
     }
 }
 

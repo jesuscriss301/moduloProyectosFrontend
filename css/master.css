@@ -1,4 +1,5 @@
 .sangria{
+
     width: 98%;
     width: -webkit-fill-available;
 }
@@ -8,4 +9,10 @@
     align-items: center;
     max-height: 300px;
     max-width: 300px; 
+}
+
+.iframe{
+
+    width: 100%;
+    height: 100vh;
 }
