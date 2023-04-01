@@ -1,5 +1,5 @@
 const URL_BASE = "http://sistemas:8080";
-const URL_IMG = "http://localhost:8081"
+const URL_IMG = "http://sistemas:8081"
 
 function carga() {
     const urltarea = new URLSearchParams(window.location.search);
