@@ -58,18 +58,14 @@ const asignarResponsable = async (nuevaTarea, form) => {
 // Función principal que se encarga de crear una nueva tarea, asignar un responsable, y hacer alguna acción adicional
 const addTarea = async () => {
   const form = document.querySelector("#formTarea");
-  //console.log(form[0].value);
   const urlParams = new URLSearchParams(window.location.search);
   let proyecto = urlParams.get('nombreProyecto'); 
   
   const etapaProyecto = await obtenerEtapaProyecto(form,proyecto);
-  console.log(etapaProyecto);
 
   const nuevaTarea = await crearTarea(etapaProyecto, form);
-  console.log(nuevaTarea);
 
   const responsable = await asignarResponsable(nuevaTarea, form);
-  console.log(responsable);
 
   location.href ="tareas.html?nombreProyecto="+proyecto;
   
