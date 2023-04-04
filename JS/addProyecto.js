@@ -26,15 +26,16 @@ const crearProyecto = async (form) => {
 
 // Función para obtener los datos de una etapa de proyecto por su ID
 const obtenerEtapaProyecto = async (proyecto) => {
-    const etapa_proyecto= {
-    "idProyecto":{"id":1},
+  
+  const etapa_proyecto= {
+    "idProyecto":{"id":proyecto.id},
     "idEtapa":{"id":1},
-    "fechaInicio":"2023-02-22",
-    "fechaFinal":"2023-03-01",
-    "idEstado":{"id":1}
-}
+    "fechaInicio":fecha(),
+    "fechaFinal":null,
+    "idEstado":{"id":2}
+  }
     
-      const response = await fetch(`${URL_BASE}/etapa_proyectos`, {
+const response = await fetch(`${URL_BASE}/etapa_proyectos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +48,7 @@ const obtenerEtapaProyecto = async (proyecto) => {
 
 // Función para asignar una persona responsable a una tarea
 const asignarResponsable = async (nuevoProyecto) => {
-    console.log(nuevoProyecto.id);
+    
   const responsable = {
     "id":{
         "proyecto":nuevoProyecto.id,
@@ -56,7 +57,7 @@ const asignarResponsable = async (nuevoProyecto) => {
     "fecha":fecha()
   };
 
-  const response = await fetch(`${URL_BASE}/proyectoPersonas`, {
+const response = await fetch(`${URL_BASE}/proyectoPersonas`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -87,12 +88,11 @@ const addProyecto = async () => {
 
   const nuevoProyecto = await crearProyecto(form);
 
-  //const responsable = await asignarResponsable(nuevoProyecto);
+  const responsable = await asignarResponsable(nuevoProyecto);
 
-  const etapa = await asignarResponsable(nuevoProyecto);
+  const etapa = await obtenerEtapaProyecto(nuevoProyecto);
 
-
-  //location.href ="proyectos.html";
+  location.href ="proyectos.html";
   
   // Hacer alguna acción adicional (por ejemplo, redireccionar a otra página)
 };
