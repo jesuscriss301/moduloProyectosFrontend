@@ -26,9 +26,49 @@ const crearTarea = async (idEtapaProyecto, form) => {
 // Función para obtener los datos de una etapa de proyecto por su ID
 const obtenerEtapaProyecto = async (form, proyecto) => {
 
+  const response = await fetch(`${URL_BASE}/etapa_proyectos/${proyecto}/${form[1].value}`);
   
   //buscar link para buscar etapa proyecto por la etapa ya el proyecto
-  const response = await fetch(`${URL_BASE}/etapa_proyectos/${proyecto}/${form[1].value}`);
+  const data = await response.json();
+  if (data==null) {
+    await actualizarFecha(form,proyecto);
+    return await crearEtapaProyecto(form,proyecto);
+  }
+  return data;
+};
+
+const crearEtapaProyecto = async (form, proyecto) => {
+  
+  const etapa_proyecto= {
+    "idProyecto":{"id":proyecto},
+    "idEtapa":{"id":form[1].value},
+    "fechaInicio":form[3].value,
+    "fechaFinal":null,
+    "idEstado":{"id":2}
+  }
+    
+  const response = await fetch(`${URL_BASE}/etapa_proyectos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(etapa_proyecto),
+      });
+  const data = await response.json();
+  return data;
+};
+
+const actualizarFecha = async (form, proyecto) => {
+  
+  let idEtapaProyecto = await fetch(`${URL_BASE}/etapa_proyectos/${proyecto}/${(form[1].value)-1}`)
+  const dataEP = await idEtapaProyecto.json();
+  let a = `${URL_BASE}/etapa_proyectos/${dataEP.id}/${form[3].value}`;
+  const response = await fetch(`${URL_BASE}/etapa_proyectos/${dataEP.id}/${form[3].value}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
   const data = await response.json();
   return data;
 };
@@ -42,7 +82,6 @@ const asignarResponsable = async (nuevaTarea, form) => {
     },
     fecha: nuevaTarea.fechaInicio,
   };
-  console.log(responsable);
 
   const response = await fetch(`${URL_BASE}/tareaPersonas`, {
     method: "POST",
