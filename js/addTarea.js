@@ -60,10 +60,10 @@ const crearEtapaProyecto = async (form, proyecto) => {
 
 const actualizarFecha = async (form, proyecto) => {
   
-  let idEtapaProyecto = await fetch(`${URL_BASE}/etapa_proyectos/${proyecto}/${(form[1].value)-1}`)
+  let idEtapaProyecto = await fetch(`${URL_BASE}/etapa_proyectos/ult/${proyecto}`)
   const dataEP = await idEtapaProyecto.json();
-  let a = `${URL_BASE}/etapa_proyectos/${dataEP.id}/${form[3].value}`;
-  const response = await fetch(`${URL_BASE}/etapa_proyectos/${dataEP.id}/${form[3].value}`, {
+  
+  const response = await fetch(`${URL_BASE}/etapa_proyectos/${dataEP[0].id}/${form[3].value}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
