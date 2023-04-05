@@ -15,7 +15,10 @@
       <div class="card py-5 px-3" style="width: 35rem;">
         <h3 style="text-align: center;">Bitácora</h3>
         <div class="card-body">
-          <div id="output"></div>
+          <div class="visually-hidden" id="liveAlertPlaceholder">
+            <div id="alerta"class="alert alert-danger" role="alert">
+            </div>
+          </div>
           <form enctype="multipart/form-data" method="post" name="agregarBitacora" id="agregarBitacora" action="http://sistemas:8081/api/files">
             <!-- Descripción -->
             <div class="form-outline mb-4">
@@ -50,5 +53,6 @@
       </div>
     </section>
   <script src="../JS/addBitacora.js"></script>
+  <script src="../JS/carboexco.js"></script>
   </body>
 </html>
