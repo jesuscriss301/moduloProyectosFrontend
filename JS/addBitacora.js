@@ -1,33 +1,28 @@
-BASE_IMG = "http://localhost:8081";
+const URL_IMG = "http://sistemas:8081";
+var form = document.forms.namedItem("agregarBitacora");
+form.addEventListener('submit', function(ev) {
 
-const guardarImage = async (form)=>{
-
-  form.addEventListener('submit', function(ev) {
-
-    var oOutput = document.getElementById("output"),
-    oData = new FormData(document.forms.namedItem("agregarBitacora"));
-
-    oData.append("ubicacion", "img");
-
-    var oReq = new XMLHttpRequest();
-    oReq.open("POST", `${BASE_IMG}/api/files`, true);
-    oReq.onload = function(oEvent) {
-        if (oReq.status != 200)  {
-            oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
-        }
-    };
-
-    oReq.send(oData);
-    ev.preventDefault();
-  }, false);
-}
-
-const addProyecto = async () => {
-    const form = document.querySelector("#agregarBitacor");  
+  let archivo = form[3].files[0];
+  var oOutput = document.getElementById("output"),
+  oData = new FormData();
   
-    const nuevoProyecto = await guardarImage(form);
-  
-    location.href ="proyectos.html";
-    
-    // Hacer alguna acción adicional (por ejemplo, redireccionar a otra página)
+  var newDate = new Date(form[1].value).toLocaleDateString("en-CA");
+
+  oData.append("file", archivo);
+  oData.append("ubicacion", "img");
+  oData.append("nombre", "Proyectos-Minero");
+  oData.append("fecha", newDate);
+
+  var oReq = new XMLHttpRequest();
+  oReq.open("POST",`${URL_IMG}/api/files`, true);
+  oReq.onload = function(oEvent) {
+    if (oReq.status == 200) {
+      oOutput.innerHTML = "cargo con exito";
+    } else {
+      oOutput.innerHTML = "Error " + oReq.status + " occurred uploading your file.<br \/>";
+    }
   };
+
+  oReq.send(oData);
+  ev.preventDefault();
+}, false);
