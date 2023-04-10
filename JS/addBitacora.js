@@ -27,16 +27,17 @@ async function onSubmitForm(ev) {
 
   oData.append("file", archivo);
   oData.append("ubicacion", "img");
-  oData.append("nombre", `(${bitacora.id})${newDate.getFullYear()}${newDate.getMonth()}${newDate}`);
+  oData.append("nombre", `(${bitacora})${newDate}`);
   oData.append("fecha", newDate);
 
-  let idfoto = uploadFile(oData);
-  
+  let idfoto = await uploadFile(oData);
+  let actualizacion =await uploadBitacora(bitacora, idfoto);
+  direccionbitacoras("bitacora.html")
 
 }
 
-async function uploadBitacora(oData, idfoto){
-  const actuaizacion = await fetch(`${URL_BASE}/${oData.id}/${idfoto.id}`)
+async function uploadBitacora(bitacora, idfoto){
+  const actuaizacion = await fetch(`${URL_BASE}/bitacoras/${bitacora}/${idfoto}`)
     .then(response => response.json())
     .catch(error => console.log(error));
 
@@ -67,17 +68,17 @@ async function createBitacora(queryParamTarea) {
   const data = await response.json();
   return data;
 }
-
-function uploadFile(oData) {
-  const oReq = new XMLHttpRequest();
-  oReq.open("POST", `${URL_IMG}/api/files`, true);
-  oReq.onload = function(oEvent) {
-    if (oReq.status == 200) {
-      console.log(oReq.responseText);
-    } else {
-      alerta("Error " + oReq.status + " no se pudo guardar el archivo. Es posible que la aplicación no tenga permisos suficientes o que el archivo esté en uso.");
-    }
-  };
-  oReq.send(oData);
-  return oData;
+async function uploadFile(oData) {
+  return new Promise((resolve, reject) => {
+    const oReq = new XMLHttpRequest();
+    oReq.open("POST", `${URL_IMG}/api/files`, true);
+    oReq.onload = function(oEvent) {
+      if (oReq.status == 200) {
+        resolve(oReq.responseText);
+      } else {
+        alerta("Error " + oReq.status + " no se pudo guardar el archivo. Es posible que la aplicación no tenga permisos suficientes o que el archivo esté en uso.");
+      }
+    };
+    oReq.send(oData);
+  });
 }
