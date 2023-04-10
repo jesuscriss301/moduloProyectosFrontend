@@ -12,6 +12,7 @@ function direccion(direccion) {
       alerta("Seleccione un proyecto para continuar")
     }
 }  
+
 function alerta(text) {
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
     const mensaje = document.getElementById('alerta');
@@ -20,8 +21,7 @@ function alerta(text) {
     setTimeout(function() {
       alertPlaceholder.setAttribute("class", "visually-hidden");
     }, 2500);
-}
-  
+}  
 
   function desplegarEtapa(number) {
   
@@ -48,4 +48,22 @@ function alerta(text) {
       default:etapa= "Etapa";
     }
     etapaDropdown.innerText=etapa;
-  }
+}
+
+function direccionbitacoras(direccion) {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryParam = urlParams.get('nombreProyecto');
+      const queryParamTarea = urlParams.get('idTarea');
+      let a= parseInt(queryParam);
+      let b =parseInt(queryParamTarea);
+      if (isNaN(a)&&isNaN(b)) {
+      alerta("Seleccione un proyecto para continuar"); 
+      }else{
+        window.location.href = `${direccion}?nombreProyecto=${a}&idTarea=${b}`;
+      }
+    } catch (error) {
+      alerta("Seleccione un proyecto para continuar")
+    }
+}
+  

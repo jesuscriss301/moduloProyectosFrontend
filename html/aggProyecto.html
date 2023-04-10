@@ -6,78 +6,81 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <title>Proyectos</title>
+        <link rel="stylesheet" href="../css/master.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     </head>
 
-<body style="background-color: lightgrey;">
+<body class="fondo">
 <section class="d-flex justify-content-center align-middlee p-3 " >
-        
-    <div class="card py-5 px-3" style="width: 35rem; ">
-          <h3 style=" text-align: center;">Crear proyecto</h3>
-      <div class="card-body">
-      <form action="proyectos.html">
-      <!-- Nombre input -->
-      <div class="form-outline mb-4">
-        <input type="text" id="nombreProyecto" class="form-control" />
-        <label class="form-label" for="form1Example1">Nombre de proyecto</label>
-      </div>
-    
-      <!-- textArea input -->
-      <div class="form-outline mb-4">
-          <textarea class="form-control" placeholder="Leave a comment here" id="descripcionProyecto"></textarea>
+      
+  <div class="card py-5 px-3" style="width: 35rem; ">
+    <h3 style=" text-align: center;">Crear proyecto</h3>
+    <div class="card-body">
+      <form id="formProyecto" action="proyectos.html">
+        <!-- Nombre input -->
+        <div class="form-outline mb-4">
+          <input type="text" id="nombreProyecto" class="form-control" placeholder="Ingresa un nombre breve que describa el proyecto." />
+          <label class="form-label" for="form1Example1">Nombre de proyecto</label>
+        </div>
+        <div class="form-outline mb-4">
+          <select id="tipo" class="form-control">
+            
+            <option value="0">Seleccionar tipo de proyecto</option>
+            <option value="1">Obras civiles</option>
+            <option value="2">Mantenimientos</option>
+            <option value="3">Reparación de hornos</option>
+          </select>
+          <label class="form-label" for="tipo">Tipo de proyecto</label>
+        </div>
+        <!-- textArea input -->
+        <div class="form-outline mb-4">
+          <textarea class="form-control" placeholder=" Describe en detalle en qué consiste el proyecto." id="descripcionProyecto"></textarea>
           <label for="floatingTextarea">Descripción</label>
-      </div>
-      <div class="form-outline mb-4">
-        <select id="prioridad" class="form-control">
-          <option value="alta">Alta</option>
-          <option value="media">Media</option>
-          <option value="baja">Baja</option>
-        </select>
-        <label class="form-label" for="prioridad">Prioridad</label>
-      </div>
-      <div class="form-outline mb-4">
-        <textarea class="form-control"></textarea>
-        <label for="floatingTextarea">Justificaciòn</label>
-    </div>
-    <div class="form-outline mb-4">
-        <textarea class="form-control" placeholder="Leave a comment here"></textarea>
-        <label for="floatingTextarea">Objetivo general</label>
-    </div>
-    <div class="form-outline mb-4">
-        <textarea class="form-control" placeholder="Leave a comment here"></textarea>
-        <label for="floatingTextarea">Objetivo especifico</label>
-    </div>
-    <div class="form-outline mb-4">
-        <select id="prioridad" class="form-control">
-          <option value="alta">Patio 3</option>
-          <option value="media">Oficina</option>
-          <option value="baja">Almacen</option>
-          <option value="baja">Laboratorio</option>
-          <option value="baja">Molino</option>
-          <option value="baja">Baterias Nuevas</option>
-        </select>
-        <label class="form-label" for="prioridad">Ubicacion</label>
-      </div>
-      <div class="form-outline mb-4">
-        <input type="text" id="nombreResponsable" class="form-control" />
-        <label class="form-label" for="form1Example1">Nombre de responsable</label>
-      </div>
-      <div class="form-outline mb-4">
-        <input type="file" class="form-control" id="fotoProyecto" >
-        <label class="form-label" for="direcionFotografia">Diseño</label>
-    </div>
-    <nav class="d-flex justify-content-between">
-        <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="window.history.back();">
-        Cancelar
-        </button>
-        <button class="btn btn-success d-flex align-items-center m-1" type="submit">
-          Aceptar
-        </button>
-    </nav>
+        </div>
+        <div class="form-outline mb-4">
+          <select id="prioridad" class="form-control">
+            <option value="3">Baja</option>
+            <option value="2">Media</option>
+            <option value="1">Alta</option>            
+          </select>
+          <label class="form-label" for="prioridad">Prioridad</label>
+        </div>
+        <div class="form-outline mb-4">
+          <textarea class="form-control" placeholder="Escribe la justificación del proyecto."></textarea>
+          <label for="floatingTextarea">Justificaciòn</label>
+        </div>
+        <div class="form-outline mb-4">
+          <textarea class="form-control" placeholder="Describe el objetivo general del proyecto."></textarea>
+          <label for="floatingTextarea">Objetivo general</label>
+        </div>
+        <div class="form-outline mb-4">
+          <textarea class="form-control" placeholder="Escribe los objetivos específicos que se quieren alcanzar."></textarea>
+          <label for="floatingTextarea">Objetivo especifico</label>
+        </div>
+        <div class="form-outline mb-4">
+          <select id="Ubicacion" class="form-control">
+            <option value="Patio 3">Patio 3</option>
+            <option value="Oficina">Oficina</option>
+            <option value="Almacen">Almacen</option>
+            <option value="Laboratorio">Laboratorio</option>
+            <option value="Molino">Molino</option>
+            <option value="Baterias Nuevas">Baterias Nuevas</option>
+          </select>
+          <label class="form-label" for="prioridad">Ubicacion</label>
+        </div>
+        <nav class="d-flex justify-content-between">
+          <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="window.history.back();">
+          Cancelar
+          </button>
+          <button class="btn btn-success d-flex align-items-center m-1" type="button" onclick="addProyecto()">
+            Aceptar
+          </button>
+        </nav>
       </form>
-      </div>
     </div>
+  </div>
 </section>
+<script src="../JS/addProyecto.js"></script>
 </body>
 </html>
