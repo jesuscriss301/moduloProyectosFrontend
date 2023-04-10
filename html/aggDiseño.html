@@ -12,7 +12,11 @@
         <div class="card py-5 px-3" style="width: 35rem;">
             <h3 style="text-align: center;">Diseño</h3>
             <div class="card-body">
-                <form id="diseño" action="diseño.html" method="POST" enctype="multipart/form-data">
+                <div class="visually-hidden" id="liveAlertPlaceholder">
+                    <div id="alerta"class="alert alert-danger" role="alert">
+                    </div>
+                </div>
+                <form id="diseño" method="POST" enctype="multipart/form-data">
                     <div class="form-outline mb-4">
                         <input type="text" class="form-control" name="nombreDiseño">
                         <label class="form-label" for="nombreDiseño">Nombre del Diseño</label>
@@ -30,7 +34,7 @@
                         <label class="form-label" for="direcionFotografia">Archivo</label>
                     </div>
                     <nav class="d-flex justify-content-between">
-                        <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="window.history.back();">
+                        <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="direccion('Tareas.html')">
                             Cancelar
                         </button>
                         <button class="btn btn-success d-flex align-items-center m-1" type="submit">
@@ -42,6 +46,7 @@
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script> </script>
+    <script src="../JS/aggDiseño.js"></script>
+    <script src="../JS/carboexco.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 const URL_IMG = "http://sistemas:8081";
 const URL_BASE = "http://sistemas:8080";
 
-const form = document.forms.namedItem("agregarBitacora");
+const form = document.forms.namedItem("diseño");
 form.addEventListener('submit', onSubmitForm, false);
 
 async function onSubmitForm(ev) {
@@ -9,55 +9,55 @@ async function onSubmitForm(ev) {
 
   const urlParams = new URLSearchParams(window.location.search);
   const queryParam = urlParams.get('nombreProyecto');
-  const queryParamTarea = urlParams.get('idTarea');
 
   if (queryParam === "" || queryParam === null) {
     return;
   }
 
-  const bitacora = await createBitacora(queryParamTarea);
+  const diseno = await creatediseno(queryParam);
 
-  if (!bitacora) {
+  if (!diseno) {
     return;
   }
 
   const archivo = form[3].files[0];
   const oData = new FormData();
-  const newDate = new Date(form[1].value).toLocaleDateString("en-CA");
+  const newDate = form[2].value;
 
   oData.append("file", archivo);
   oData.append("ubicacion", "img");
-  oData.append("nombre", `(${bitacora})${newDate}`);
+  oData.append("nombre", `(${diseno})-${newDate}`);
   oData.append("fecha", newDate);
 
   let idfoto = await uploadFile(oData);
-  let actualizacion =await uploadBitacora(bitacora, idfoto);
-  direccionbitacoras("bitacora.html")
+  let actualizacion =await uploaddiseno(diseno, idfoto);
+  direccion("diseno.html");
 
 }
 
-async function uploadBitacora(bitacora, idfoto){
-  const actuaizacion = await fetch(`${URL_BASE}/bitacoras/${bitacora}/${idfoto}`)
+async function uploaddiseno(diseno, idfoto){
+  const actuaizacion = await fetch(`${URL_BASE}/disenos/${diseno}/${idfoto}`)
     .then(response => response.json())
     .catch(error => console.log(error));
 
     return actuaizacion;
 }
 
-async function createBitacora(queryParamTarea) {
-  const nuevaBitacora = {
-    "idTarea": {"id": parseInt(queryParamTarea)},
-    "descripcionBitacora": form[0].value,
-    "observacionBitacora": form[2].value,
-    "fechaHora": new Date(form[1].value).toISOString(),
-    "fileFoto": 4
-  };
-  const response = await fetch(`${URL_BASE}/bitacoras`, {
+async function creatediseno(proyecto) {
+  const nuevadiseno = {
+    "idProyecto":{"id":proyecto},
+    "nombreDiseno":form[0].value,
+    "areaTerreno":form[1].value,
+    "idFoto":2,
+    "fecha":form[2].value,
+    "idEstado":{"id":2}
+    };
+  const response = await fetch(`${URL_BASE}/disenos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(nuevaBitacora),
+    body: JSON.stringify(nuevadiseno),
   });
 
   if (response.status !== 200) {
