@@ -76,7 +76,7 @@
 
 	<div class="px-5 d-flex justify-content-center" ><!--style="display: flex; align-items: center;"-->
 		<!--Boton ir atras el scritp esta al final-->
-	  <button class="btn btn-outline-secondary" onclick="goBack()">Volver</button>
+	  <button class="btn btn-outline-secondary" onclick="direccion('Tareas.html')">Volver</button>
 		  <!--Encabezado pagina-->
 	  <h3 class="m-auto">Bitacora</h3>
   </div>
@@ -93,9 +93,7 @@
             <li><button class="dropdown-item">proyecto</button></li>
           </ul>
         </div>
-        <form action="aggBitacora.html">
-            <button id="agregarFila" class="btn btn-danger" onclick="">Agregar Bitacora</button>
-        </form>
+          <button id="agregarFila" class="btn btn-danger" onclick="direccionbitacoras('aggBitacora.html')">Agregar Bitacora</button>
       </div>
     </nav>
   </div>
@@ -125,11 +123,7 @@
       </div>
     </div>
   </footer>
-  <script>
-    function goBack() {
-      window.history.back();
-    } 
-  </script>
+
   <script src="../JS/bitacora.js"></script>
   <script src="../JS/carboexco.js"></script>
 </body>

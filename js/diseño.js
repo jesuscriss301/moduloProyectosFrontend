@@ -1,12 +1,19 @@
 const URL_BASE = "http://sistemas:8080";
+const URL_IMG = "http://sistemas:8081";
 
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);
     let queryParam = urlParams.get('nombreProyecto');
-    //console.log(queryParam);
     if (queryParam!=null && queryParam!="") {
         cargarProyecto(queryParam);
+        cargarDisenos(queryParam);
     }
+}
+function cargarpdf(archivo) {
+    
+    const pdf =document.getElementById("pdf");
+    pdf.setAttribute("src",`${URL_IMG}/filesPDF/view/${archivo}`)
+
 }
 
 async function cargarProyecto(id) {
@@ -15,6 +22,35 @@ async function cargarProyecto(id) {
     .then(data => {
         tablaInfo(data);
         responsable(data.id);
+        cargardiseno(data.id);
+    })
+    .catch(error => console.log(error));
+}
+
+async function cargardiseno(proyecto) {
+    const NombreDiseño = document.getElementById("NombreDiseño");
+    const area = document.getElementById("area");
+    const fecha= document.getElementById("fecha");
+    
+    fetch(`${URL_BASE}/disenos/proyecto/${proyecto}`)
+    .then(response => response.json())
+    .then(data => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let diseno = urlParams.get('iddiseno');
+        let a= parseInt(diseno);
+        if (!isNaN(a)) {
+
+            cargarpdf(data[a].idFoto);
+            NombreDiseño.textContent = data[a].nombreDiseno;
+            area.textContent.textContent = data[a].areaTerreno;
+            fecha.textContent = data[a].fecha;
+        }else{
+            cargarpdf(data[0].idFoto);
+            NombreDiseño.textContent = data[0].nombreDiseno;
+            area.textContent.textContent = data[0].areaTerreno;
+            fecha.textContent = data[0].fecha;
+        }
+
     })
     .catch(error => console.log(error));
 }
@@ -43,5 +79,48 @@ function tablaInfo(data) {
     nombre.textContent=data.nombreProyecto;
     tipo.textContent=data.idTipoProyecto.nombre;
 
+}
+
+async function cargarDisenos(proyecto) {
+    
+    fetch(`${URL_BASE}/disenos/proyecto/${proyecto}`)
+    .then(response => response.json())
+    .then(data => cargarfiltro(data,proyecto))
+    .catch(error => console.log(error));
+}
+
+function cargarfiltro(data,proyecto) {
+    const proyectoDropdown = document.getElementById("disenoProyecto");
+    proyectoDropdown.innerHTML="";
+    
+  for (let i = 0; i < data.length; i++) {
+    
+    const newListItem = document.createElement("li");
+    const element = data[i];
+        // Create a new a element
+    const newLink = document.createElement("button");
+    newLink.setAttribute("class", "dropdown-item");
+    newLink.setAttribute("onclick", "desplegable("+ i+",'"+ proyecto +"')");
+    newLink.textContent = element.id+"- " +element.nombreDiseno;
+ 
+        // Append the newLink to the newListItem
+    newListItem.appendChild(newLink); 
+    proyectoDropdown.appendChild(newListItem); 
+  }
+}
+
+function desplegable(diseno,proyecto) {
+    const proyectoDropdown = document.getElementById("disenosButton");
+    proyectoDropdown.innerText=`${diseno}`;
+
+    var currentHostname = window.location.hostname;
+    var currentPathname = window.location.pathname;
+    var currentSearch = window.location.search;
+    var currentHash = window.location.hash;
+
+    const url = `${currentPathname}?nombreProyecto=${proyecto}&iddiseno=${diseno}`;
+    // redirigir a la página con la URL construida
+    window.location.href = url;
+    
 }
 

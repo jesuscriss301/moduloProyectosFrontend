@@ -6,15 +6,20 @@
     <title>Bitácora</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/master.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body style="background-color: lightgrey;">
+  <body class="fondo">
     <section class="d-flex justify-content-center align-items-center p-3" >
       <!-- Card con el formulario -->
       <div class="card py-5 px-3" style="width: 35rem;">
         <h3 style="text-align: center;">Bitácora</h3>
         <div class="card-body">
-          <form action="Tareas.html">
+          <div class="visually-hidden" id="liveAlertPlaceholder">
+            <div id="alerta"class="alert alert-danger" role="alert">
+            </div>
+          </div>
+          <form enctype="multipart/form-data" method="post" name="agregarBitacora" id="agregarBitacora" action="http://sistemas:8081/api/files">
             <!-- Descripción -->
             <div class="form-outline mb-4">
               <label class="form-label" for="descripcionProyecto">Descripción</label>
@@ -23,7 +28,7 @@
             <!-- Fecha de inicio -->
             <div class="form-outline mb-4">
               <label class="form-label" for="fechaInicio">Fecha Inicio</label>
-              <input type="date" class="form-control" id="fechaInicio">
+              <input type="datetime-local" class="form-control" id="fechaInicio">
             </div>
             <!-- Observaciones -->
             <div class="form-outline mb-4">
@@ -33,18 +38,21 @@
             <!-- Foto -->
             <div class="form-outline mb-4">
               <label class="form-label" for="fotoProyecto">Foto</label>
-              <input type="file" class="form-control" id="fotoProyecto" disabled>
+              <input type="file" class="form-control" id="fotoProyecto" accept="image/*">
             </div>
             <!-- Botones de cancelar y aceptar -->
             <div class="d-flex justify-content-between">
-              <button class="btn btn-danger d-flex align-items-center m-1" type="button" onclick="window.history.back();">
+              <button class="btn btn-danger d-flex align-items-center m-1" type="button" onclick="direccion('Tareas.html')">
                 Cancelar
               </button>
               <button class="btn btn-success d-flex align-items-center m-1" type="submit">Aceptar</button>
             </div>
+            
           </form>
         </div>
       </div>
     </section>
+  <script src="../JS/addBitacora.js"></script>
+  <script src="../JS/carboexco.js"></script>
   </body>
 </html>
