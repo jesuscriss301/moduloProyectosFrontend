@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Proyectos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/master.css">
 </head>
-<body>
+<body class="fondo">
     <section class="d-flex justify-content-center align-middlee m-3">
-        <div class="card" style="width: 35rem;">
+        <div class="card py-5 px-3" style="width: 35rem;">
             <h3 style="text-align: center;">Diseño</h3>
             <div class="card-body">
                 <form id="diseño" action="diseño.html" method="POST" enctype="multipart/form-data">
                     <div class="form-outline mb-4">
                         <input type="text" class="form-control" name="nombreDiseño">
-                        <label class="form-label" for="form1Example1">Nombre del Diseño</label>
+                        <label class="form-label" for="nombreDiseño">Nombre del Diseño</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="number" class="form-control" name="areaTerreno">
+                        <label class="form-label" for="areaTerreno">Arrea de terrreno m<sup>2</sup></label>
                     </div>
                     <div class="form-outline mb-4">
                         <input type="date" class="form-control" name="fecha">
