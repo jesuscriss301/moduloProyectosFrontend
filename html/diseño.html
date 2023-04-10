@@ -80,7 +80,6 @@
 	<div class="px-5 d-flex justify-content-center">
 			<!--Boton ir atras el scritp esta al final-->
 			<button class="btn btn-outline-secondary" onclick="window.history.back()">Volver</button>
-
 						<!--Encabezado pagina-->
 		<h3 style="margin: 0 auto;">Diseño</h3>
 	</div>
@@ -89,14 +88,11 @@
 	<div class="dropdown-center m-3" >
 		<nav class="navbar bg-body-tertiary">
 		<div class="container-fluid">
-			<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			Filtro
+			<button id="disenosButton"  class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			Diseños
 			</button>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">Responsable</a></li>
-				<li><a class="dropdown-item" href="#">Etapa</a></li>
-				<li><a class="dropdown-item" href="#">Completado</a></li>
-				<li><a class="dropdown-item" href="#">Archivado</a></li>
+			<ul id="disenoProyecto" class="dropdown-menu">
+				<li><button class="dropdown-item" onclick="">Responsable</button></li>
 			</ul>
 
 			<!-- Boton agregar diseño U- izquierda -->
