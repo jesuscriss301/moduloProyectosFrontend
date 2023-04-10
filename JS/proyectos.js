@@ -1,3 +1,5 @@
+const URL_BASE = "http://sistemas:8080";
+
 function cargarTablaProyectos() {
   //Tabla();
   consultaNombreProyecto();
@@ -21,7 +23,7 @@ async function Tabla(busqueda) {
 }
 
 async function proyectos(busqueda) {
-  fetch('http://sistemas:8080/proyectos/tablaProyectos/'+busqueda+"/")
+  fetch(`${URL_BASE}/proyectos/tablaProyectos/${busqueda}/`)
     .then(response => response.json())
     .then(data => drawTable(data))
     .catch(error => console.log(error));
