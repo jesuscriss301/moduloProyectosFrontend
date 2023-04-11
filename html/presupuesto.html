@@ -73,6 +73,17 @@
 				<th scope="row">Responsable:</td>
 				<td id="responsable"></td>
 			</tr>
+			<tr>
+				<th rowspan="2" scope="row">Codigo Presupuesto:</th>
+				<td rowspan="2" id="codigoPresupueso"></td>
+				<th scope="row">Costo Total:</td>
+				<td><span id="unidad">$ </span><span id="costo"></span>
+				</td>
+			  </tr>
+			  <tr>
+				<th>Estado:</th>
+				<td id="estado"></td>
+			  </tr>
 		</tbody>
 	</table>
 
@@ -87,15 +98,13 @@
 	<div class="dropdown-center m-3">
 		<nav class="navbar bg-body-tertiary">
 			<div class="container-fluid">
-				<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+				<button id="presupuestoButton" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
 					aria-expanded="false">
-					Filtro
+					presupuestos
 				</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Presupuesto</a></li>
-					<li><a class="dropdown-item" href="#">Requisicion</a></li>
+				<ul id="PresupuestoProyecto" class="dropdown-menu">
+					<li><button class="dropdown-item" onclick=""></button></li>
 				</ul>
-
 				<button id="agregarFila" class="btn btn-danger">Agregar Presupuesto +</button>
 			</div>
 		</nav>
@@ -121,7 +130,7 @@
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingOne">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								<button id="buttonPersonal" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#flush-collapseOne" aria-expanded="false"
 									aria-controls="flush-collapseOne">
 									Personal
@@ -140,7 +149,7 @@
 												<th scope="col">Tiempo</th>
 											</tr>
 										</thead>
-										<tbody id="personaltable"></tbody>
+										<tbody id="Personaltable"></tbody>
 									</table>
 								</div>
 							</div>
@@ -151,14 +160,14 @@
 
 			<tr class="accordion-row">
 				<td  style="width: 20ch;">
-					<button class="btn btn-danger" style="width: 15ch;">Maquinaria +</button>
+					<button  class="btn btn-danger" style="width: 15ch;">Maquinaria +</button>
 				</td>
 
 				<td colspan="6">
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingTwo">
-								<button class="accordion-button collapsed colspan-6" type="button"
+								<button id="buttonMaquinaria" class="accordion-button collapsed colspan-6" type="button"
 									data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
 									aria-controls="flush-collapseTwo">
 									Maquinaria
@@ -177,7 +186,7 @@
 												<th scope="col">Tiempo</th>
 											</tr>
 										</thead>
-										<tbody id="maquinariatable"></tbody>
+										<tbody id="Maquinariatable"></tbody>
 									</table>
 								</div>
 							</div>
@@ -194,7 +203,7 @@
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingThree">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								<button  id="buttonMaterial" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#flush-collapseThree" aria-expanded="false"
 									aria-controls="flush-collapseThree">
 									Material
@@ -213,7 +222,7 @@
 												<th scope="col">Tiempo</th>
 											</tr>
 										</thead>
-										<tbody id="materialtable"></tbody>
+										<tbody id="Materialtable"></tbody>
 									</table>
 								</div>
 							</div>
@@ -229,7 +238,7 @@
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingFour">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								<button  id="buttonHerramienta" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 									data-bs-target="#flush-collapseFour" aria-expanded="false"
 									aria-controls="flush-collapseFour">
 									Herramienta
@@ -248,7 +257,7 @@
 												<th scope="col">Tiempo</th>
 											</tr>
 										</thead>
-										<tbody id="herramientatable"></tbody>
+										<tbody id="Herramientatable"></tbody>
 									</table>
 								</div>
 							</div>
@@ -256,9 +265,9 @@
 					</div>
 				</td>
 			</tr>
-
 		</tbody>
 	</table>
+
 	<footer class="bg-body-secondary py-3 bottom-0 start-50 " style="padding: 0; margin: 0;">
 		<div class="container">
 			<div class="row">
