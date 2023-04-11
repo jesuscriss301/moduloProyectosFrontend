@@ -60,12 +60,12 @@ async function cargarProyecto(id) {
             console.log(data);
             tablaInfo(data);
             responsable(data.id);
-            cargarPresupuesto(data.id);
+            cargarPresupuestos(data.id);
         })
         .catch(error => console.log(error));
 }
 
-async function cargarPresupuesto(proyecto) {
+async function cargarPresupuestos(proyecto) {
     const codigoPresupueso = document.getElementById("codigoPresupueso");
     const costo = document.getElementById("costo");
     const estado= document.getElementById("estado");
@@ -130,6 +130,7 @@ async function cargarItems(presupuesto) {
 async function fila(tipo, presupuesto) {
 
     const tabla = document.getElementById(`${tipo}table`);
+    tabla.innerHTML="";
 
     if (tipo === "Personal") {
         const response = await fetch(`${URL_BASE}/presupuestoPersonals/proyecto/${presupuesto}`);
