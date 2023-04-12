@@ -13,6 +13,10 @@ function direccion(direccion) {
     }
 }  
 
+function direccionProyecto(direccion) {
+      location.href =direccion;
+}
+
 function alerta(text) {
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
     const mensaje = document.getElementById('alerta');
