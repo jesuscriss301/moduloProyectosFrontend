@@ -68,6 +68,7 @@ async function createBitacora(queryParamTarea) {
   const data = await response.json();
   return data;
 }
+
 async function uploadFile(oData) {
   return new Promise((resolve, reject) => {
     const oReq = new XMLHttpRequest();

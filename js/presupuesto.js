@@ -77,7 +77,6 @@ async function cargarPresupuestos(proyecto) {
             const urlParams = new URLSearchParams(window.location.search);
             let presupuesto = urlParams.get('idPresupuesto');
             let a = parseInt(presupuesto);
-            console.log(data);
             if (!isNaN(a)) {
                 cargarItems(data[a].id);
                 codigoPresupueso.textContent = data[a].id;
@@ -175,4 +174,43 @@ function updateUI(tipo, data) {
 async function fila(tipo, presupuesto) {
     const data = await fetchData(tipo, presupuesto);
     updateUI(tipo, data);
+}
+
+async function agregar() {
+    let presupuesto = document.getElementById("codigoPresupueso");
+    let a = parseInt(presupuesto.textContent);
+    if (!isNaN(a)) {
+        const form = document.getElementById("agregarPresupuesto");
+
+        let nuevo = {
+            "id": {
+                "idPresupuesto": a,
+                "idMaterial": parseInt(form[0].value)
+            },
+            "idPresupuesto": { "id": a },
+            "idMaterial": { "id": parseInt(form[0].value) },
+            "cantidad": parseInt(form[2].value),
+            "costo": parseInt(form[1].value),
+            "tiempoUso": parseInt(form[3].value)
+        }
+        console.log(`${a}-${parseInt(form[0].value)}-${parseInt(form[1].value)}-${parseInt(form[2].value)}-${parseInt(form[3].value)}`);
+        const response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(nuevo),
+        });
+        if (response.status !== 200) {
+            alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad"
+             +"de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
+            return null;
+        }
+        const data = await response.json();
+        cargarItems(presupuesto);
+        return data;
+    }else{
+        alerta("Seleccione un proyecto para continuar");
+
+    }
 }

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,33 +14,44 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
   <!-- barra de navegaciòn-->
   <div class="section">
-    <nav class="navbar navbar-expand-lg bg-body-secondary" >
-      <a href="#" class="logo"><img src="LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
-      <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
-          <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
-        <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
+    <nav class="navbar navbar-expand-lg bg-body-secondary">
+      <a href="#" class="logo"><img src="LOGO_CARBOEXCO.png" alt="Logo"
+          style="width: 250px; height: 50px; align-self: left;"></a>
+      <div class="container-fluid" style="width: auto; margin-left:auto; margin-right: auto;">
+        <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
+        <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+          aria-label="Alternar navegación">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText" >
+        <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html"><h3>Dashboard</h3></a>
+              <a class="nav-link active" aria-current="page" href="index.html">
+                <h3>Dashboard</h3>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="html/proyectos.html"><h3>Proyectos</h3></a>
+              <a class="nav-link" href="html/proyectos.html">
+                <h3>Proyectos</h3>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="html/Tareas.html"><h3>Tareas</h3></a>
+              <a class="nav-link" href="html/Tareas.html">
+                <h3>Tareas</h3>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="html/hornos.html"><h3>Reparaciones</h3></a>
+              <a class="nav-link" href="html/hornos.html">
+                <h3>Reparaciones</h3>
+              </a>
             </li>
           </ul>
         </div>
       </div>
       <a href="html/perfil.html" class="btn btn-danger m-2">
         <i class="bi bi-person"></i> Ver Perfil
-      </a>	
+      </a>
     </nav>
   </div>
 
@@ -48,17 +60,17 @@
       <div class="col-sm-12 col-md-6">
         <!--Diagrama de barras-->
         <div class="container-fluid m-3">
-         <div class="row">
-          <div class="col">
-           <div class="card" style="height: 250px;">
-             <div class="card-body" style="overflow-y: auto;">
-               <!-- Contenido del diagrama aquí -->
-                <div id="columnchart_material"></div>
+          <div class="row">
+            <div class="col">
+              <div class="card" style="height: 250px;">
+                <div class="card-body" style="overflow-y: auto;">
+                  <!-- Contenido del diagrama aquí -->
+                  <div id="columnchart_material"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
         <!--Diagrama de tabla-->
         <div class="container-fluid m-3">
@@ -82,11 +94,12 @@
     </div>
   </div>
   <!--Diagrama de Gannt-->
-  <div class="dropdown-center m-3" >
+  <div class="dropdown-center m-3">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <div class="dropdown">
-          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
+          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" style="width:25ch;">
             Etapa
           </button>
           <ul class="dropdown-menu">
@@ -101,10 +114,11 @@
           </ul>
         </div>
         <div class="dropdown">
-          <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+          <button id="SeleccionarProyecto" class="btn btn-danger dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false" disabled>
             Seleccionar proyecto
           </button>
-          <ul class="dropdown-menu"  id="proyecto">
+          <ul class="dropdown-menu" id="proyecto">
             <li><button class="dropdown-item">proyecto</button></li>
           </ul>
         </div>
@@ -121,7 +135,7 @@
           <div class="card-body" style="overflow-y: auto; overflow: auto;">
             <!-- Contenido del diagrama aquí -->
             <h2 id="nombreProyecto" class="text-center text-danger"></h2>
-            <div  id="chart_div"></div>
+            <div id="chart_div"></div>
           </div>
         </div>
       </div>
