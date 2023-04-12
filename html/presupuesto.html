@@ -115,7 +115,7 @@
 			<tr>
 				<th> </th>
 				<th scope="col">Codigo</th>
-				<th scope="col">Nombre</th>
+				<th scope="col">Nombre/Cargo</th>
 				<th scope="col">Cantidad</th>
 				<th scope="col">Costo</th>
 				<th scope="col">Tiempo</th>
@@ -124,9 +124,9 @@
 		<tbody>
 			<tr>
 				<td  style="width: 20ch;">
-					<button class="btn btn-danger" style="width: 15ch;">Personal +</button>
+					<button class="btn btn-danger"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="width: 15ch;">Personal +</button>
 				</td>
-				<td colspan="6">
+				<td colspan="5">
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingOne">
@@ -143,7 +143,7 @@
 										<thead>
 											<tr>
 												<th scope="col">Codigo</th>
-												<th scope="col">Nombre</th>
+												<th scope="col">Cargo</th>
 												<th scope="col">Cantidad</th>
 												<th scope="col">Costo</th>
 												<th scope="col">Tiempo</th>
@@ -160,10 +160,10 @@
 
 			<tr class="accordion-row">
 				<td  style="width: 20ch;">
-					<button  class="btn btn-danger" style="width: 15ch;">Maquinaria +</button>
+					<button class="btn btn-danger"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="width: 15ch;">Maquinaria +</button>
 				</td>
 
-				<td colspan="6">
+				<td colspan="5">
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingTwo">
@@ -197,9 +197,9 @@
 
 			<tr>
 				<td  style="width: 20ch;">
-					<button class="btn btn-danger" style="width: 15ch;">Material +</button>
+					<button class="btn btn-danger"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="width: 15ch;">Material +</button>
 				</td>
-				<td colspan="6">
+				<td colspan="5">
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingThree">
@@ -232,9 +232,9 @@
 			</tr>
 			<tr>
 				<td  style="width: 20ch;">
-					<button class="btn btn-danger" style="width: 15ch;">Herramienta +</button>
+					<button class="btn btn-danger"  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="width: 15ch;">Herramienta +</button>
 				</td>
-				<td colspan="6">
+				<td colspan="5">
 					<div class="accordion accordion-flush" id="accordionFlushExample">
 						<div class="accordion-item">
 							<h2 class="accordion-header" id="flush-headingFour">
@@ -267,8 +267,51 @@
 			</tr>
 		</tbody>
 	</table>
-
-	<footer class="bg-body-secondary py-3 bottom-0 start-50 " style="padding: 0; margin: 0;">
+	<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+		aria-labelledby="offcanvasWithBothOptionsLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Agregar <span id="tipoMaterial"></span></h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="visually-hidden" id="liveAlertPlaceholder">
+				<div id="alerta"class="alert alert-danger" role="alert">
+				</div>
+			  </div>
+			<form id="agregarPresupuesto">
+				<!-- Nombre -->
+				<div class="form-outline mb-4">
+					<select class="form-control">
+						<option value="1">material</option>
+						<option value="2">material</option>
+						<option value="3">material</option>
+						<option value="5">material</option>
+					</select>
+					<label class="form-label" for="tipo">Nombre/Cargo</label>
+				</div>
+				<!-- Costo -->
+				<div class="form-outline mb-4">
+					<input type="number" name="costo" class="form-control" min="0">
+					<label class="form-label" for="costo">Costo(COP)</label>
+				</div>
+				<!-- Cantidad -->
+				<div class="form-outline mb-4">
+					<input type="number" name="cantidad" class="form-control" min="0">
+					<label class="form-label" for="cantidad">Cantidad(unidad)</label>
+				</div>
+				<!-- Tiempo -->
+				<div class="form-outline mb-4">
+					<input type="number" name="Tiempo" class="form-control" min="0">
+					<label class="form-label" for="Tiempo">Tiempo(días)</label>
+				</div>
+				<!-- Botones de cancelar y aceptar -->
+				<div class="d-flex justify-content-between">
+					<button class="btn btn-success d-flex align-items-center m-1" type="button" onclick="agregar()">Aceptar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer class="bg-body-secondary py-3 bottom-0 start-50" style="padding: 0; margin: 0;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
