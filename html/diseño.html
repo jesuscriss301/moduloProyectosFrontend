@@ -66,8 +66,7 @@
 			<th rowspan="2" scope="row">Nombre Diseño:</th>
 			<td rowspan="2" id="NombreDiseño"></td>
 			<th scope="row">Area del terreno:</td>
-			<td><span id="area">55</span> <span id="unidad">metros</span>
-			</td>
+			<td id="area"></td>
 		  </tr>
 		  <tr>
 			<th>fecha:</th>
@@ -75,6 +74,11 @@
 		  </tr>
 		</tbody>
 	</table>
+
+	<div class="visually-hidden" id="liveAlertPlaceholder">
+		<div id="alerta"class="alert alert-danger" role="alert">
+		</div>
+	</div>
 
 	<!--nav de boton atras y encabezado-->
 	<div class="px-5 d-flex justify-content-center">
@@ -100,7 +104,7 @@
 	</div>
 
 	<div class="h-auto m-3">
-		<iframe id="pdf" class="iframe" src="http://sistemas:8081/filesPDF/view/2"></iframe>
+		<iframe id="pdf" class="iframe" src=""></iframe>
 	</div>
 
     <footer class="bg-body-secondary py-3 bottom-0 start-50" style="padding: 0; margin: 0;">

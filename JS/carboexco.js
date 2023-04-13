@@ -27,6 +27,13 @@ function alerta(text) {
     }, 2500);
 }  
 
+function alertaPermanente(text) {
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+  const mensaje = document.getElementById('alerta');
+  alertPlaceholder.setAttribute("class", "m-3");
+  mensaje.innerText=text;
+}  
+
   function desplegarEtapa(number) {
   
     const etapaDropdown = document.getElementById("etapa");

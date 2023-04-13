@@ -30,29 +30,36 @@ async function cargarProyecto(id) {
 async function cargardiseno(proyecto) {
     const NombreDiseño = document.getElementById("NombreDiseño");
     const area = document.getElementById("area");
-    const fecha= document.getElementById("fecha");
+    const fecha = document.getElementById("fecha");
     
     fetch(`${URL_BASE}/disenos/proyecto/${proyecto}`)
-    .then(response => response.json())
-    .then(data => {
-        const urlParams = new URLSearchParams(window.location.search);
-        let diseno = urlParams.get('iddiseno');
-        let a= parseInt(diseno);
-        if (!isNaN(a)) {
-
-            cargarpdf(data[a].idFoto);
-            NombreDiseño.textContent = data[a].nombreDiseno;
-            area.textContent.textContent = data[a].areaTerreno;
-            fecha.textContent = data[a].fecha;
-        }else{
-            cargarpdf(data[0].idFoto);
-            NombreDiseño.textContent = data[0].nombreDiseno;
-            area.textContent.textContent = data[0].areaTerreno;
-            fecha.textContent = data[0].fecha;
-        }
-
-    })
-    .catch(error => console.log(error));
+        .then(response => response.json())
+        .then(data => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let diseno = urlParams.get('iddiseno');
+            let a = parseInt(diseno);
+            if (!isNaN(a)) {
+                console.log(data);
+                cargarpdf(data[a].idFoto);
+                NombreDiseño.textContent = data[a].nombreDiseno;
+                area.textContent = data[a].areaTerreno+" metros";
+                fecha.textContent = data[a].fecha;
+            } else {
+                if (data.length == 0) {
+                    alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se ha encontrado ningún diseño asociado. ");
+                    let botondisenos = document.getElementById("disenosButton");
+                    botondisenos.disabled = true;
+                }
+                else {
+                    console.log(data);
+                    cargarpdf(data[0].idFoto);
+                    NombreDiseño.textContent = data[0].nombreDiseno;
+                    area.textContent = data[0].areaTerreno+" metros";
+                    fecha.textContent = data[0].fecha;
+                }
+            }
+        })
+        .catch(error => console.log(error));
 }
 
 async function responsable(proyecto) {
