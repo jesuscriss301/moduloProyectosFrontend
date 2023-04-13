@@ -32,6 +32,7 @@ const obtenerEtapaProyecto = async (form, proyecto) => {
   const data = await response.json();
   if (data==null) {
     await actualizarFecha(form,proyecto);
+    await crearPersonaEtapaProyecto(form,proyecto);
     return await crearEtapaProyecto(form,proyecto);
   }
   return data;
@@ -39,15 +40,36 @@ const obtenerEtapaProyecto = async (form, proyecto) => {
 
 const crearEtapaProyecto = async (form, proyecto) => {
   
-  const etapa_proyecto= {
-    "idProyecto":{"id":proyecto},
-    "idEtapa":{"id":form[1].value},
-    "fechaInicio":form[3].value,
-    "fechaFinal":null,
-    "idEstado":{"id":2}
+  const etapa_proyecto = {
+    "idProyecto": { "id": proyecto },
+    "idEtapa": { "id": form[1].value },
+    "fechaInicio": form[3].value,
+    "fechaFinal": null,
+    "idEstado": { "id": 2 }
   }
     
   const response = await fetch(`${URL_BASE}/etapa_proyectos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(etapa_proyecto),
+      });
+  const data = await response.json();
+  return data;
+};
+
+const crearPersonaEtapaProyecto = async (form, proyecto) => {
+  
+  const etapa_proyecto = { 
+    "id": { 
+      "proyecto": proyecto,
+      "persona": form[5].value, 
+      "etapa": form[1].value 
+    },
+    "fecha": form[3].value }
+    
+  const response = await fetch(`${URL_BASE}/proyectoPersonas`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

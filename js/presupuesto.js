@@ -83,10 +83,15 @@ async function cargarPresupuestos(proyecto) {
                 costo.textContent = data[a].costoTotal;
                 estado.textContent = data[a].idEstado.nombreEstado;
             } else {
-                cargarItems(data[0].id);
-                codigoPresupueso.textContent = data[0].id;
-                costo.textContent = data[0].costoTotal;
-                estado.textContent = data[0].idEstado.nombreEstado;
+                if (data.length == 0) {
+                    alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se ha encontrado ningún presupuesto asociado. ");
+                }
+                else {
+                    cargarItems(data[0].id);
+                    codigoPresupueso.textContent = data[0].id;
+                    costo.textContent = data[0].costoTotal;
+                    estado.textContent = data[0].idEstado.nombreEstado;
+                }
             }
 
         })

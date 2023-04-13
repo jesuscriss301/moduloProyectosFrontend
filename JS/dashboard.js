@@ -167,6 +167,7 @@ function etapa(number) {
   const proyectoDropdown = document.getElementById("SeleccionarProyecto");
   desplegarEtapa(number);
   proyectoDropdown.disabled = false;
+  proyectoDropdown.setAttribute("onclick","agreagarTarea("+number+")")
   desplegable(number);
 
 }
@@ -201,4 +202,8 @@ function desplegable(number) {
   // Append the newListItem to the proyectoDropdown
   
   }
+}
+
+function agreagarTarea(number) {
+  
 }
