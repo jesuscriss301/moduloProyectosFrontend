@@ -10,6 +10,12 @@ function cargar() {
 
 }
 
+async function cargarCosto(presupuesto) {
+    const costo =fetch(`${URL_BASE}/presupuestos/costototal/${presupuesto}`);
+    const data = await response.json();
+  return data;
+}
+
 async function cargarPresupuesto(proyecto) {
 
     fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
@@ -57,7 +63,6 @@ async function cargarProyecto(id) {
     fetch(`${URL_BASE}/proyectos/${id}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             tablaInfo(data);
             responsable(data.id);
             cargarPresupuestos(data.id);
@@ -69,27 +74,29 @@ async function cargarPresupuestos(proyecto) {
     const codigoPresupueso = document.getElementById("codigoPresupueso");
     const costo = document.getElementById("costo");
     const estado = document.getElementById("estado");
-    console.log(proyecto);
-
-    fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
+    
+    await fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
         .then(response => response.json())
         .then(data => {
             const urlParams = new URLSearchParams(window.location.search);
             let presupuesto = urlParams.get('idPresupuesto');
             let a = parseInt(presupuesto);
             if (!isNaN(a)) {
+                cargarCosto(data[a].id);
                 cargarItems(data[a].id);
                 codigoPresupueso.textContent = data[a].id;
-                costo.textContent = data[a].costoTotal;
+                costo.textContent = "$"+data[a].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
                 estado.textContent = data[a].idEstado.nombreEstado;
             } else {
                 if (data.length == 0) {
-                    alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se ha encontrado ningún presupuesto asociado. ");
+                    alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se"
+                    +" ha encontrado ningún presupuesto asociado. ");
                 }
                 else {
+                    cargarCosto(data[0].id);
                     cargarItems(data[0].id);
                     codigoPresupueso.textContent = data[0].id;
-                    costo.textContent = data[0].costoTotal;
+                    costo.textContent ="$"+data[0].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
                     estado.textContent = data[0].idEstado.nombreEstado;
                 }
             }
@@ -130,6 +137,7 @@ async function cargarItems(presupuesto) {
     fila("Material", presupuesto);
     fila("Herramienta", presupuesto);
 }
+
 async function fetchData(tipo, presupuesto) {
     if (tipo === "Personal") {
         const response = await fetch(`${URL_BASE}/presupuestoPersonals/proyecto/${presupuesto}`);
@@ -161,7 +169,7 @@ function updateUI(tipo, data) {
         cell3.textContent = material.cantidad;
 
         const cell4 = document.createElement("td");
-        cell4.textContent = material.costo;
+        cell4.textContent = "$"+material.costo.toLocaleString('es-ES', { maximumFractionDigits: 0 });
 
         const cell5 = document.createElement("td");
         cell5.textContent = material.tiempoUso;
@@ -170,7 +178,9 @@ function updateUI(tipo, data) {
         row.appendChild(cell2);
         row.appendChild(cell3);
         row.appendChild(cell4);
-        row.appendChild(cell5);
+        if(tipo!="Material" && tipo!="Herramienta"){  
+            row.appendChild(cell5);
+        }
 
         tabla.appendChild(row);
     }
@@ -198,7 +208,7 @@ async function agregar() {
             "costo": parseInt(form[1].value),
             "tiempoUso": parseInt(form[3].value)
         }
-        console.log(`${a}-${parseInt(form[0].value)}-${parseInt(form[1].value)}-${parseInt(form[2].value)}-${parseInt(form[3].value)}`);
+        
         const response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
             method: "POST",
             headers: {
@@ -208,13 +218,13 @@ async function agregar() {
         });
         if (response.status !== 200) {
             alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad"
-             +"de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
+                + "de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
             return null;
         }
         const data = await response.json();
         cargarItems(presupuesto);
         return data;
-    }else{
+    } else {
         alerta("Seleccione un proyecto para continuar");
 
     }
