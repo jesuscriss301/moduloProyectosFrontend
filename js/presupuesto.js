@@ -12,8 +12,6 @@ function cargar() {
 
 async function cargarCosto(presupuesto) {
     const costo =fetch(`${URL_BASE}/presupuestos/costototal/${presupuesto}`);
-    const data = await response.json();
-  return data;
 }
 
 async function cargarPresupuesto(proyecto) {
@@ -169,18 +167,21 @@ function updateUI(tipo, data) {
         cell3.textContent = material.cantidad;
 
         const cell4 = document.createElement("td");
-        cell4.textContent = "$"+material.costo.toLocaleString('es-ES', { maximumFractionDigits: 0 });
+        cell4.textContent = material.costo == null ? "$0" :  "$"+material.costo.toLocaleString();
 
         const cell5 = document.createElement("td");
         cell5.textContent = material.tiempoUso;
-
+        
         row.appendChild(cell1);
         row.appendChild(cell2);
         row.appendChild(cell3);
         row.appendChild(cell4);
+        let costo = material.cantidad * material.costo * material.tiempoUso || 0;
         if(tipo!="Material" && tipo!="Herramienta"){  
             row.appendChild(cell5);
+            costo = material.cantidad * material.costo;  
         }
+
 
         tabla.appendChild(row);
     }
@@ -228,4 +229,16 @@ async function agregar() {
         alerta("Seleccione un proyecto para continuar");
 
     }
+}
+
+function editarPresupuesto(tipo) {
+    
+    const form3 = document.getElementById("tiempo");
+
+    if (tipo === "Herramienta" || tipo === "Material") {
+        form3.classList.add("class", "visually-hidden");
+    }else{
+        form3.setAttribute("class", "form-outline mb-4");
+    }
+
 }
