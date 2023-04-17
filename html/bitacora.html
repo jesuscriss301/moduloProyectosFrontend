@@ -11,14 +11,17 @@
 
   </head>
 <body onload="carga()">
+  <!--
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
+  -->
   <!-- barra de navegaciòn-->
   <div class="section">
     <nav class="navbar navbar-expand-lg bg-body-secondary" >
       <a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
       <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
         <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
-        <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
+        <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+         aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText" >
@@ -61,12 +64,16 @@
         <td id="nombreTarea" scope="col"></th>
       </tr>
 			<tr>
-			  <th rowspan="2" scope="row">Responsable:</th>
-			  <td rowspan="2" id="responsable"></td>
+			  <th scope="row">Responsable:</th>
+			  <td id="responsable"></td>
 			  <th scope="row">Fecha inicio:</td>
         <td id="fechaInicio"></td>
       </tr>
       <tr>
+        <th>actualizar tarea:</th>
+        <td><button onclick="actualizarform()" class="btn btn-success" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"><i class="bi bi-arrow-clockwise"></i> actualizar</button></td>
         <th>Fecha final:</th>
         <td id="fechaFinal"></td>
       </tr>
@@ -110,7 +117,53 @@
     <tbody id="tablaBitacora">
     </tbody>
   </table>
-
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Actualizar Tarea</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="visually-hidden" id="liveAlertPlaceholder">
+      <div id="alerta" class="alert alert-danger" role="alert">
+      </div>
+    </div>
+    <form id="actualizarTarea">
+      <!-- Nombre input -->
+      <div class="form-outline mb-4">
+        <input type="text" class="form-control" placeholder="nombre que se describa la tarea de forma breve"/>
+        <label class="form-label">Nombre de Tarea</label>
+      </div>
+      <!-- textArea input -->
+      <div class="form-outline mb-4">
+          <textarea class="form-control" placeholder="escribe una descripción de en que consiste la tarea" ></textarea>
+          <label for="floatingTextarea">Descripción</label>
+      </div>
+      <div class="form-outline mb-4">
+        <input type="date" class="form-control" placeholder="fecha de planeada para el inicio de la tarea">
+        <label class="form-label" >Fecha inicio programadas </label>
+      </div>
+      <div class="form-outline mb-4">
+        <input type="date" class="form-control" placeholder="fecha de planeada para el fin de la tarea">
+        <label class="form-label" >Fecha final programadas</label>
+      </div>
+      <div class="form-outline mb-4">
+        <input type="date" class="form-control" placeholder="fecha de inicio real de la tarea">
+        <label class="form-label" >Fecha inicio ejecutdas</label>
+      </div>
+      <div class="form-outline mb-4">
+        <input type="date" class="form-control" placeholder="fecha de fin real de la tarea">
+        <label class="form-label" >Fecha final ejecutdas</label>
+      </div>
+      
+      <!-- Botones de cancelar y aceptar -->
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-success d-flex align-items-center m-1" type="button"
+          onclick="actualizarTarea()">Aceptar</button>
+      </div>
+    </form>
+  </div>
+</div>
   <footer class="bg-body-secondary py-3  bottom-0 start-50 " style="padding: 0; margin: 0;">
     <div class="container">
       <div class="row">
