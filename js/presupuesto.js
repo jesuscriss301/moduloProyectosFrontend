@@ -146,6 +146,16 @@ async function fetchData(tipo, presupuesto) {
     }
 }
 
+async function personalMaterial(tipo) {
+    if (tipo === "Personal") {
+        const response = await fetch(`${URL_BASE}/personals`);
+        return await response.json();
+    } else {
+        const response = await fetch(`${URL_BASE}/materials/tipo/${tipo}`);
+        return await response.json();
+    }
+}
+
 function updateUI(tipo, data) {
     const tabla = document.getElementById(`${tipo}table`);
     tabla.innerHTML = "";
@@ -161,7 +171,7 @@ function updateUI(tipo, data) {
         cell1.textContent = tipo === "Personal" ? material.idPersonal.id : material.idMaterial.idProducto;
 
         const cell2 = document.createElement("td");
-        cell2.textContent = tipo === "Personal" ? material.idPersonal.cargo : material.idMaterial.idProducto;
+        cell2.textContent = tipo === "Personal" ? material.idPersonal.idCargo : material.idMaterial.idProducto;
 
         const cell3 = document.createElement("td");
         cell3.textContent = material.cantidad;
@@ -210,7 +220,41 @@ async function agregar() {
             "tiempoUso": parseInt(form[3].value)
         }
         
-        const response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
+        let response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(nuevo),
+        });
+        if (response.status !== 200) {
+            response = agregarPersonal(a);
+        }
+        const data = await response.json();
+        cargarItems(presupuesto);
+        return data;
+    } else {
+        alerta("Seleccione un proyecto para continuar");
+
+    }
+}
+
+async function agregarPersonal(a) {
+
+    const form = document.getElementById("agregarPresupuesto");
+
+        let nuevo = {"id":{
+            "idPresupuesto":a,
+            "idPersonal":parseInt(form[0].value)
+        },
+        "idPresupuesto":{"id":a},
+        "idPersonal":{"id":parseInt(form[0].value)},
+        "cantidad": parseInt(form[2].value),
+        "costo": parseInt(form[1].value),
+        "tiempoUso": parseInt(form[3].value)
+    }
+        
+        const response = await fetch(`${URL_BASE}/presupuestoPersonals`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -222,18 +266,30 @@ async function agregar() {
                 + "de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
             return null;
         }
-        const data = await response.json();
-        cargarItems(presupuesto);
-        return data;
-    } else {
-        alerta("Seleccione un proyecto para continuar");
-
-    }
+        return response;
+    
 }
 
-function editarPresupuesto(tipo) {
+async function editarPresupuesto(tipo) {
     
     const form3 = document.getElementById("tiempo");
+    const form =document.getElementById("agregarPresupuesto");
+
+    const data =await personalMaterial(tipo);
+    form[0].innerHTML = "";
+    for (let i in data) {
+
+        const cell = document.createElement("option");
+        if(tipo === "Personal"){
+            cell.text = data[i].idCargo}
+        else{
+            cell.text = data[i].idProducto;
+        }
+        cell.value = data.id;
+
+        form[0].add(cell)
+    }
+    
 
     if (tipo === "Herramienta" || tipo === "Material") {
         form3.classList.add("class", "visually-hidden");
