@@ -52,7 +52,7 @@ const asignarResponsable = async (nuevoProyecto) => {
   const responsable = {
     "id":{
         "proyecto":nuevoProyecto.id,
-        "persona":1,
+        "persona":2,
         "etapa":1},
     "fecha":fecha()
   };

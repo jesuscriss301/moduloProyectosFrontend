@@ -43,9 +43,12 @@ async function tablaInfo(data) {
 }
 
 async function getResponsablesTarea(idTarea) {
-    const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
-    const data = await response.json();
-    return data.map(item => item.id.idPersona).join(", ");
+  const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
+  const data = await response.json();
+  const arreglo = data.map(item => item.id.idPersona).join(", ");
+  const nombres = await nombreResponsable(arreglo);
+  return nombres;
+
 }
 
 function cargartareas(proyecto) {
@@ -153,3 +156,47 @@ async function tablasBitacoras(idTarea) {
     cell.appendChild(img);
     return cell;
   }
+
+async function actualizarform() {
+  const urltarea = new URLSearchParams(window.location.search);
+  let id = urltarea.get('idTarea');
+  const responsetarea = await fetch(`${URL_BASE}/tareas/${id}`);
+  const tarea = await responsetarea.json();
+  const form = document.getElementById("actualizarTarea");
+
+  form[0].value = tarea.nombreTarea;
+  form[1].value = tarea.descripcionTarea;
+  form[2].value = tarea.fechaInicio;
+  form[3].value = tarea.fechaFinal;
+  form[4].value = tarea.fechaInicioReal;
+  form[5].value = tarea.fechaFinalReal;
+}
+
+const actualizarTarea = async () => {
+  const urltarea = new URLSearchParams(window.location.search);
+  let id = urltarea.get('idTarea');
+  const responsetarea = await fetch(`${URL_BASE}/tareas/${id}`);
+  const tarea = await responsetarea.json();
+  const form = document.getElementById("actualizarTarea");
+  const actualizar = {
+    id: tarea.id,
+    idEtapaProyecto: { id: tarea.idEtapaProyecto.id },
+    nombreTarea: form[0].value,
+    descripcionTarea: form[1].value,
+    fechaInicio: form[2].value,
+    fechaFinal: form[3].value,
+    fechaInicioReal: form[4].value,
+    fechaFinalReal: form[5].value,
+  };
+
+  const response = await fetch(`${URL_BASE}/tareas/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(actualizar),
+  });
+  const data = await response.json();
+  location.reload();
+  return data;
+}
