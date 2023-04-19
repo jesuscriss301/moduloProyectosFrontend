@@ -23,10 +23,14 @@ async function Tabla(busqueda) {
 }
 
 async function proyectos(busqueda) {
-  fetch(`${URL_BASE}/proyectos/tablaProyectos/${busqueda}/`)
-    .then(response => response.json())
-    .then(data => drawTable(data))
-    .catch(error => console.log(error));
+  const response = await fetch(`${URL_BASE}/proyectos/tablaProyectos/${busqueda}/`)
+  const json = await response.json();
+  for (let index = 1; index < json.length; index++) {
+    const element = json[index][2];
+    json[index][2]=await nombreResponsable(element);
+  }
+  
+  drawTable(json);
 }
 
 function drawTable(info) {
