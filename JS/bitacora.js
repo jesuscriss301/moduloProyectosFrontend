@@ -128,14 +128,44 @@ async function tablasBitacoras(idTarea) {
     cell4.textContent = bitacora.observacionBitacora;
   
     const cell5 = createBitacoraImageCell(bitacora.fileFoto);
+
+    const cell6 = document.createElement("td");
+    const iconEdit = document.createElement("i");
+    const boton = document.createElement("button");
+    iconEdit.setAttribute("class" ,"bi bi-pencil-square");
+    boton.setAttribute("onclick", `actualizarBitacora(${bitacora.id})`);
+    boton.setAttribute("class", "btn btn-success");
+   
+    boton.appendChild(iconEdit);
+    cell6.appendChild(boton);
   
     //row.appendChild(cell1);
     row.appendChild(cell2);
     row.appendChild(cell3);
     row.appendChild(cell4);
     row.appendChild(cell5);
-  
+    row.appendChild(cell6);
     return row;
+  }
+
+  function actualizarBitacora(bitacora) {
+
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryParam = urlParams.get('nombreProyecto');
+      const queryParamTarea = urlParams.get('idTarea');
+      let a= parseInt(queryParam);
+      let b= parseInt(queryParamTarea);
+      let c= parseInt(bitacora);
+      if (isNaN(a)&&isNaN(b)&&isNaN(c)) {
+      alerta("Error, de informacion seleccionada"); 
+      }else{
+        window.location.href = `editBitacora.html?nombreProyecto=${a}&idTarea=${b}&idbitacora=${c}`;
+      }
+    } catch (error) {
+      alerta("Error, de informacion seleccionada")
+    }
+    
   }
   
   function formatDate(date) {
