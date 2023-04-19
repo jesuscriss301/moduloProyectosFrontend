@@ -3,7 +3,6 @@ const URL_BASE = "http://sistemas:8080";
 function cargar() {
   const urlParams = new URLSearchParams(window.location.search);
   let queryParam = urlParams.get('nombreProyecto');
-  //console.log(queryParam);
   cargarProyectos();
   if (queryParam != null && queryParam != "") {
     cargarProyecto(queryParam);
@@ -92,7 +91,6 @@ async function cargarProyectos() {
 }
 
 function tareasEtapa(idProyecto) {
-  //console.log(idProyecto);
   for (let i = 1; i <= 5; i++) {
     etapas(idProyecto, i);
   }
@@ -184,3 +182,50 @@ function getEstadoTarea(tarea) {
     return "culminado";
   }
 }
+
+async function actualizarform() {
+  const urltarea = new URLSearchParams(window.location.search);
+  let id = urltarea.get('nombreProyecto');
+  const responsetarea = await fetch(`${URL_BASE}/proyectos/${id}`);
+  const proyecto = await responsetarea.json();
+  const form = document.getElementById("formProyecto");
+
+  form[0].value = proyecto.nombreProyecto;
+  form[1].value = proyecto.idTipoProyecto.id;
+  form[2].value = proyecto.descripcionProyecto;
+  form[3].value = proyecto.idPrioridad.id;
+  form[4].value = proyecto.justificacion;
+  form[5].value = proyecto.objetivoGeneral;
+  form[6].value = proyecto.objetivoEspecifico;
+  form[7].value = proyecto.ubicacion;
+
+}
+
+const actualizarProyecto = async () => {
+  const urltarea = new URLSearchParams(window.location.search);
+  let id = urltarea.get('nombreProyecto');
+  const form = document.getElementById("formProyecto");
+
+  const actualizar = {
+    "id":parseInt(id),
+    "idTipoProyecto":{"id":form[1].value},
+    "nombreProyecto":form[0].value,
+    "descripcionProyecto":form[2].value,
+    "idPrioridad":{"id":form[3].value},
+    "justificacion":form[4].value === "" ? null : form[4].value,
+    "objetivoGeneral":form[5].value,
+    "objetivoEspecifico":form[6].value === "" ? null : form[4].value,
+    "ubicacion":form[7].value
+    };
+
+  const response = await fetch(`${URL_BASE}/proyectos/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(actualizar),
+  });
+  const data = await response.json();
+  location.reload();
+  return data;
+};
