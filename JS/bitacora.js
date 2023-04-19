@@ -43,9 +43,12 @@ async function tablaInfo(data) {
 }
 
 async function getResponsablesTarea(idTarea) {
-    const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
-    const data = await response.json();
-    return data.map(item => item.id.idPersona).join(", ");
+  const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
+  const data = await response.json();
+  const arreglo = data.map(item => item.id.idPersona).join(", ");
+  const nombres = await nombreResponsable(arreglo);
+  return nombres;
+
 }
 
 function cargartareas(proyecto) {
