@@ -87,6 +87,15 @@
 						onclick="direccion('presupuesto.html')">Presupuesto</button>
 				</td>
 			</tr>
+			<tr>
+				<th scope="row">Actualizar proyecto:</th>
+				<td>
+					<button onclick="actualizarform()" class="btn btn-success" type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
+							class="bi bi-arrow-clockwise"></i> actualizar</button>
+				</td>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 
@@ -96,9 +105,7 @@
 		<button class="btn btn-outline-secondary" onclick="direccion('proyectos.html')">Volver</button>
 		<!--Encabezado pagina-->
 		<h3 style="margin: 0 auto;">Tareas</h3>
-		<button onclick="actualizarform()" class="btn btn-success" type="button" data-bs-toggle="offcanvas"
-			data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
-				class="bi bi-arrow-clockwise"></i> actualizar</button></td>
+
 	</div>
 	<!--barra de busqueda y menu desplegable (filtro)-->
 	<div class="dropdown-center m-3">
@@ -368,7 +375,8 @@
 					<label class="form-label" for="prioridad">Ubicacion</label>
 				</div>
 				<nav class="d-flex justify-content-between">
-					<button class="btn btn-success d-flex align-items-center m-1" type="button" onclick="actualizarProyecto()">
+					<button class="btn btn-success d-flex align-items-center m-1" type="button"
+						onclick="actualizarProyecto()">
 						Aceptar
 					</button>
 				</nav>
