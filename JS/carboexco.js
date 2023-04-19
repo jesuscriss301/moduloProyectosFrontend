@@ -79,10 +79,11 @@ function direccionbitacoras(direccion) {
     }
 }
 
-async function nombreResponsable(id) {
+async function nombreResponsable(id,responsable) {
 
+  console.log(id);
   const response = await fetch(`${URL_RESPONSABLE}/personas/${id}`);
-  const json =await response.json();
+  const json =await response.text();
   return json;
 }
   

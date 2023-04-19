@@ -25,14 +25,12 @@ async function responsable(proyecto) {
 
   const responsable = document.getElementById("responsable");
 
-  fetch(`${URL_BASE}/proyectos/responsable/${proyecto}`)
-    .then(response => response.json())
-    .then(data => {
-      //const idPersonas = data.map(item => item.id.persona);
-      //const rta = idPersonas.join(", ");
-      responsable.textContent = data;
-    })
-    .catch(error => console.log(error));
+  const response = await fetch(`${URL_BASE}/proyectos/responsable/${proyecto}`)
+  const data = await  response.json();
+  const nombres = await nombreResponsable(data,responsable);
+
+  responsable.textContent = nombres;
+
 }
 
 function tablaInfo(data) {
@@ -165,7 +163,10 @@ async function etapas(idProyecto, idEtapa) {
 async function getResponsablesTarea(idTarea) {
   const response = await fetch(`${URL_BASE}/tareaPersonas/tareas/${idTarea}`);
   const data = await response.json();
-  return data.map(item => item.id.idPersona).join(", ");
+  const arreglo = data.map(item => item.id.idPersona).join(", ");
+  const nombres = await nombreResponsable(arreglo);
+  return nombres;
+
 }
 
 function getFechasTarea(tarea) {
