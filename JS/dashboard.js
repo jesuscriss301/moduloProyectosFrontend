@@ -159,7 +159,7 @@ function DiagramaGannt(number) {
     }
 
     var options = {
-      height: "100%",
+      height: "110%",
       gantt: {
         trackHeight: 30
       }

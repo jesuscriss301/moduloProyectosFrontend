@@ -132,4 +132,3 @@ const addTarea = async () => {
   
   // Hacer alguna acción adicional (por ejemplo, redireccionar a otra página)
 };
-
