@@ -10,46 +10,75 @@ async function onSubmitForm(ev) {
   const urlParams = new URLSearchParams(window.location.search);
   const queryParam = urlParams.get('nombreProyecto');
   const queryParamTarea = urlParams.get('idTarea');
-  const queryParamBitacora = urlParams.get('idBitacora');
+  const queryParamBitacora = urlParams.get('idbitacora');
 
-  if (queryParam === "" || queryParam === null ) {
+  if (queryParam === "" || queryParam === null) {
     return;
   }
+  if (queryParamBitacora != "" && queryParamBitacora != null) {
+    const form = document.getElementById("agregarBitacora");
+    const response = await fetch(`${URL_BASE}/bitacoras/${queryParamBitacora}`);
+    const data = await response.json();
+    const nuevaBitacora = {
+      "id": data.id,
+      "idTarea": { "id": data.idTarea.id },
+      "descripcionBitacora": form[0].value,
+      "observacionBitacora": form[2].value === "" ? null : form[2].value,
+      "fechaHora": new Date(form[1].value).toISOString(),
+      "fileFoto": data.fileFoto
+    };
+    const guardarCabios = await fetch(`${URL_BASE}/bitacoras/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nuevaBitacora),
+    });
+    const bitacora = await guardarCabios.json();
 
-  if (queryParamBitacora!="" && queryParamBitacora!=null) {
-    cargarinfo(queryParamBitacora);
+    if (guardarCabios.status !== 200) {
+      alerta("Error " + guardarCabios.status + " al guardar información. Revisa la conexión a internet y la disponibilidad de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
+      return null;
+    }
+    
+    if (!bitacora) {
+      return;
+    }
+
+    const archivo = form[3].files[0];
+      if (archivo != null) {
+    const oData = new FormData();
+    const newDate = new Date(form[1].value).toLocaleDateString("en-CA");
+
+    oData.append("file", archivo);
+    oData.append("ubicacion", "img");
+    oData.append("nombre", `(${bitacora})${newDate}`);
+    oData.append("fecha", newDate);
+
+    let idfoto = await uploadFile(oData);
+    let actualizacion = await uploadBitacora(bitacora, idfoto);
   }
-
-  const bitacora = await createBitacora(queryParamTarea);
-
-  if (!bitacora) {
-    return;
+    direccionbitacoras("bitacora.html")
   }
-
-  const archivo = form[3].files[0];
-  const oData = new FormData();
-  const newDate = new Date(form[1].value).toLocaleDateString("en-CA");
-
-  oData.append("file", archivo);
-  oData.append("ubicacion", "img");
-  oData.append("nombre", `(${bitacora})${newDate}`);
-  oData.append("fecha", newDate);
-
-  let idfoto = await uploadFile(oData);
-  let actualizacion =await uploadBitacora(bitacora, idfoto);
-  direccionbitacoras("bitacora.html")
-
 }
 
-async function cargarinfo(params) {
+async function cargarinfo() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const queryParamBitacora = urlParams.get('idbitacora');
+
+  if (queryParamBitacora != "" && queryParamBitacora != null) {
+
     const form = document.getElementById("agregarBitacora");
-    const response =  await fetch(`${URL_BASE}/bitacoras/${id}`);
-    const bitacora = response.json();
+    const response = await fetch(`${URL_BASE}/bitacoras/${queryParamBitacora}`);
+    const bitacora = await response.json();
     form[0].value = bitacora.descripcionBitacora;
-    form[1].value = bitacora.fechaHora;
+    let date =new Date(bitacora.fechaHora);
+    form[1].value = date.toISOString().slice(0,16);
     form[2].value = bitacora.observacionBitacora;
-    const img = form.getElementById("imagenBitacora");
+    const img = document.getElementById("imagenBitacora");
     img.setAttribute("src", `${URL_IMG}/files/view/${bitacora.fileFoto}`);
+
+  }
 }
 
 async function uploadBitacora(bitacora, idfoto){
@@ -64,7 +93,7 @@ async function createBitacora(queryParamTarea) {
   const nuevaBitacora = {
     "idTarea": {"id": parseInt(queryParamTarea)},
     "descripcionBitacora": form[0].value,
-    "observacionBitacora": form[2].value,
+    "observacionBitacora": form[2].value === "" ? null : form[2].value,
     "fechaHora": new Date(form[1].value).toISOString(),
     "fileFoto": 4
   };
@@ -80,7 +109,6 @@ async function createBitacora(queryParamTarea) {
     alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
     return null;
   }
-
   const data = await response.json();
   return data;
 }

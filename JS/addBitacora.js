@@ -22,16 +22,18 @@ async function onSubmitForm(ev) {
   }
 
   const archivo = form[3].files[0];
-  const oData = new FormData();
-  const newDate = new Date(form[1].value).toLocaleDateString("en-CA");
+  if (archivo != null) {
+    const oData = new FormData();
+    const newDate = new Date(form[1].value).toLocaleDateString("en-CA");
 
-  oData.append("file", archivo);
-  oData.append("ubicacion", "img");
-  oData.append("nombre", `(${bitacora})${newDate}`);
-  oData.append("fecha", newDate);
+    oData.append("file", archivo);
+    oData.append("ubicacion", "img");
+    oData.append("nombre", `(${bitacora})${newDate}`);
+    oData.append("fecha", newDate);
 
-  let idfoto = await uploadFile(oData);
-  let actualizacion =await uploadBitacora(bitacora, idfoto);
+    let idfoto = await uploadFile(oData);
+    let actualizacion = await uploadBitacora(bitacora, idfoto);
+  }
   direccionbitacoras("bitacora.html")
 
 }
@@ -48,7 +50,7 @@ async function createBitacora(queryParamTarea) {
   const nuevaBitacora = {
     "idTarea": {"id": parseInt(queryParamTarea)},
     "descripcionBitacora": form[0].value,
-    "observacionBitacora": form[2].value,
+    "observacionBitacora": form[2].value === "" ? null : form[2].value,
     "fechaHora": new Date(form[1].value).toISOString(),
     "fileFoto": 4
   };
