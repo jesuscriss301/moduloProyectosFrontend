@@ -89,30 +89,6 @@ async function uploadBitacora(bitacora, idfoto){
     return actuaizacion;
 }
 
-async function createBitacora(queryParamTarea) {
-  const nuevaBitacora = {
-    "idTarea": {"id": parseInt(queryParamTarea)},
-    "descripcionBitacora": form[0].value,
-    "observacionBitacora": form[2].value === "" ? null : form[2].value,
-    "fechaHora": new Date(form[1].value).toISOString(),
-    "fileFoto": 4
-  };
-  const response = await fetch(`${URL_BASE}/bitacoras`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(nuevaBitacora),
-  });
-
-  if (response.status !== 200) {
-    alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
-    return null;
-  }
-  const data = await response.json();
-  return data;
-}
-
 async function uploadFile(oData) {
   return new Promise((resolve, reject) => {
     const oReq = new XMLHttpRequest();
