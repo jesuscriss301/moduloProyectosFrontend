@@ -7,19 +7,24 @@ function cargar() {
         cargarProyecto(queryParam);
         cargarPresupuesto(queryParam);
     }
-
 }
 
-async function cargarCosto(presupuesto) {
-    const costo =fetch(`${URL_BASE}/presupuestos/costototal/${presupuesto}`);
+async function cargarProyecto(id) {
+    fetch(`${URL_BASE}/proyectos/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            tablaInfo(data);
+            responsable(data.id);
+            cargarPresupuestos(data.id);
+        })
+        .catch(error => console.log(error));
 }
 
 async function cargarPresupuesto(proyecto) {
 
-    fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
-        .then(response => response.json())
-        .then(data => cargarfiltro(data, proyecto))
-        .catch(error => console.log(error));
+    const response = await fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
+    const data = await response.json();
+    const filtro = cargarfiltro(data, proyecto);
 }
 
 function cargarfiltro(data, proyecto) {
@@ -42,65 +47,15 @@ function cargarfiltro(data, proyecto) {
     }
 }
 
-function desplegable(presupuesto, proyecto) {
-    const proyectoDropdown = document.getElementById("presupuestoButton");
-    proyectoDropdown.innerText = `${presupuesto}`;
+function tablaInfo(data) {
 
-    var currentHostname = window.location.hostname;
-    var currentPathname = window.location.pathname;
-    var currentSearch = window.location.search;
-    var currentHash = window.location.hash;
+    const codigo = document.getElementById("codigoProyecto");
+    const nombre = document.getElementById("nombreProyecto");
+    const tipo = document.getElementById("tipoProyecto");
 
-    const url = `${currentPathname}?nombreProyecto=${proyecto}&idPresupuesto=${presupuesto}`;
-    // redirigir a la página con la URL construida
-    window.location.href = url;
-
-}
-
-async function cargarProyecto(id) {
-    fetch(`${URL_BASE}/proyectos/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            tablaInfo(data);
-            responsable(data.id);
-            cargarPresupuestos(data.id);
-        })
-        .catch(error => console.log(error));
-}
-
-async function cargarPresupuestos(proyecto) {
-    const codigoPresupueso = document.getElementById("codigoPresupueso");
-    const costo = document.getElementById("costo");
-    const estado = document.getElementById("estado");
-    
-    await fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
-        .then(response => response.json())
-        .then(data => {
-            const urlParams = new URLSearchParams(window.location.search);
-            let presupuesto = urlParams.get('idPresupuesto');
-            let a = parseInt(presupuesto);
-            if (!isNaN(a)) {
-                cargarCosto(data[a].id);
-                cargarItems(data[a].id);
-                codigoPresupueso.textContent = data[a].id;
-                costo.textContent = "$"+data[a].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
-                estado.textContent = data[a].idEstado.nombreEstado;
-            } else {
-                if (data.length == 0) {
-                    alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se"
-                    +" ha encontrado ningún presupuesto asociado. ");
-                }
-                else {
-                    cargarCosto(data[0].id);
-                    cargarItems(data[0].id);
-                    codigoPresupueso.textContent = data[0].id;
-                    costo.textContent ="$"+data[0].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
-                    estado.textContent = data[0].idEstado.nombreEstado;
-                }
-            }
-
-        })
-        .catch(error => console.log(error));
+    codigo.textContent = data.id;
+    nombre.textContent = data.nombreProyecto;
+    tipo.textContent = data.idTipoProyecto.nombre;
 }
 
 async function responsable(proyecto) {
@@ -117,16 +72,40 @@ async function responsable(proyecto) {
         .catch(error => console.log(error));
 }
 
-function tablaInfo(data) {
+async function cargarPresupuestos(proyecto) {
+    const codigoPresupueso = document.getElementById("codigoPresupueso");
+    const costo = document.getElementById("costo");
+    const estado = document.getElementById("estado");
 
-    const codigo = document.getElementById("codigoProyecto");
-    const nombre = document.getElementById("nombreProyecto");
-    const tipo = document.getElementById("tipoProyecto");
+    const response = await fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
+    const data = await response.json();
 
-    codigo.textContent = data.id;
-    nombre.textContent = data.nombreProyecto;
-    tipo.textContent = data.idTipoProyecto.nombre;
+    const urlParams = new URLSearchParams(window.location.search);
+    let presupuesto = urlParams.get('idPresupuesto');
+    let a = parseInt(presupuesto);
+    if (!isNaN(a)) {
+        cargarCosto(data[a].id);
+        cargarItems(data[a].id);
+        codigoPresupueso.textContent = data[a].id;
+        costo.textContent = "$" + data[a].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
+        estado.textContent = data[a].idEstado.nombreEstado;
+    } else {
+        if (data.length == 0) {
+            alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se"
+                + " ha encontrado ningún presupuesto asociado. ");
+        }
+        else {
+            cargarCosto(data[0].id);
+            cargarItems(data[0].id);
+            codigoPresupueso.textContent = data[0].id;
+            costo.textContent = "$" + data[0].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
+            estado.textContent = data[0].idEstado.nombreEstado;
+        }
+    }
+}
 
+async function cargarCosto(presupuesto) {
+    const costo = fetch(`${URL_BASE}/presupuestos/costototal/${presupuesto}`);
 }
 
 async function cargarItems(presupuesto) {
@@ -134,6 +113,11 @@ async function cargarItems(presupuesto) {
     fila("Maquinaria", presupuesto);
     fila("Material", presupuesto);
     fila("Herramienta", presupuesto);
+}
+
+async function fila(tipo, presupuesto) {
+    const data = await fetchData(tipo, presupuesto);
+    updateUI(tipo, data);
 }
 
 async function fetchData(tipo, presupuesto) {
@@ -161,25 +145,25 @@ function updateUI(tipo, data) {
         cell1.textContent = tipo === "Personal" ? material.idPersonal.id : material.idMaterial.idProducto;
 
         const cell2 = document.createElement("td");
-        cell2.textContent = tipo === "Personal" ? material.idPersonal.cargo : material.idMaterial.idProducto;
+        cell2.textContent = tipo === "Personal" ? material.idPersonal.idCargo : material.idMaterial.idProducto;
 
         const cell3 = document.createElement("td");
         cell3.textContent = material.cantidad;
 
         const cell4 = document.createElement("td");
-        cell4.textContent = material.costo == null ? "$0" :  "$"+material.costo.toLocaleString();
+        cell4.textContent = material.costo == null ? "$0" : "$" + material.costo.toLocaleString();
 
         const cell5 = document.createElement("td");
         cell5.textContent = material.tiempoUso;
-        
+
         row.appendChild(cell1);
         row.appendChild(cell2);
         row.appendChild(cell3);
         row.appendChild(cell4);
         let costo = material.cantidad * material.costo * material.tiempoUso || 0;
-        if(tipo!="Material" && tipo!="Herramienta"){  
+        if (tipo != "Material" && tipo != "Herramienta") {
             row.appendChild(cell5);
-            costo = material.cantidad * material.costo;  
+            costo = material.cantidad * material.costo;
         }
 
 
@@ -187,10 +171,7 @@ function updateUI(tipo, data) {
     }
 }
 
-async function fila(tipo, presupuesto) {
-    const data = await fetchData(tipo, presupuesto);
-    updateUI(tipo, data);
-}
+
 
 async function agregar() {
     let presupuesto = document.getElementById("codigoPresupueso");
@@ -209,8 +190,8 @@ async function agregar() {
             "costo": parseInt(form[1].value),
             "tiempoUso": parseInt(form[3].value)
         }
-        
-        const response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
+
+        let response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -218,9 +199,7 @@ async function agregar() {
             body: JSON.stringify(nuevo),
         });
         if (response.status !== 200) {
-            alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad"
-                + "de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
-            return null;
+            response = agregarPersonal(a);
         }
         const data = await response.json();
         cargarItems(presupuesto);
@@ -231,14 +210,121 @@ async function agregar() {
     }
 }
 
-function editarPresupuesto(tipo) {
-    
+async function agregarPersonal(a) {
+
+    const form = document.getElementById("agregarPresupuesto");
+
+    let nuevo = {
+        "id": {
+            "idPresupuesto": a,
+            "idPersonal": parseInt(form[0].value)
+        },
+        "idPresupuesto": { "id": a },
+        "idPersonal": { "id": parseInt(form[0].value) },
+        "cantidad": parseInt(form[2].value),
+        "costo": parseInt(form[1].value),
+        "tiempoUso": parseInt(form[3].value)
+    }
+
+    const response = await fetch(`${URL_BASE}/presupuestoPersonals`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nuevo),
+    });
+    if (response.status !== 200) {
+        alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad"
+            + "de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
+        return null;
+    }
+    return response;
+
+}
+
+async function crearPresupuesto() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let proyecto = urlParams.get('nombreProyecto');
+    if (proyecto != null && proyecto != "") {
+
+        let nuevo = {
+            "idProyecto": { "id": parseInt(proyecto) },
+            "costoTotal": 0,
+            "idEstado": { "id": 2 }
+        }
+
+        let response = await fetch(`${URL_BASE}/presupuestos`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(nuevo),
+        });
+        if (response.status !== 200) {
+            response = agregarPersonal(a);
+        }
+        const data = await response.json();
+        cargarItems(presupuesto);
+
+        return data;
+    } else {
+        alerta("Seleccione un proyecto para continuar");
+
+    }
+}
+
+async function personalMaterial(tipo) {
+    if (tipo === "Personal") {
+        const response = await fetch(`${URL_BASE}/personals`);
+        return await response.json();
+    } else {
+        const response = await fetch(`${URL_BASE}/materials/tipo/${tipo}`);
+        return await response.json();
+    }
+}
+
+async function editarPresupuesto(tipo) {
+
     const form3 = document.getElementById("tiempo");
+    const form = document.getElementById("agregarPresupuesto");
+
+    const data = await personalMaterial(tipo);
+    form[0].innerHTML = "";
+    for (let i in data) {
+
+        const cell = document.createElement("option");
+        if (tipo === "Personal") {
+            cell.text = data[i].idCargo
+        }
+        else {
+            cell.text = data[i].idProducto;
+        }
+        cell.value = data.id;
+
+        form[0].add(cell)
+    }
+
 
     if (tipo === "Herramienta" || tipo === "Material") {
         form3.classList.add("class", "visually-hidden");
-    }else{
+    } else {
         form3.setAttribute("class", "form-outline mb-4");
     }
+
+}
+
+function desplegable(presupuesto, proyecto) {
+    const proyectoDropdown = document.getElementById("presupuestoButton");
+    proyectoDropdown.innerText = `${presupuesto}`;
+
+    var currentHostname = window.location.hostname;
+    var currentPathname = window.location.pathname;
+    var currentSearch = window.location.search;
+    var currentHash = window.location.hash;
+
+    const url = `${currentPathname}?nombreProyecto=${proyecto}&idPresupuesto=${presupuesto}`;
+    // redirigir a la página con la URL construida
+    window.location.href = url;
 
 }

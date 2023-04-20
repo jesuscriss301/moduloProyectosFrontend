@@ -1,86 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-        <title>Proyectos</title>
-        <link rel="stylesheet" href="../css/master.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <title>Proyectos</title>
+  <link rel="stylesheet" href="../css/master.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
 
 <body class="fondo">
-<section class="d-flex justify-content-center align-middlee p-3 " >
-      
-  <div class="card py-5 px-3" style="width: 35rem; ">
-    <h3 style=" text-align: center;">Crear proyecto</h3>
-    <div class="card-body">
-      <form id="formProyecto" action="proyectos.html">
-        <!-- Nombre input -->
-        <div class="form-outline mb-4">
-          <input type="text" id="nombreProyecto" class="form-control" placeholder="Ingresa un nombre breve que describa el proyecto." />
-          <label class="form-label" for="form1Example1">Nombre de proyecto</label>
-        </div>
-        <div class="form-outline mb-4">
-          <select id="tipo" class="form-control">
-            
-            <option value="0">Seleccionar tipo de proyecto</option>
-            <option value="1">Obras civiles</option>
-            <option value="2">Mantenimientos</option>
-            <option value="3">Reparación de hornos</option>
-          </select>
-          <label class="form-label" for="tipo">Tipo de proyecto</label>
-        </div>
-        <!-- textArea input -->
-        <div class="form-outline mb-4">
-          <textarea class="form-control" placeholder=" Describe en detalle en qué consiste el proyecto." id="descripcionProyecto"></textarea>
-          <label for="floatingTextarea">Descripción</label>
-        </div>
-        <div class="form-outline mb-4">
-          <select id="prioridad" class="form-control">
-            <option value="3">Baja</option>
-            <option value="2">Media</option>
-            <option value="1">Alta</option>            
-          </select>
-          <label class="form-label" for="prioridad">Prioridad</label>
-        </div>
-        <div class="form-outline mb-4">
-          <textarea class="form-control" placeholder="Escribe la justificación del proyecto."></textarea>
-          <label for="floatingTextarea">Justificaciòn</label>
-        </div>
-        <div class="form-outline mb-4">
-          <textarea class="form-control" placeholder="Describe el objetivo general del proyecto."></textarea>
-          <label for="floatingTextarea">Objetivo general</label>
-        </div>
-        <div class="form-outline mb-4">
-          <textarea class="form-control" placeholder="Escribe los objetivos específicos que se quieren alcanzar."></textarea>
-          <label for="floatingTextarea">Objetivo especifico</label>
-        </div>
-        <div class="form-outline mb-4">
-          <select id="Ubicacion" class="form-control">
-            <option value="Almacen">Almacen</option>
-            <option value="Baterias Nuevas">Baterias Nuevas</option>
-            <option value="Laboratorio">Laboratorio</option>
-            <option value="Molino">Molino</option>
-            <option value="Oficina">Oficina</option>
-            <option value="Patio 3">Patio 3</option>
-          </select>
-          <label class="form-label" for="prioridad">Ubicacion</label>
-        </div>
-        <nav class="d-flex justify-content-between">
-          <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button" onclick="direccion('proyectos.html')">
-          Cancelar
-          </button>
-          <button class="btn btn-success d-flex align-items-center m-1" type="button" onclick="addProyecto()">
-            Aceptar
-          </button>
-        </nav>
-      </form>
+  <section class="d-flex justify-content-center align-middlee p-3 ">
+
+    <div class="card py-5 px-3" style="width: 35rem; ">
+      <h3 style=" text-align: center;">Crear proyecto</h3>
+      <div class="card-body">
+        <form id="formProyecto" action="proyectos.html">
+          <!-- Nombre input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="nombreProyecto" class="form-control"
+              placeholder="Ingresa un nombre breve que describa el proyecto." />
+            <label class="form-label" for="form1Example1">Nombre de proyecto</label>
+          </div>
+          <div class="form-outline mb-4">
+            <select id="tipo" class="form-control">
+
+              <option value="0">Seleccionar tipo de proyecto</option>
+              <option value="1">Obras civiles</option>
+              <option value="2">Mantenimientos</option>
+              <option value="3">Reparación de hornos</option>
+            </select>
+            <label class="form-label" for="tipo">Tipo de proyecto</label>
+          </div>
+          <!-- textArea input -->
+          <div class="form-outline mb-4">
+            <textarea class="form-control" placeholder=" Describe en detalle en qué consiste el proyecto."
+              id="descripcionProyecto"></textarea>
+            <label for="floatingTextarea">Descripción</label>
+          </div>
+          <div class="form-outline mb-4">
+            <select id="prioridad" class="form-control">
+              <option value="3">Baja</option>
+              <option value="2">Media</option>
+              <option value="1">Alta</option>
+            </select>
+            <label class="form-label" for="prioridad">Prioridad</label>
+          </div>
+          <div class="form-outline mb-4">
+            <textarea class="form-control" placeholder="Escribe la justificación del proyecto."></textarea>
+            <label for="floatingTextarea">Justificaciòn</label>
+          </div>
+          <div class="form-outline mb-4">
+            <textarea class="form-control" placeholder="Describe el objetivo general del proyecto."></textarea>
+            <label for="floatingTextarea">Objetivo general</label>
+          </div>
+          <div class="form-outline mb-4">
+            <textarea class="form-control"
+              placeholder="Escribe los objetivos específicos que se quieren alcanzar."></textarea>
+            <label for="floatingTextarea">Objetivo especifico</label>
+          </div>
+          <div class="form-outline mb-4">
+            <select id="Ubicacion" class="form-control">
+              <option value="Almacen">Almacen</option>
+              <option value="Bascula">Bascula</option>
+              <option value="Bateria1">Bateria1</option>
+              <option value="Bateria2">Bateria2</option>
+              <option value="Bateria3">Bateria3</option>
+              <option value="Bateria4">Bateria4</option>
+              <option value="Bateria5">Bateria5</option>
+              <option value="Bateria6">Bateria6</option>
+              <option value="Bateria7">Bateria7</option>
+              <option value="Bateria8">Bateria8</option>
+              <option value="Bateria9">Bateria9</option>
+              <option value="Bateria10">Bateria10</option>
+              <option value="BateriaA">BateriaA</option>
+              <option value="BateriaB">BateriaB</option>
+              <option value="Chimeneas">Chimeneas</option>
+              <option value="Laboratorio">Laboratorio</option>
+              <option value="Molino de coque">Molino de coque</option>
+              <option value="Oficina">Oficina</option>
+              <option value="Parqueadero de motos">Parqueadero de motos</option>
+              <option value="Patio 3">Patio 3</option>
+              <option value="Patio campamento">Patio campamento</option>
+              <option value="Patio de cargue">Patio de cargue</option>
+              <option value="Patio de escombros">Patio de escombros</option>
+              <option value="Patio de finos">Patio de finos</option>
+              <option value="Patio de mezclas">Patio de mezclas</option>
+              <option value="Patio Eugenio">Patio Eugenio</option>
+              <option value="Patio Fensilven">Patio Fensilven</option>
+              <option value="Patio ladrillo">Patio ladrillo</option>
+              <option value="Patio Pinzon">Patio Pinzon</option>
+              <option value="Patio solera">Patio solera</option>
+              <option value="Porteria">Porteria</option>
+              <option value="Pozo subterraneo">Pozo subterraneo</option>
+              <option value="Proyectos">Proyectos</option>
+              <option value="Rio tanque pozo">Rio tanque pozo</option>
+              <option value="Taller">Taller</option>
+              <option value="Talud jarillon">Talud jarillon</option>
+              <option value="Tolva de finos">Tolva de finos</option>
+              <option value="Tolva del molino">Tolva del molino</option>
+              <option value="Vivero">Vivero</option>
+            </select>
+            <label class="form-label" for="prioridad">Ubicacion</label>
+          </div>
+          <nav class="d-flex justify-content-between">
+            <button class="btn btn-danger d-flex align-content-lg-end m-1" type="button"
+              onclick="direccion('proyectos.html')">
+              Cancelar
+            </button>
+            <button class="btn btn-success d-flex align-items-center m-1" type="button" onclick="addProyecto()">
+              Aceptar
+            </button>
+          </nav>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
-<script src="../JS/addProyecto.js"></script>
+  </section>
+  <script src="../JS/addProyecto.js"></script>
 </body>
+
 </html>
