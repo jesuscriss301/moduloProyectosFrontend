@@ -11,7 +11,7 @@ function cargar() {
 }
 
 async function cargarCosto(presupuesto) {
-    const costo =fetch(`${URL_BASE}/presupuestos/costototal/${presupuesto}`);
+    const costo = fetch(`${URL_BASE}/presupuestos/costototal/${presupuesto}`);
 }
 
 async function cargarPresupuesto(proyecto) {
@@ -72,7 +72,7 @@ async function cargarPresupuestos(proyecto) {
     const codigoPresupueso = document.getElementById("codigoPresupueso");
     const costo = document.getElementById("costo");
     const estado = document.getElementById("estado");
-    
+
     await fetch(`${URL_BASE}/presupuestos/proyecto/${proyecto}`)
         .then(response => response.json())
         .then(data => {
@@ -83,18 +83,18 @@ async function cargarPresupuestos(proyecto) {
                 cargarCosto(data[a].id);
                 cargarItems(data[a].id);
                 codigoPresupueso.textContent = data[a].id;
-                costo.textContent = "$"+data[a].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
+                costo.textContent = "$" + data[a].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
                 estado.textContent = data[a].idEstado.nombreEstado;
             } else {
                 if (data.length == 0) {
                     alertaPermanente("Lo siento, pero no se puede continuar con el proyecto en este momento, ya que no se"
-                    +" ha encontrado ningún presupuesto asociado. ");
+                        + " ha encontrado ningún presupuesto asociado. ");
                 }
                 else {
                     cargarCosto(data[0].id);
                     cargarItems(data[0].id);
                     codigoPresupueso.textContent = data[0].id;
-                    costo.textContent ="$"+data[0].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
+                    costo.textContent = "$" + data[0].costoTotal.toLocaleString('es-ES', { maximumFractionDigits: 0 });
                     estado.textContent = data[0].idEstado.nombreEstado;
                 }
             }
@@ -177,19 +177,19 @@ function updateUI(tipo, data) {
         cell3.textContent = material.cantidad;
 
         const cell4 = document.createElement("td");
-        cell4.textContent = material.costo == null ? "$0" :  "$"+material.costo.toLocaleString();
+        cell4.textContent = material.costo == null ? "$0" : "$" + material.costo.toLocaleString();
 
         const cell5 = document.createElement("td");
         cell5.textContent = material.tiempoUso;
-        
+
         row.appendChild(cell1);
         row.appendChild(cell2);
         row.appendChild(cell3);
         row.appendChild(cell4);
         let costo = material.cantidad * material.costo * material.tiempoUso || 0;
-        if(tipo!="Material" && tipo!="Herramienta"){  
+        if (tipo != "Material" && tipo != "Herramienta") {
             row.appendChild(cell5);
-            costo = material.cantidad * material.costo;  
+            costo = material.cantidad * material.costo;
         }
 
 
@@ -219,7 +219,7 @@ async function agregar() {
             "costo": parseInt(form[1].value),
             "tiempoUso": parseInt(form[3].value)
         }
-        
+
         let response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
             method: "POST",
             headers: {
@@ -243,18 +243,77 @@ async function agregarPersonal(a) {
 
     const form = document.getElementById("agregarPresupuesto");
 
-        let nuevo = {"id":{
-            "idPresupuesto":a,
-            "idPersonal":parseInt(form[0].value)
+    let nuevo = {
+        "id": {
+            "idPresupuesto": a,
+            "idPersonal": parseInt(form[0].value)
         },
-        "idPresupuesto":{"id":a},
-        "idPersonal":{"id":parseInt(form[0].value)},
+        "idPresupuesto": { "id": a },
+        "idPersonal": { "id": parseInt(form[0].value) },
         "cantidad": parseInt(form[2].value),
         "costo": parseInt(form[1].value),
         "tiempoUso": parseInt(form[3].value)
     }
-        
-        const response = await fetch(`${URL_BASE}/presupuestoPersonals`, {
+
+    const response = await fetch(`${URL_BASE}/presupuestoPersonals`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nuevo),
+    });
+    if (response.status !== 200) {
+        alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad"
+            + "de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
+        return null;
+    }
+    return response;
+
+}
+
+async function editarPresupuesto(tipo) {
+
+    const form3 = document.getElementById("tiempo");
+    const form = document.getElementById("agregarPresupuesto");
+
+    const data = await personalMaterial(tipo);
+    form[0].innerHTML = "";
+    for (let i in data) {
+
+        const cell = document.createElement("option");
+        if (tipo === "Personal") {
+            cell.text = data[i].idCargo
+        }
+        else {
+            cell.text = data[i].idProducto;
+        }
+        cell.value = data.id;
+
+        form[0].add(cell)
+    }
+
+
+    if (tipo === "Herramienta" || tipo === "Material") {
+        form3.classList.add("class", "visually-hidden");
+    } else {
+        form3.setAttribute("class", "form-outline mb-4");
+    }
+
+}
+
+async function crearPresupuesto() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let proyecto = urlParams.get('nombreProyecto');
+    if (proyecto != null && proyecto != "") {
+
+        let nuevo = {
+            "idProyecto": { "id": parseInt(proyecto) },
+            "costoTotal": 0,
+            "idEstado": { "id": 2 }
+        }
+
+        let response = await fetch(`${URL_BASE}/presupuestos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -262,39 +321,14 @@ async function agregarPersonal(a) {
             body: JSON.stringify(nuevo),
         });
         if (response.status !== 200) {
-            alerta("Error " + response.status + " al guardar información. Revisa la conexión a internet y la disponibilidad"
-                + "de espacio en tu dispositivo de almacenamiento. Si el problema continúa, contacta al soporte técnico.");
-            return null;
+            response = agregarPersonal(a);
         }
-        return response;
-    
-}
+        const data = await response.json();
+        cargarItems(presupuesto);
+        
+        return data;
+    }else {
+        alerta("Seleccione un proyecto para continuar");
 
-async function editarPresupuesto(tipo) {
-    
-    const form3 = document.getElementById("tiempo");
-    const form =document.getElementById("agregarPresupuesto");
-
-    const data =await personalMaterial(tipo);
-    form[0].innerHTML = "";
-    for (let i in data) {
-
-        const cell = document.createElement("option");
-        if(tipo === "Personal"){
-            cell.text = data[i].idCargo}
-        else{
-            cell.text = data[i].idProducto;
-        }
-        cell.value = data.id;
-
-        form[0].add(cell)
     }
-    
-
-    if (tipo === "Herramienta" || tipo === "Material") {
-        form3.classList.add("class", "visually-hidden");
-    }else{
-        form3.setAttribute("class", "form-outline mb-4");
-    }
-
 }
