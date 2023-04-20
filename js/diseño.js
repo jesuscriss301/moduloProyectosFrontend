@@ -63,17 +63,17 @@ async function cargardiseno(proyecto) {
 }
 
 async function responsable(proyecto) {
-        
+
     const responsable = document.getElementById("responsable");
 
-    fetch(`${URL_BASE}/proyectoPersonas/proyecto/${proyecto}/2`)
-    .then(response => response.json())
-    .then(data => {
-        const idPersonas = data.map(item => item.id.persona);
-        const rta = idPersonas.join(", ");
-        responsable.textContent = rta;
-    })
-    .catch(error => console.log(error));
+    const response = await fetch(`${URL_BASE}/proyectoPersonas/proyecto/${proyecto}/2`);
+    const data = await response.json();
+
+    const idPersonas = data.map(item => item.id.persona);
+    const rta = idPersonas.join(", ");
+    const nombres = await nombreResponsable(rta);
+    responsable.textContent = nombres;
+
 }
 
 function tablaInfo(data) {
