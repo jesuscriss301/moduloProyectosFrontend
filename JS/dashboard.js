@@ -84,7 +84,7 @@ function TablaInform() {
 
     for (let index = 1; index < json.length; index++) {
       const element = json[index][1];
-      json[index][1]=await nombreResponsable(element);
+      json[index][1]=await nombreResponsable(element) || element;
     }
     
     drawTable(json);
