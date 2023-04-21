@@ -1,5 +1,6 @@
 const URL_BASE = "http://sistemas:8080";
 
+
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);
     let queryParam = urlParams.get('nombreProyecto');
@@ -62,14 +63,14 @@ async function responsable(proyecto) {
 
     const responsable = document.getElementById("responsable");
 
-    fetch(`${URL_BASE}/proyectoPersonas/proyecto/${proyecto}/3`)
-        .then(response => response.json())
-        .then(data => {
-            const idPersonas = data.map(item => item.id.persona);
-            const rta = idPersonas.join(", ");
-            responsable.textContent = rta;
-        })
-        .catch(error => console.log(error));
+    const response = await fetch(`${URL_BASE}/proyectoPersonas/proyecto/${proyecto}/3`);
+    const data = await response.json();
+
+    const idPersonas = data.map(item => item.id.persona);
+    const rta = idPersonas.join(", ");
+    const nombres = await nombreResponsable(rta);
+    responsable.textContent = nombres;
+
 }
 
 async function cargarPresupuestos(proyecto) {
@@ -170,8 +171,6 @@ function updateUI(tipo, data) {
         tabla.appendChild(row);
     }
 }
-
-
 
 async function agregar() {
     let presupuesto = document.getElementById("codigoPresupueso");
@@ -276,7 +275,7 @@ async function crearPresupuesto() {
 
 async function personalMaterial(tipo) {
     if (tipo === "Personal") {
-        const response = await fetch(`${URL_BASE}/personals`);
+        const response = await fetch(`${URL_RESPONSABLE}/personas`);
         return await response.json();
     } else {
         const response = await fetch(`${URL_BASE}/materials/tipo/${tipo}`);
@@ -295,7 +294,8 @@ async function editarPresupuesto(tipo) {
 
         const cell = document.createElement("option");
         if (tipo === "Personal") {
-            cell.text = data[i].idCargo
+
+            cell.text = data[i].idCargo.nombre;
         }
         else {
             cell.text = data[i].idProducto;
@@ -304,7 +304,6 @@ async function editarPresupuesto(tipo) {
 
         form[0].add(cell)
     }
-
 
     if (tipo === "Herramienta" || tipo === "Material") {
         form3.classList.add("class", "visually-hidden");

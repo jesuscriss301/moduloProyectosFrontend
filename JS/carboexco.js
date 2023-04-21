@@ -1,4 +1,5 @@
 const URL_RESPONSABLE = "http://sistemas:8083";
+
 function direccion(direccion) {
     try {
       const urlParams = new URLSearchParams(window.location.search);
@@ -83,6 +84,9 @@ async function nombreResponsable(id) {
 
   const response = await fetch(`${URL_RESPONSABLE}/personas/${id}`);
   const json =await response.text();
+  if (response.status!=200) {
+    return null;
+  }
   return json;
 }
   
