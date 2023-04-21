@@ -1,4 +1,5 @@
 const URL_BASE = "http://sistemas:8080";
+URL_RESPONSABLE = "http://sistemas:8083";
 
 
 function cargar() {
@@ -131,7 +132,15 @@ async function fetchData(tipo, presupuesto) {
     }
 }
 
-function updateUI(tipo, data) {
+async function cargoPersonal(id){
+
+    const response = await fetch(`${URL_RESPONSABLE}/cargos/${id}`);
+    const data = await response.json();
+    console.log(data);
+    return data;
+}
+
+async function updateUI(tipo, data) {
     const tabla = document.getElementById(`${tipo}table`);
     tabla.innerHTML = "";
 
@@ -143,10 +152,17 @@ function updateUI(tipo, data) {
         const row = document.createElement("tr");
 
         const cell1 = document.createElement("td");
-        cell1.textContent = tipo === "Personal" ? material.idPersonal.id : material.idMaterial.idProducto;
+        cell1.textContent = tipo === "Personal" ? material.id.idPersonal : material.idMaterial.idProducto;
 
         const cell2 = document.createElement("td");
-        cell2.textContent = tipo === "Personal" ? material.idPersonal.idCargo : material.idMaterial.idProducto;
+        if(tipo === "Personal"){
+            let  cargo = await cargoPersonal(material.id.idPersonal);
+            console.log(cargo);
+            cell2.textContent = cargo.nombre;
+        }
+        else{
+            cell2.textContent =material.idMaterial.idProducto;
+        }
 
         const cell3 = document.createElement("td");
         cell3.textContent = material.cantidad;
@@ -167,7 +183,6 @@ function updateUI(tipo, data) {
             costo = material.cantidad * material.costo;
         }
 
-
         tabla.appendChild(row);
     }
 }
@@ -177,29 +192,32 @@ async function agregar() {
     let a = parseInt(presupuesto.textContent);
     if (!isNaN(a)) {
         const form = document.getElementById("agregarPresupuesto");
+        const tipo = form.getAttribute('data-id');
 
-        let nuevo = {
-            "id": {
-                "idPresupuesto": a,
-                "idMaterial": parseInt(form[0].value)
-            },
-            "idPresupuesto": { "id": a },
-            "idMaterial": { "id": parseInt(form[0].value) },
-            "cantidad": parseInt(form[2].value),
-            "costo": parseInt(form[1].value),
-            "tiempoUso": parseInt(form[3].value)
+        if (tipo === "Personal") {
+            const response = await agregarPersonal(a);
+        } else {
+            let nuevo = {
+                "id": {
+                    "idPresupuesto": a,
+                    "idMaterial": parseInt(form[0].value)
+                },
+                "idPresupuesto": { "id": a },
+                "idMaterial": { "id": parseInt(form[0].value) },
+                "cantidad": parseInt(form[2].value),
+                "costo": parseInt(form[1].value),
+                "tiempoUso": parseInt(form[3].value)
+            }
+
+            let response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(nuevo),
+            });
         }
 
-        let response = await fetch(`${URL_BASE}/presupuestoMaterials`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(nuevo),
-        });
-        if (response.status !== 200) {
-            response = agregarPersonal(a);
-        }
         const data = await response.json();
         cargarItems(presupuesto);
         return data;
@@ -275,7 +293,7 @@ async function crearPresupuesto() {
 
 async function personalMaterial(tipo) {
     if (tipo === "Personal") {
-        const response = await fetch(`${URL_RESPONSABLE}/personas`);
+        const response = await fetch(`${URL_RESPONSABLE}/cargos`);
         return await response.json();
     } else {
         const response = await fetch(`${URL_BASE}/materials/tipo/${tipo}`);
@@ -289,20 +307,20 @@ async function editarPresupuesto(tipo) {
     const form = document.getElementById("agregarPresupuesto");
 
     const data = await personalMaterial(tipo);
+    form.setAttribute("data-id", tipo)
     form[0].innerHTML = "";
     for (let i in data) {
 
         const cell = document.createElement("option");
         if (tipo === "Personal") {
-
-            cell.text = data[i].idCargo.nombre;
+            cell.text = data[i].nombre;
         }
         else {
             cell.text = data[i].idProducto;
         }
-        cell.value = data.id;
+        cell.value = data[i].idProducto;
 
-        form[0].add(cell)
+        form[0].add(cell);
     }
 
     if (tipo === "Herramienta" || tipo === "Material") {
