@@ -136,10 +136,10 @@ async function cargoPersonal(id){
 
     const response = await fetch(`${URL_RESPONSABLE}/cargos/${id}`);
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
+//Llenar tablas de materiales y personal presupuestoMterials y presupuestoPersonals
 async function updateUI(tipo, data) {
     const tabla = document.getElementById(`${tipo}table`);
     tabla.innerHTML = "";
@@ -152,12 +152,11 @@ async function updateUI(tipo, data) {
         const row = document.createElement("tr");
 
         const cell1 = document.createElement("td");
-        cell1.textContent = tipo === "Personal" ? material.id.idPersonal : material.idMaterial.idProducto;
+        cell1.textContent = tipo === "Personal" ? material.id.idPersonal : material.idMaterial.id;
 
         const cell2 = document.createElement("td");
         if(tipo === "Personal"){
             let  cargo = await cargoPersonal(material.id.idPersonal);
-            console.log(cargo);
             cell2.textContent = cargo.nombre;
         }
         else{
@@ -218,9 +217,11 @@ async function agregar() {
             });
         }
 
-        const data = await response.json();
+        //const data = await response.json();
         cargarItems(presupuesto);
-        return data;
+        location.reload();
+        
+        //return data;
     } else {
         alerta("Seleccione un proyecto para continuar");
 
@@ -301,6 +302,7 @@ async function personalMaterial(tipo) {
     }
 }
 
+//cargar desplegable del formulario con los personales 
 async function editarPresupuesto(tipo) {
 
     const form3 = document.getElementById("tiempo");
@@ -318,7 +320,7 @@ async function editarPresupuesto(tipo) {
         else {
             cell.text = data[i].idProducto;
         }
-        cell.value = data[i].idProducto;
+        cell.value = data[i].id;
 
         form[0].add(cell);
     }
@@ -331,6 +333,7 @@ async function editarPresupuesto(tipo) {
 
 }
 
+//filro de desplegable de presupuestos del proyecto selecionado
 function desplegable(presupuesto, proyecto) {
     const proyectoDropdown = document.getElementById("presupuestoButton");
     proyectoDropdown.innerText = `${presupuesto}`;
