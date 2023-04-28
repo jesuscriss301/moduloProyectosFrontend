@@ -1,4 +1,4 @@
-const URL_BASE = "http://sistemas:8080";
+const URL_BASE = "http://192.168.1.10:8084";
 
 function cargarTablaProyectos() {
   //Tabla();
@@ -67,7 +67,7 @@ function tablaestilo() {
     i.setAttribute("data-id",cell[0].textContent);    
     i.addEventListener("dblclick",  () => {
       const idproyecto = i.getAttribute("data-id");
-      window.location.href = `tareas.html?nombreProyecto=${idproyecto}`;
+      window.location.href = `Tareas.html?nombreProyecto=${idproyecto}`;
     });
     let lastTouchTime = 0;
     const touchThreshold = 300; 
@@ -77,7 +77,7 @@ function tablaestilo() {
       
         if (timeSinceLastTouch < touchThreshold) {
             const idproyecto = i.getAttribute("data-id");
-            window.location.href = `tareas.html?nombreProyecto=${idproyecto}`;
+            window.location.href = `Tareas.html?nombreProyecto=${idproyecto}`;
           }
       
         lastTouchTime = currentTime;

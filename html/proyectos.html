@@ -1,102 +1,119 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-        <title>Proyectos</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-      
-    </head>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <title>Proyectos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
 
 <body onload="cargarTablaProyectos()">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
-    <!-- barra de navegaciòn-->
-    <div class="section">
-      <nav class="navbar navbar-expand-lg bg-body-secondary" >
-        <a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"style="width: 250px; height: 50px; align-self: left;"></a>
-        <div class="container-fluid"  style="width: auto; margin-left:auto; margin-right: auto;">
-          <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
-          <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Alternar navegación">
-            <span class="navbar-toggler-icon"></span>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">  </script>
+  <!-- barra de navegaciòn-->
+  <div class="section">
+    <nav class="navbar navbar-expand-lg bg-body-secondary">
+      <a href="#" class="logo m-2"><img src="../LOGO_CARBOEXCO.png" alt="Logo"
+          style="width: 250px; height: 50px; align-self: left;"></a>
+      <div class="container-fluid" style="width: auto; margin-left:auto; margin-right: auto;">
+        <!--<a class="navbar-brand" href="#"><h2 class="text-danger"> Proyectos</h2></a>-->
+        <button class="navbar-toggler" aria-current="page" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+          aria-label="Alternar navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">
+                <h3>Dashboard</h3>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="proyectos.html">
+                <h3>Proyectos</h3>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Tareas.html">
+                <h3>Tareas</h3>
+              </a>
+            </li>
+            <!--
+              <li class="nav-item">
+              <a class="nav-link" href="html/hornos.html">
+                <h3>Reparaciones</h3>
+              </a>
+              </li>
+              -->
+          </ul>
+        </div>
+      </div>
+      <!--
+      <a href="html/perfil.html" class="btn btn-danger m-2">
+        <i class="bi bi-person"></i> Ver Perfil
+      </a>
+      -->
+    </nav>
+  </div>
+
+  <!--barra de busqueda y menu desplegable (filtro)-->
+  <div class="dropdown-center m-3">
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="dropdown my-2">
+          <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" style="width:25ch;">
+            Etapa
           </button>
-          <div class="collapse navbar-collapse" id="navbarText" >
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link"  href="../index.html"><h3>Dashboard</h3></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="proyectos.html"><h3>Proyectos</h3></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Tareas.html"><h3>Tareas</h3></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="hornos.html"><h3>Reparaciones</h3></a>
-              </li>
-            </ul>
-          </div>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" onclick=" despliegue(1)">Crear proyectos</button></li>
+            <li><button class="dropdown-item" onclick=" despliegue(2)">Diseño</button></li>
+            <li><button class="dropdown-item" onclick=" despliegue(3)">Requisición & Presupuesto</button></li>
+            <li><button class="dropdown-item" onclick=" despliegue(5)">Programación & Ejecución </button></li>
+            <li><button class="dropdown-item" onclick=" despliegue(6)">Completado</button></li>
+            <li><button class="dropdown-item" onclick=" despliegue(7)">Archivo</button></li>
+            <li><button class="dropdown-item" onclick=" despliegue(8)">Descartado</button></li>
+          </ul>
         </div>
-        <a href="perfil.html" class="btn btn-danger m-2">
-          <i class="bi bi-person"></i> Ver Perfil
-        </a>			  
-      </nav>
-    </div>
-          
-      <!--barra de busqueda y menu desplegable (filtro)-->
-    <div class="dropdown-center m-3" >
-      <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <div class="dropdown">
-            <button id="etapa" class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width:25ch;">
-              Etapa
-            </button>
-            <ul class="dropdown-menu">
-              <li><button class="dropdown-item" onclick=" despliegue(1)">Crear proyectos</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(2)">Diseño</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(3)">Requisicion y presupuesto</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(4)">Programación</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(5)">Ejecución</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(6)">Completado</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(7)">Archivo</button></li>
-              <li><button class="dropdown-item" onclick=" despliegue(8)">Descartado</button></li>
-            </ul>
-          </div>
-          <form class="d-flex text-center" role="search" action="proyectos.html">
-            <input class="form-control me-2 text-center" type="search" name="nombreProyecto" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <form class="d-flex text-center my-2" role="search" action="proyectos.html">
+          <input class="form-control me-2 text-center" type="search" name="nombreProyecto" placeholder="Search"
+            aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
-            <button   class="btn btn-danger"  onclick="direccionProyecto('aggProyecto.html')">Agregar Proyecto</button>    
-        </div>
-      </nav>
-    </div>
+        <button class="btn btn-danger my-2" onclick="direccionProyecto('aggProyecto.html')">Agregar Proyecto</button>
+      </div>
+    </nav>
+  </div>
 
-    <div class="visually-hidden" id="liveAlertPlaceholder">
-      <div class="alert alert-danger" role="alert">
-        No se encontraron proyectos con esas indicaciones
+  <div class="visually-hidden" id="liveAlertPlaceholder">
+    <div class="alert alert-danger" role="alert">
+      No se encontraron proyectos con esas indicaciones
+    </div>
+  </div>
+
+  <!--Tabla proyectos-->
+  <div class="container-fluid row justify-content-md-center m-0">
+    <div id="table_div" class=" col-12" style="height: fit-content;"></div>
+  </div>
+
+  <footer class="bg-body-secondary mt-5 py-3 bottom-0 start-50 " style="padding: 0; margin: 0;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-0">© 2023 Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="mb-0">Desarrollado por <a href="https://carboexco.com">Carboexco.</a></p>
+        </div>
       </div>
     </div>
-    
-    <!--Tabla proyectos-->
-    <div class="container-fluid row justify-content-md-center m-0">
-      <div id="table_div" class=" col-11" style="height: fit-content;"></div>
-    </div>
+  </footer>
 
-    <footer class="bg-body-secondary mt-5 py-3 bottom-0 start-50 " style="padding: 0; margin: 0;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <p class="mb-0">© 2023 Todos los derechos reservados.</p>
-          </div>
-          <div class="col-md-6 text-md-end">
-            <p class="mb-0">Desarrollado por <a href="https://carboexco.com">Carboexco.</a></p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-  <script  src="../JS/carboexco.js"></script>
+  <script src="../JS/carboexco.js"></script>
   <script src="../JS/proyectos.js"></script>
 </body>

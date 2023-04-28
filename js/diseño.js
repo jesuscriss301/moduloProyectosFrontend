@@ -1,5 +1,5 @@
-const URL_BASE = "http://sistemas:8080";
-const URL_IMG = "http://sistemas:8081";
+const URL_BASE = "http://192.168.1.10:8084";
+const URL_IMG = "http://192.168.1.10:8081";
 
 function cargar() {
     const urlParams = new URLSearchParams(window.location.search);

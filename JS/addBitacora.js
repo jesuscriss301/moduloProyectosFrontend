@@ -1,5 +1,5 @@
-const URL_IMG = "http://sistemas:8081";
-const URL_BASE = "http://sistemas:8080";
+const URL_IMG = "http://192.168.1.10:8081";
+const URL_BASE = "http://192.168.1.10:8084";
 
 const form = document.forms.namedItem("agregarBitacora");
 form.addEventListener('submit', onSubmitForm, false);
@@ -47,11 +47,13 @@ async function uploadBitacora(bitacora, idfoto){
 }
 
 async function createBitacora(queryParamTarea) {
+  const date = new Date(form[1].value);
+  date.setHours(date.getHours() - 5);
   const nuevaBitacora = {
     "idTarea": {"id": parseInt(queryParamTarea)},
     "descripcionBitacora": form[0].value,
     "observacionBitacora": form[2].value === "" ? null : form[2].value,
-    "fechaHora": new Date(form[1].value).toISOString(),
+    "fechaHora": date.toISOString(),
     "fileFoto": 4
   };
   const response = await fetch(`${URL_BASE}/bitacoras`, {

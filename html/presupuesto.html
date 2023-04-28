@@ -43,49 +43,54 @@
 								<h3>Tareas</h3>
 							</a>
 						</li>
+						<!--
 						<li class="nav-item">
 							<a class="nav-link" href="hornos.html">
 								<h3>Reparaciones</h3>
 							</a>
 						</li>
+					-->
 					</ul>
 				</div>
 			</div>
-			<a href="perfil.html" class="btn btn-danger m-2">
-				<i class="bi bi-person"></i> Ver Perfil
-			</a>
+			<!--
+      <a href="html/perfil.html" class="btn btn-danger m-2">
+        <i class="bi bi-person"></i> Ver Perfil
+      </a>
+      -->
 		</nav>
 	</div>
-	<table class="table table-bordered border-light-subtle m-3 sangria">
-		<thead>
+	<div class="table-responsive">
+		<table class="table table-bordered border-light-subtle m-3 sangria">
+		  <thead class="me-auto mb-2 mb-lg-0">
 			<tr>
-				<th scope="col">Codigo Proyecto:</th>
-				<td id="codigoProyecto" scope="col">
-					</th>
-				<th scope="col">Nombre Proyecto:</th>
-				<td id="nombreProyecto" scope="col">
-					</th>
+			  <th scope="col">Codigo Proyecto:</th>
+			  <td id="codigoProyecto" scope="col"></th>
+			  <th scope="col">Nombre Proyecto:</th>
+			  <td id="nombreProyecto" scope="col"></th>
 			</tr>
-		</thead>
-		<tbody>
+		  </thead>
+		  <tbody>
 			<tr>
-				<th scope="row">Tipo Proyecto:</th>
-				<td id="tipoProyecto"></td>
-				<th scope="row">Responsable:</td>
-				<td id="responsable"></td>
-			</tr>
-			<tr>
-				<th rowspan="2" scope="row">Codigo Presupuesto:</th>
-				<td rowspan="2" id="codigoPresupueso"></td>
-				<th scope="row">Costo Total:</td>
-				<td id="costo"></td>
+			  <th scope="row">Tipo Proyecto:</th>
+			  <td id="tipoProyecto"></td>
+			  <th scope="row">Responsable:</td>
+			  <td id="responsable"></td>
 			</tr>
 			<tr>
-				<th>Estado:</th>
-				<td id="estado"></td>
+			  <th rowspan="2" scope="row">Codigo Presupuesto:</th>
+			  <td rowspan="2" id="codigoPresupueso"></td>
+			  <th scope="row">Costo Total:</td>
+			  <td id="costo"></td>
 			</tr>
-		</tbody>
-	</table>
+			<tr>
+			  <th>Estado:</th>
+			  <td id="estado"></td>
+			</tr>
+		  </tbody>
+		</table>
+	  </div>
+	  
 
 	<div class="visually-hidden" id="liveAlertPlaceholder">
 		<div id="alerta" class="alert alert-danger" role="alert">
@@ -115,6 +120,7 @@
 		</nav>
 	</div>
 
+	<div  class="table-responsive" >
 	<table class="table">
 		<thead>
 			<tr>
@@ -320,6 +326,7 @@
 			</form>
 		</div>
 	</div>
+</div>
 	<footer class="bg-body-secondary py-3 bottom-0 start-50" style="padding: 0; margin: 0;">
 		<div class="container">
 			<div class="row">

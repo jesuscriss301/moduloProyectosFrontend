@@ -1,4 +1,4 @@
-const URL_BASE = "http://sistemas:8080";
+const URL_BASE = "http://192.168.1.10:8084";
 
 // Función para enviar una petición POST a la API y crear una nueva tarea
 const crearProyecto = async (form) => {

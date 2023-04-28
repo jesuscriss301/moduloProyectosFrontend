@@ -1,4 +1,4 @@
-const URL_RESPONSABLE = "http://sistemas:8083";
+const URL_RESPONSABLE = "http://192.168.1.10:8083";
 
 function direccion(direccion) {
   try {
