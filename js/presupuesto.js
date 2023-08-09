@@ -1,5 +1,5 @@
-const URL_BASE = "http://192.168.1.10:8084";
-URL_RESPONSABLE = "http://192.168.1.10:8083";
+const URL_BASE = "http://192.168.1.211:8080";
+URL_RESPONSABLE = "http://192.168.1.211:8083";
 
 
 function cargar() {
